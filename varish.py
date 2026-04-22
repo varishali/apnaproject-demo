@@ -1,13 +1,12 @@
-count = 1
-while count <= 5 :
-     print("hello")
-     count = count + 1
 
-print(count)
+nums = (1, 5, 7, 9, 21, 32, 54, 21)
+x = 21
+idx = 0
+for el in nums :
 
-i = 1
-while i <= 10 :
-    print("varish ali", i)
-    i += 1
-print(i)
+    if(el == x):
+        print("number found at idx", idx)
+        break
+    idx += 1    
 
+    
