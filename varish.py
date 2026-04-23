@@ -1,3 +1,5 @@
-n = int(input("Enter a number:-"))
-for i in range(1,11):
-    print(n*i)
+while i <= n:
+    sum += i
+    i += 1
+print("total sum:-",sum)    
+  
