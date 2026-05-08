@@ -1,66 +1,57 @@
-# kon banega crorepati 2026b
+# kon kbanega krorepati (KBC) game in Python
 
-print("===welcome to kon banega crorepati 2026===")
+print("====Welcome to kon banega krorepati====")
+print(" ====sahi jabab do aur paisa jeeto====\n")
 
-money = 0
+question = [
+    {
+        "question": "1. who is the first prime minister uof India?" ,
+        "option": ["a. Jabahrlal naehru","b. lal bahadur shastri","c. rajiv gandhi","d. Indra gandhi"],
+        "answer": "a",
+        "money": 1000
+    },
+    {
+        "question": "2. Python kiya hai?",
+        "option": ["a. snake","b. programming language","c. game","d. browser"],
+        "answer": "b",
+        "money": 5000
+    },
+    {
+        "question": "3. what is capital of India?",
+        "option": ["a. mumbai","b. bareilly","c. dehli","d. pune"],
+        "answer": "c",
+        "money": 10000
+    },
+    {
+        "question": "4. which planet is known as the red planet?",
+        "option": ["a.Earth","b. venus","c. mars","d. jupiter"],
+        "answer": "c",
+        "money": 20000
+    }
+]
 
-#question 1
-print("Q1. What is tha capital od India?")
-print("a. Mumbai")
-print("b. dehli")
-print("c. Kolkata")
-print("d. Chennai")
+total_money = 0
 
-answer1 = input("Enter your answer:")
 
-if answer1 == "b":
-    print("cprrect answer")
-    money += 1000
-    print("you have won :",money)
+for q in question:
+    print(q["question"])
 
-    #question 2
-    print("Next Question for -- 5000 --")
-    print("Q2. what is the national animals of India ?")
-    print("a. Tiger")
-    print("b. Lion")
-    print("c. Elephant")
-    print("d. Bear")
+    for option in q["option"]:
+        print(option)
 
-    answer2 = input("Enter your answer:")
+    user_answer = input("apna answer likho (a/b/c/d): ")
 
-    if answer2 == "a":
-        print("correct answer")
-        money += 5000
-        print("you have won :",money)
-    
+    if user_answer == q["answer"]:
+        total_money = q["money"]
+        print("sahi jabab")
+        print("aap jeete:",total_money,"rupees\n")
 
-        #question 3
-        print("Next question for -- 10000 --")
-        print("Q3. what is the national bords of India ?")
-        print("a. peacock")
-        print("b. piegon")
-        print("c. crow")
-        print("d. duck")
-
-        answer3 = input("Enter your answer:")
-        if answer3 =="a":
-            print("correct answer")
-            money += 10000
-            print("you have won :",money)
-
-        else:
-            print("wrong answer!")
-            print("game over!")  
-            print("money won :",money)  
-    
     else:
-        print("wrong answer!")
-        print("game over !") 
-        print("money won :",money)
-else:
-    print("wrong answer!")
-    print("game over !")
-    print("money won :",money)
+        print("galat jabab")
+        print("game over")
+        break
+print("\nFinal winning amount : ",total_money,"rupees")        
+
 
 
 
