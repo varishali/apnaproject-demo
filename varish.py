@@ -1,32 +1,18 @@
-num1 = int(input("Enter First Number : "))
-num2 = int(input("Enter Second Number : "))
+import time
 
-print("Choose Operator : [+,-,*,/,**]")
-
-op = input("Enter Operator : ")
-
-if op == "+":
-    print("Addition is : ",num1+num2)
-
-elif op == "-":
-    print("Subtraction : ",num1-num2)
-
-elif op == "*":
-    print("Multiplication is : ",num1*num2)
-
-elif op == "/":
-    if num2 != 0:
-        print("Division is : ",num1/num2)
-    else:
-        print("Cannot Divide by Zero! ")
+t = time.strftime('%H:%M:%S')
+hour = int(time.strftime('%H'))
+hour = int(input("Enter hour : "))
 
 
-elif op == "**":
-    print("Exponent is : ",num1**num2)
+if(hour>0 and hour<12):
+    print("Good Morning Sir!")
 
-else:
-    print("Invalid Operator!")
+elif(hour>=12 and hour<=17):
+    print("Good After Noon Sir!")
 
+elif(hour>=17 and hour<0):
+    print("Good Night Sir!")
 
 
 
