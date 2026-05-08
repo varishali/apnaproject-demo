@@ -1,56 +1,41 @@
-# kon kbanega krorepati (KBC) game in Python
+balance = 5000
 
-print("====Welcome to kon banega krorepati====")
-print(" ====sahi jabab do aur paisa jeeto====\n")
+print("welcome to ATTM ")
 
-question = [
-    {
-        "question": "1. who is the first prime minister uof India?" ,
-        "option": ["a. Jabahrlal naehru","b. lal bahadur shastri","c. rajiv gandhi","d. Indra gandhi"],
-        "answer": "a",
-        "money": 1000
-    },
-    {
-        "question": "2. Python kiya hai?",
-        "option": ["a. snake","b. programming language","c. game","d. browser"],
-        "answer": "b",
-        "money": 5000
-    },
-    {
-        "question": "3. what is capital of India?",
-        "option": ["a. mumbai","b. bareilly","c. dehli","d. pune"],
-        "answer": "c",
-        "money": 10000
-    },
-    {
-        "question": "4. which planet is known as the red planet?",
-        "option": ["a.Earth","b. venus","c. mars","d. jupiter"],
-        "answer": "c",
-        "money": 20000
-    }
-]
+while True:
+    print("1. cheak balance")
+    print("2. deposite money")
+    print("3. withdraw money")
+    print("4. exit")
 
-total_money = 0
+    choice = input("Enter choice(1-4):")
 
+    if choice == "1":
+        print("your balance is :",balance)
 
-for q in question:
-    print(q["question"])
+    elif choice == "2":
+        amount = int(input("Enter diposite amount :"))
+        balance = balance + amount
+        print("money diposited succesfully")
+        print("new balance :",balance)
+        break
 
-    for option in q["option"]:
-        print(option)
+    elif choice == "3":
+        amount = int(input("Enter withdraw amount:"))
+        if amount<=balance:
+            balance = balance - amount
+            print("please collect your cash:")
+            print("remainning balance :",balance)
 
-    user_answer = input("apna answer likho (a/b/c/d): ")
+        else:
+            print("Insufficient balance")
 
-    if user_answer == q["answer"]:
-        total_money = q["money"]
-        print("sahi jabab")
-        print("aap jeete:",total_money,"rupees\n")
+    elif choice == "4":
+        print("thankyou for using ATM")
+        break
 
     else:
-        print("galat jabab")
-        print("game over")
-        break
-print("\nFinal winning amount : ",total_money,"rupees")        
+        print("Invalid choice")            
 
 
 
