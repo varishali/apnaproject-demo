@@ -18,7 +18,7 @@ while True:
         balance = balance + amount
         print("money diposited succesfully")
         print("new balance :",balance)
-        break
+        
 
     elif choice == "3":
         amount = int(input("Enter withdraw amount:"))
