@@ -1,24 +1,28 @@
-#number guessing game
+# password generator
 
 import random
+import string
 
-print("== welcome to number guessing game ==")
+print("welcome to password generator")
 
-number = random.randint(1, 10)
-   
-guess = int(input("Guess a number between 1 to 10 : "))
+length = int(input("enter password length: "))
 
-if guess == number:
-    print("correct guess!")
-    print("you win!")
+letters = string.ascii_letters
+digit = string.digits
+symbols = string.punctuation
 
-else:
-    print("wrong guess")
-    print(f"correct number was = {number}")    
+all_characters = letters + digit + symbols
+
+password = " " 
+
+for i in range(length):
+    password += random.choice(all_characters)
+
+print("your password is:" + password)
 
 
 
-
+    
 
 
 
