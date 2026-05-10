@@ -1,20 +1,22 @@
-  
-# palindrome program in python using while loop
-num = int(input("enter  a number : "))
+# palindrome program using recursion
 
-temp = num
-rev = 0
+def is_palindrome(n, temp, rev=0):
+    if n == 0:
+        if temp == rev:
+            return "the number is a palindrome"
+        else:
+            return "the number is not a palindrome"
+        
+    else:
+        dig = n % 10
+        rev = rev * 10 + dig
+        n = n // 10
+        return is_palindrome(n, temp, rev)
+n = int(input("enter a number : "))
+result = is_palindrome(n,n)
+print(result)      
 
-while (num>0):
-    dig = num % 10
-    rev = rev * 10 + dig
-    num = num // 10
 
-if (temp == rev):
-    print(temp, "is a palindrome number")
-
-else:
-    print(temp, "is not a palindromne number")
 
 
    
