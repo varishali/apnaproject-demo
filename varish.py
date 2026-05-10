@@ -1,20 +1,17 @@
-# palindrome program using recursion
+# palindrome program using selicing
 
-def is_palindrome(n, temp, rev=0):
-    if n == 0:
-        if temp == rev:
-            return "the number is a palindrome"
-        else:
-            return "the number is not a palindrome"
-        
-    else:
-        dig = n % 10
-        rev = rev * 10 + dig
-        n = n // 10
-        return is_palindrome(n, temp, rev)
-n = int(input("enter a number : "))
-result = is_palindrome(n,n)
-print(result)      
+
+def is_palindrome(n):
+
+    num_str = str(n)
+    reversed_str = num_str[::-1]
+    return num_str == reversed_str
+n = int(input("Enter  a number : "))
+if is_palindrome(n):
+    print(n,"is a palindrome number")
+
+else:
+    print(n, "is not a palindrome number") 
 
 
 
