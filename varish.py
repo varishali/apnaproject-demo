@@ -1,38 +1,22 @@
-# password generator
+  
+# palindrome program in python using while loop
+num = int(input("enter  a number : "))
 
-import random
-import string
+temp = num
+rev = 0
 
-print("welcome to password generator")
+while (num>0):
+    dig = num % 10
+    rev = rev * 10 + dig
+    num = num // 10
 
-length = int(input("enter password length: "))
+if (temp == rev):
+    print(temp, "is a palindrome number")
 
-letters = string.ascii_letters
-digit = string.digits
-symbols = string.punctuation
-
-all_characters = letters + digit + symbols
-
-password = " " 
-
-for i in range(length):
-    password += random.choice(all_characters)
-
-print("your password is:" + password)
+else:
+    print(temp, "is not a palindromne number")
 
 
+   
 
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
