@@ -1,17 +1,10 @@
-# palindrome program using selicing
+import math
+num = int(input("enter th enumber : "))
 
+print("squre root : ",math.sqrt(num))
+print("power : ",math.pow(num,2))
+print("factorial : ",math.factorial(num))
 
-def is_palindrome(n):
-
-    num_str = str(n)
-    reversed_str = num_str[::-1]
-    return num_str == reversed_str
-n = int(input("Enter  a number : "))
-if is_palindrome(n):
-    print(n,"is a palindrome number")
-
-else:
-    print(n, "is not a palindrome number") 
 
 
 
