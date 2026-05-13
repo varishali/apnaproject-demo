@@ -1,77 +1,62 @@
-# Password protected calculator
-print("============================================")
-print("Welcome to the password protected Calculator")
-print("============================================")
+class Account:
+    print("----------------------")
+    print("\033[1mWELCOME TO VARISH BANK\033[0m")
+    print("----------------------")
+    def __init__(self,bal,acc,password):
+        self.balance = bal
+        self.account_number = acc
+        self.password = password
 
-password = "varish"
-phone_num = "1234567890"
+    def debit(self,amount):
+        if amount > self.balance:
+            print("Insufficient balance.")
 
-password = input("Enter The Password : ")
+        else:    
+            self.balance -= amount
+            print("RS.",amount,"was debited.")
+            print("total balance is",self.get_balance())
 
+    def credit(self,amount):
+        self.balance += amount
+        print("RS.",amount,"was credited.")
+        print("total balance is ",self.get_balance())
 
-
-if password == "varish":
-    print("==================")
-    print("Correct Password !")
-    print("==================")
-
-    print("Welcome To The Calculator")
-
-    a = int(input("Enter The First Number : "))
-    b = int(input("Enter The Second Number : "))
-
-    op = input("Enter The Operator (+,-,*,/) : ")
-
-    if op == "+":
-        print("The Addition Is : ",a+b)
-    elif op == "-":
-        print("The Subtraction Is : ",a-b)
-    elif op == "*":
-        print("The Multiplication Is : ",a*b)
-    elif op == "/":
-        print("The Division Is : ",a/b)
-    else:
-        print("Invalid Operator!")
-        print("try again!")
-
-
-elif password != "varish":
-    print("================")
-    print("Wrong Password !")
-    print("================")
-
-    phone_num = input("Enter Phone Number To Enter Calculator :")
-
-    if phone_num == "1234567890":
-        print("Welcome to the calculator")
+    def get_balance(self):
+        return self.balance
         
+acc1 = Account(15000,1234567890,"12345")
+
+password = input("enter your password to continue : ")
 
 
-        a = int(input("Enter The First Number : "))
-        b = int(input("Enter The Second Number : "))
+if password == acc1.password:
+    print("--- \033[1mlogin succesful\033[0m ---")
+    print("current balance :",acc1.get_balance())
 
-        op = input("Enter The Operator (+,-,*,/) : ")
 
-        if op == "+":
-            print("The Addition Is : ",a+b)
-        elif op == "-":
-            print("The Subtraction Is : ",a-b)
-        elif op == "*":
-            print("The Multiplication Is : ",a*b)
-        elif op == "/":
-            print("The Division Is : ",a/b)
-        else:
-            print("Invalid Operator!")
-            print("try again!")
+    options = int(input("Enter (1) for credit and (2) for debit :"))
 
+    if options == 1:
+        print("you have selected credit option :")
+        input1 = int(input("Enter the amount to credit: ") )
+        acc1.credit(input1)
+
+    elif options == 2:     
+        print("you have selected debit option :")
+        input1 = int(input("enter the amount to debit: "))
+        acc1.debit(input1) 
     else:
-        print("Invalid Phone Number !") 
-        print("You Are Not Allowed To Enter The Calculator !")
-        print("Try Again !") 
-           
+        print("Invalid options!")      
+
 else:
-    print("Invalid Phone Number !")
-   
+    print("Invalid password!")
+    print("Please try again")         
+
+
+
+
+
+
 
 
 
