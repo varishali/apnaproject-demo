@@ -1,10 +1,10 @@
 import pandas as pd
 
-# IPL Player Data
+# Employee Data
 data = {
-    "PLAYER": ["Virat", "Rohit", "Gill", "Dhoni", "Hardik"],
-    "RUNS": [120, 45, 99, 70, 88],
-    "TEAM": ["RCB", "MI", "GT", "CSK", "MI"]
+    "EMPLOYEE": ["Aman", "Varish", "Sohil", "Zainul", "Ali"],
+    "SALARY": [45000, 60000, 38000, 72000, 50000],
+    "DEPARTMENT": ["IT", "HR", "IT", "Manager", "Sales"]
 }
 
 # DataFrame
@@ -13,42 +13,42 @@ df = pd.DataFrame(data)
 # Stylish Heading
 print("\033[1;96m")
 print("=" * 45)
-print("           IPL RUNS ANALYZER")
+print("         EMPLOYEE SALARY ANALYZER")
 print("=" * 45)
 print("\033[0m")
 
 # Full Data
-print("\n\033[1;93m[PLAYER DATA]\033[0m\n")
+print("\n\033[1;93m[EMPLOYEE DATA]\033[0m\n")
 print(df)
 
-# Average Runs
-print("\nAverage Runs:")
-print(df["RUNS"].mean())
+# Average Salary
+print("\nAverage Salary:")
+print(df["SALARY"].mean())
 
-# Highest Runs
-print("\nHighest Runs:")
-print(df["RUNS"].max())
+# Highest Salary
+print("\nHighest Salary:")
+print(df["SALARY"].max())
 
-# Lowest Runs
-print("\nLowest Runs:")
-print(df["RUNS"].min())
+# Lowest Salary
+print("\nLowest Salary:")
+print(df["SALARY"].min())
 
-# Total Runs
-print("\nTotal Runs:")
-print(df["RUNS"].sum())
+# Total Salary
+print("\nTotal Salary:")
+print(df["SALARY"].sum())
 
-# Filtering
-print("\n\033[1;92mPlayers Scoring More Than 80:\033[0m\n")
-print(df[df["RUNS"] > 80])
+# High Salary Employees
+print("\n\033[1;92mEmployees Salary Greater Than 50000:\033[0m\n")
+print(df[df["SALARY"] > 50000])
 
 # Sorting
-print("\n\033[1;95mPlayers Sorted By Runs:\033[0m\n")
-print(df.sort_values("RUNS", ascending=False))
+print("\n\033[1;95mEmployees Sorted By Salary:\033[0m\n")
+print(df.sort_values("SALARY", ascending=False))
 
 # iloc Example
-print("\n\033[1;94mTop Player Using iloc:\033[0m\n")
+print("\n\033[1;94mFirst Employee Details:\033[0m\n")
 print(df.iloc[0])
 
 print("\n" + "=" * 45)
-print("           ANALYSIS COMPLETED")
+print("            ANALYSIS COMPLETED")
 print("=" * 45)
