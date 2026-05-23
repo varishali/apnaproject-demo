@@ -1,10 +1,10 @@
 import pandas as pd
 
-# Employee Data
+# Mobile Store Data
 data = {
-    "EMPLOYEE": ["Aman", "Varish", "Sohil", "Zainul", "Ali"],
-    "SALARY": [45000, 60000, 38000, 72000, 50000],
-    "DEPARTMENT": ["IT", "HR", "IT", "Manager", "Sales"]
+    "MOBILE": ["iPhone 15", "Samsung S24", "OnePlus 12", "Realme GT", "Redmi Note"],
+    "PRICE": [80000, 75000, 65000, 35000, 20000],
+    "RATING": [4.8, 4.6, 4.5, 4.2, 4.1]
 }
 
 # DataFrame
@@ -13,40 +13,40 @@ df = pd.DataFrame(data)
 # Stylish Heading
 print("\033[1;96m")
 print("=" * 45)
-print("         EMPLOYEE SALARY ANALYZER")
+print("           MOBILE STORE ANALYZER")
 print("=" * 45)
 print("\033[0m")
 
 # Full Data
-print("\n\033[1;93m[EMPLOYEE DATA]\033[0m\n")
+print("\n\033[1;93m[MOBILE DATA]\033[0m\n")
 print(df)
 
-# Average Salary
-print("\nAverage Salary:")
-print(df["SALARY"].mean())
+# Average Price
+print("\nAverage Price:")
+print(df["PRICE"].mean())
 
-# Highest Salary
-print("\nHighest Salary:")
-print(df["SALARY"].max())
+# Highest Price
+print("\nHighest Price:")
+print(df["PRICE"].max())
 
-# Lowest Salary
-print("\nLowest Salary:")
-print(df["SALARY"].min())
+# Lowest Price
+print("\nLowest Price:")
+print(df["PRICE"].min())
 
-# Total Salary
-print("\nTotal Salary:")
-print(df["SALARY"].sum())
+# Average Rating
+print("\nAverage Rating:")
+print(df["RATING"].mean())
 
-# High Salary Employees
-print("\n\033[1;92mEmployees Salary Greater Than 50000:\033[0m\n")
-print(df[df["SALARY"] > 50000])
+# Expensive Mobiles
+print("\n\033[1;92mMobiles Price Greater Than 50000:\033[0m\n")
+print(df[df["PRICE"] > 50000])
 
 # Sorting
-print("\n\033[1;95mEmployees Sorted By Salary:\033[0m\n")
-print(df.sort_values("SALARY", ascending=False))
+print("\n\033[1;95mMobiles Sorted By Price:\033[0m\n")
+print(df.sort_values("PRICE", ascending=False))
 
 # iloc Example
-print("\n\033[1;94mFirst Employee Details:\033[0m\n")
+print("\n\033[1;94mFirst Mobile Details:\033[0m\n")
 print(df.iloc[0])
 
 print("\n" + "=" * 45)
