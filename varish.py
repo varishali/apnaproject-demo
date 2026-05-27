@@ -1,17 +1,12 @@
 import seaborn as sns
 import matplotlib.pyplot as plt
+import pandas as pd
 
-days = [1,2,3,4,5]
-sales = [20,30,40,10,35]
-
-sns.lineplot(
-    x=days,
-    y=sales,
-    marker="o",
-    color="blue"
-)
-plt.title("Daily Sales")
-plt.xlabel("Days")
-plt.ylabel("Sales")
-plt.grid()
+data = {
+    "Marks" : [78,90,67,88],
+    "Attendance" : [90,95,70,85],
+    "Study" : [2,5,1,4]
+}
+df = pd.DataFrame(data)
+sns.pairplot(df)
 plt.show()
