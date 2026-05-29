@@ -1,19 +1,45 @@
-import random
-import string
+class BankAccount:
+    total_accounts = 0
 
-print("=== Password Generator ===")
+    def __init__(self, name, pin):
+        self.name = name
+        self.pin = pin
+        self.balance = 0
+        self.history = []
 
-length = int(input("Enter password length: "))
+        BankAccount.total_accounts += 1
+        self.account_number = BankAccount.total_accounts
 
-letters = string.ascii_letters
-numbers = string.digits
-symbols = string.punctuation
+    def deposit(self, amount):
+        self.balance += amount
+        self.history.append(f"Deposited ₹{amount}")
+        print(f"₹{amount} deposited successfully")
 
-all_characters = letters + numbers + symbols
+    def withdraw(self, amount, pin):
+        if pin != self.pin:
+            print("Wrong PIN")
+            return
 
-password = ""
+        if amount > self.balance:
+            print("Insufficient Balance")
+        else:
+            self.balance -= amount
+            self.history.append(f"Withdraw ₹{amount}")
+            print(f"₹{amount} withdrawn successfully")
 
-for i in range(length):
-    password += random.choice(all_characters)
+    def show_balance(self):
+        print(f"Current Balance: ₹{self.balance}")
 
-print("Generated Password:", password)
+    def show_history(self):
+        print("\nTransaction History")
+        for i in self.history:
+            print("-", i)
+
+
+user1 = BankAccount("Varish", 1234)
+
+user1.deposit(5000)
+user1.withdraw(1000, 1234)
+
+user1.show_balance()
+user1.show_history()
