@@ -1,45 +1,16 @@
-class BankAccount:
-    total_accounts = 0
+import random
 
-    def __init__(self, name, pin):
-        self.name = name
-        self.pin = pin
-        self.balance = 0
-        self.history = []
+number = random.randint(1, 100)
 
-        BankAccount.total_accounts += 1
-        self.account_number = BankAccount.total_accounts
+while True:
+    guess = int(input("Guess the number (1-100): "))
 
-    def deposit(self, amount):
-        self.balance += amount
-        self.history.append(f"Deposited ₹{amount}")
-        print(f"₹{amount} deposited successfully")
+    if guess > number:
+        print("Too High")
 
-    def withdraw(self, amount, pin):
-        if pin != self.pin:
-            print("Wrong PIN")
-            return
+    elif guess < number:
+        print("Too Low")
 
-        if amount > self.balance:
-            print("Insufficient Balance")
-        else:
-            self.balance -= amount
-            self.history.append(f"Withdraw ₹{amount}")
-            print(f"₹{amount} withdrawn successfully")
-
-    def show_balance(self):
-        print(f"Current Balance: ₹{self.balance}")
-
-    def show_history(self):
-        print("\nTransaction History")
-        for i in self.history:
-            print("-", i)
-
-
-user1 = BankAccount("Varish", 1234)
-
-user1.deposit(5000)
-user1.withdraw(1000, 1234)
-
-user1.show_balance()
-user1.show_history()
+    else:
+        print("Correct Number!")
+        break
