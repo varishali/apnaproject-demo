@@ -1,16 +1,13 @@
 import random
 
-number = random.randint(1, 100)
-
 while True:
-    guess = int(input("Guess the number (1-100): "))
 
-    if guess > number:
-        print("Too High")
+    roll = input("Roll the dice? (y/n): ")
 
-    elif guess < number:
-        print("Too Low")
+    if roll == "y":
+        number = random.randint(1, 6)
+        print("You got:", number)
 
     else:
-        print("Correct Number!")
+        print("Game Ended")
         break
