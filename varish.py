@@ -1,8 +1,19 @@
-import numpy as np
+import random
+import string
 
-arr = np.array([
-    [1, 2],
-    [3, 4]
-])
+print("=== Password Generator ===")
 
-print(arr)
+length = int(input("Enter password length: "))
+
+letters = string.ascii_letters
+numbers = string.digits
+symbols = string.punctuation
+
+all_characters = letters + numbers + symbols
+
+password = ""
+
+for i in range(length):
+    password += random.choice(all_characters)
+
+print("Generated Password:", password)
