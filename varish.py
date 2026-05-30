@@ -1,20 +1,22 @@
-import random
+password = input("Enter Password: ")
 
 score = 0
 
-while True:
+if len(password) >= 8:
+    score += 1
 
-    roll = input("Roll the dice? (y/n): ")
+if any(char.isdigit() for char in password):
+    score += 1
 
-    if roll.lower() == "y":
+if any(char.isupper() for char in password):
+    score += 1
 
-        number = random.randint(1, 6)
-        print("You got:", number)
+if any(not char.isalnum() for char in password):
+    score += 1
 
-        score += number
-        print("Current Score:", score)
-
-    else:
-        print("\nGame Ended")
-        print("Final Score:", score)
-        break
+if score == 4:
+    print("Strong Password 💪")
+elif score >= 2:
+    print("Medium Password 👍")
+else:
+    print("Weak Password ❌")
