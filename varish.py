@@ -10,9 +10,9 @@ for question, answer in questions.items():
     user_answer = input(question).lower()
 
     if user_answer == answer:
-        print("Correct ✅")
+        print("Correct ")
         score += 1
     else:
-        print("Wrong ❌")
+        print("Wrong ")
 
 print("\nFinal Score:", score, "/", len(questions))
