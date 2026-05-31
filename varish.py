@@ -1,18 +1,51 @@
-score = 0
+class Patient:
+    def __init__(self, pid, name, age, disease):
+        self.pid = pid
+        self.name = name
+        self.age = age
+        self.disease = disease
 
-questions = {
-    "India ki capital kya hai? ": "delhi",
-    "2 + 2 kitna hota hai? ": "4",
-    "Python kis type ki language hai? ": "programming"
-}
+patients = []
+appointments = []
 
-for question, answer in questions.items():
-    user_answer = input(question).lower()
+def add_patient():
+    pass
 
-    if user_answer == answer:
-        print("Correct ")
-        score += 1
-    else:
-        print("Wrong ")
+def view_patients():
+    pass
 
-print("\nFinal Score:", score, "/", len(questions))
+def search_patient():
+    pass
+
+def book_appointment():
+    pass
+
+def generate_bill():
+    pass
+
+while True:
+    print("\n===== Hospital Management System =====")
+    print("1. Add Patient")
+    print("2. View Patients")
+    print("3. Search Patient")
+    print("4. Book Appointment")
+    print("5. View Appointments")
+    print("6. Generate Bill")
+    print("7. Exit")
+
+    choice = input("Enter choice: ")
+
+    if choice == "1":
+        add_patient()
+    elif choice == "2":
+        view_patients()
+    elif choice == "3":
+        search_patient()
+    elif choice == "4":
+        book_appointment()
+    elif choice == "5":
+        view_appointments()
+    elif choice == "6":
+        generate_bill()
+    elif choice == "7":
+        break
