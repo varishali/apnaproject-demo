@@ -1,14 +1,14 @@
-import time
+import random
+import string
 
-seconds = int(input("Enter time in seconds: "))
+length = int(input("Password Length: "))
 
-while seconds > 0:
-    mins = seconds // 60
-    secs = seconds % 60
+characters = string.ascii_letters + string.digits + string.punctuation
 
-    print(f"{mins:02}:{secs:02}", end="\r")
+password = ""
 
-    time.sleep(1)
-    seconds -= 1
+for i in range(length):
+    password += random.choice(characters)
 
-print("\nTime's Up!")
+print("Generated Password:")
+print(password)
