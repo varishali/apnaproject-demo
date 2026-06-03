@@ -1,30 +1,60 @@
-students = {
-    "Ali": 78,
-    "Rahul": 92,
-    "Sahil": 65,
-    "Aman": 85
-}
+contacts = {}
 
-average = sum(students.values()) / len(students)
+while True:
 
-highest = max(students, key=students.get)
-lowest = min(students, key=students.get)
+    print("\n===== Contact Book =====")
+    print("1. Add Contact")
+    print("2. View Contacts")
+    print("3. Search Contact")
+    print("4. Delete Contact")
+    print("5. Exit")
 
-print("Average Marks:", average)
-print("Topper:", highest, students[highest])
-print("Lowest:", lowest, students[lowest])
+    choice = input("Enter Choice: ")
 
-print("\nGrades")
+    if choice == "1":
 
-for name, marks in students.items():
+        name = input("Enter Name: ")
+        phone = input("Enter Phone Number: ")
 
-    if marks >= 90:
-        grade = "A"
-    elif marks >= 75:
-        grade = "B"
-    elif marks >= 60:
-        grade = "C"
+        contacts[name] = phone
+
+        print("Contact Added Successfully!")
+
+    elif choice == "2":
+
+        if len(contacts) == 0:
+            print("No Contacts Found!")
+
+        else:
+            print("\nContacts List:")
+
+            for name, phone in contacts.items():
+                print(f"{name} : {phone}")
+
+    elif choice == "3":
+
+        name = input("Enter Name To Search: ")
+
+        if name in contacts:
+            print(f"{name} : {contacts[name]}")
+        else:
+            print("Contact Not Found!")
+
+    elif choice == "4":
+
+        name = input("Enter Name To Delete: ")
+
+        if name in contacts:
+            del contacts[name]
+            print("Contact Deleted Successfully!")
+        else:
+            print("Contact Not Found!")
+
+    elif choice == "5":
+
+        print("Thanks For Using Contact Book!")
+        break
+
     else:
-        grade = "D"
 
-    print(name, "-", grade)
+        print("Invalid Choice!")
