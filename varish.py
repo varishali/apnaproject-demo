@@ -1,58 +1,55 @@
-contacts = {}
+tasks = []
 
 while True:
 
-    print("\n===== Contact Book =====")
-    print("1. Add Contact")
-    print("2. View Contacts")
-    print("3. Search Contact")
-    print("4. Delete Contact")
-    print("5. Exit")
+    print("\n===== TO-DO LIST =====")
+    print("1. Add Task")
+    print("2. View Tasks")
+    print("3. Remove Task")
+    print("4. Exit")
 
     choice = input("Enter Choice: ")
 
     if choice == "1":
 
-        name = input("Enter Name: ")
-        phone = input("Enter Phone Number: ")
+        task = input("Enter Task: ")
+        tasks.append(task)
 
-        contacts[name] = phone
-
-        print("Contact Added Successfully!")
+        print("Task Added Successfully!")
 
     elif choice == "2":
 
-        if len(contacts) == 0:
-            print("No Contacts Found!")
+        if len(tasks) == 0:
+            print("No Tasks Found!")
 
         else:
-            print("\nContacts List:")
+            print("\nTasks:")
 
-            for name, phone in contacts.items():
-                print(f"{name} : {phone}")
+            for i, task in enumerate(tasks, start=1):
+                print(f"{i}. {task}")
 
     elif choice == "3":
 
-        name = input("Enter Name To Search: ")
+        if len(tasks) == 0:
+            print("No Tasks To Remove!")
 
-        if name in contacts:
-            print(f"{name} : {contacts[name]}")
         else:
-            print("Contact Not Found!")
+
+            for i, task in enumerate(tasks, start=1):
+                print(f"{i}. {task}")
+
+            try:
+                index = int(input("Enter Task Number: "))
+                removed_task = tasks.pop(index - 1)
+
+                print(f"{removed_task} Removed Successfully!")
+
+            except:
+                print("Invalid Task Number!")
 
     elif choice == "4":
 
-        name = input("Enter Name To Delete: ")
-
-        if name in contacts:
-            del contacts[name]
-            print("Contact Deleted Successfully!")
-        else:
-            print("Contact Not Found!")
-
-    elif choice == "5":
-
-        print("Thanks For Using Contact Book!")
+        print("Thanks For Using To-Do List!")
         break
 
     else:
