@@ -1,5 +1,21 @@
 import pandas as pd
 from datetime import datetime
+import getpass
+
+username = "admin"
+password = "1234"
+
+print("\n\033[1;96m=== Expense Tracker App Login ===\033[0m")
+
+username = input("Enter username : ")
+password = getpass.getpass("Enter Password : ")
+
+if username == "admin" and password == "1234":
+    print("\n\033[1;97mLogin successful ! welcome to expense tracker app\033[0m")
+
+else:
+    print("\n Invalid username or password! pelase try again.") 
+
 
 expenses = []
 
@@ -24,7 +40,7 @@ while True:
 
     elif choice == "2":
         if len(expenses) == 0:
-            print("No Expensed Added Yet.")
+            print("No Expense Added Yet.")
         else:
             df = pd.DataFrame(expenses, columns=["current_time","Category","Amount"])    
             print("\n\033[1;93mYour Expenses : \033[0m")
@@ -46,7 +62,7 @@ while True:
    
 
     elif choice == "4":
-        print("\nThanks For Using This App")
+        print("\n\033[1;98mThanks For Using This App\033[0m")
         break         
     else:
         print("\nInvalid Choice.")
