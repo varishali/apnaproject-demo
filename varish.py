@@ -1,7 +1,10 @@
-import time
+import random
 
-for i in range(10, 0, -1):
-    print(i)
-    time.sleep(1)
+secret = random.randint(1, 10)
 
-print("Time Up!")
+guess = int(input("Guess Number: "))
+
+if guess == secret:
+    print("You Win!")
+else:
+    print("You Lose!")
