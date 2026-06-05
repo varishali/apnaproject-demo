@@ -1,10 +1,10 @@
-import random
+password = input("Enter Password: ")
 
-secret = random.randint(1, 10)
+if len(password) < 6:
+    print("Weak Password")
 
-guess = int(input("Guess Number: "))
+elif len(password) < 10:
+    print("Medium Password")
 
-if guess == secret:
-    print("You Win!")
 else:
-    print("You Lose!")
+    print("Strong Password")
