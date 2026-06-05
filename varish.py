@@ -1,11 +1,7 @@
-import random
-import string
+import time
 
-password = "".join(
-    random.choices(
-        string.ascii_letters + string.digits,
-        k=8
-    )
-)
+for i in range(10, 0, -1):
+    print(i)
+    time.sleep(1)
 
-print(password)
+print("Time Up!")
