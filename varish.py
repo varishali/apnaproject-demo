@@ -1,10 +1,12 @@
-password = input("Enter Password: ")
+import random
 
-if len(password) < 6:
-    print("Weak Password")
+quotes = [
+    "Never give up.",
+    "Success takes time.",
+    "Learn something new every day.",
+    "Stay focused and keep working.",
+    "Dream big, work hard."
+]
 
-elif len(password) < 10:
-    print("Medium Password")
-
-else:
-    print("Strong Password")
+print("\nRandom Quote:")
+print(random.choice(quotes))
