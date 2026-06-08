@@ -1,12 +1,6 @@
-import random
+num = input("Enter Number: ")
 
-quotes = [
-    "Never give up.",
-    "Success takes time.",
-    "Learn something new every day.",
-    "Stay focused and keep working.",
-    "Dream big, work hard."
-]
-
-print("\nRandom Quote:")
-print(random.choice(quotes))
+if num == num[::-1]:
+    print("Palindrome Number")
+else:
+    print("Not a Palindrome Number")
