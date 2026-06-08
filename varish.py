@@ -1,6 +1,6 @@
-num = input("Enter Number: ")
+total_expense = float(input("Enter Total Expense: "))
+people = int(input("Enter Number of People: "))
 
-if num == num[::-1]:
-    print("Palindrome Number")
-else:
-    print("Not a Palindrome Number")
+share = total_expense / people
+
+print("Each Person Pays: ₹", round(share, 2))
