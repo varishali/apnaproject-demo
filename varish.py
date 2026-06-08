@@ -1,6 +1,8 @@
-total_expense = float(input("Enter Total Expense: "))
-people = int(input("Enter Number of People: "))
+name = input("Enter Your Name: ")
 
-share = total_expense / people
-
-print("Each Person Pays: ₹", round(share, 2))
+print("\nSuggested Usernames:")
+print(name + "123")
+print(name + "_official")
+print("its_" + name)
+print(name + "_gaming")
+print("mr_" + name)
