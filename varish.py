@@ -1,32 +1,24 @@
-import matplotlib.pyplot as plt
 import pandas as pd
-names = ["a","b","c","d","e"]
-marks = [20,40,30,55,70]
+import matplotlib.pyplot as plt
 
-df = pd.DataFrame({"names":names,"marks":marks})
+data = {
+    "video" : [
+        "Python Tutorial",
+        "Pandas basics",
+        "Matplotlib Graph",
+        "OOP Project",
+        "Numpy Guide" 
+    ],
+    "views" : [1200,1800,1500,2200,1700],
+    "likes" : [150,250,200,300,240]
+}
 
-plt.figure(facecolor="lightblue",figsize=(8,5))
-plt.gca().set_facecolor("lightyellow")
+df = pd.DataFrame(data)
+print("\n=== Youtube Analytics ===")
+print(df)
 
-plt.plot(df["names"],df["marks"],marker="o",color="lightcoral")
-
-plt.grid(linestyle="--",color="gray")
-plt.title(
-    "Marks of students",
-    color="red",
-    fontweight="bold",
-    fontstyle="italic",
-    bbox=dict(facecolor="lightgreen",boxstyle="round")
-    )
-plt.xlabel("Names",
-           color="red",
-           fontstyle="italic",
-           fontweight="bold",
-           bbox=dict(facecolor="lightgreen",boxstyle="round")
-           )
-plt.ylabel("Marks"
-           ,color="red",
-           fontstyle="italic",
-           fontweight="bold",
-           bbox=dict(facecolor="lightgreen",boxstyle="round"))
+plt.title("youtube video views")
+plt.xlabel("video")
+plt.ylabel("views")
+plt.xticks(rotation=20)
 plt.show()
