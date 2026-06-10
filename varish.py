@@ -1,21 +1,15 @@
-import random
+import os
 
-while True:
+files = os.listdir()
 
-    print("\n===== OTP Generator =====")
-    print("1. Generate OTP")
-    print("2. Exit")
+count = 1
 
-    choice = input("Enter Choice: ")
+for file in files:
 
-    if choice == "1":
+    if file.endswith(".txt"):
 
-        otp = random.randint(100000, 999999)
+        os.rename(file, f"file_{count}.txt")
 
-        print("\nYour OTP:", otp)
+        count += 1
 
-    elif choice == "2":
-        break
-
-    else:
-        print("Invalid Choice!")
+print("Files Renamed Successfully!")
