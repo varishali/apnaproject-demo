@@ -1,15 +1,15 @@
-import os
+import random
+import string
 
-files = os.listdir()
+length = int(input("Enter Password Length: "))
 
-count = 1
+password = "".join(
+    random.choices(
+        string.ascii_letters +
+        string.digits +
+        string.punctuation,
+        k=length
+    )
+)
 
-for file in files:
-
-    if file.endswith(".txt"):
-
-        os.rename(file, f"file_{count}.txt")
-
-        count += 1
-
-print("Files Renamed Successfully!")
+print("Password:", password)
