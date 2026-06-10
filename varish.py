@@ -1,24 +1,47 @@
-import pandas as pd
-import matplotlib.pyplot as plt
+import random
+import string
 
-data = {
-    "video" : [
-        "Python Tutorial",
-        "Pandas basics",
-        "Matplotlib Graph",
-        "OOP Project",
-        "Numpy Guide" 
-    ],
-    "views" : [1200,1800,1500,2200,1700],
-    "likes" : [150,250,200,300,240]
-}
+urls = {}
 
-df = pd.DataFrame(data)
-print("\n=== Youtube Analytics ===")
-print(df)
+while True:
 
-plt.title("youtube video views")
-plt.xlabel("video")
-plt.ylabel("views")
-plt.xticks(rotation=20)
-plt.show()
+    print("\n===== URL Shortener =====")
+    print("1. Shorten URL")
+    print("2. View URLs")
+    print("3. Exit")
+
+    choice = input("Enter Choice: ")
+
+    if choice == "1":
+
+        long_url = input("Enter Long URL: ")
+
+        short_code = ''.join(
+            random.choices(
+                string.ascii_letters + string.digits,
+                k=6
+            )
+        )
+
+        urls[short_code] = long_url
+
+        print("\nShort URL:")
+        print(f"https://short.ly/{short_code}")
+
+    elif choice == "2":
+
+        if len(urls) == 0:
+            print("No URLs Found!")
+
+        else:
+
+            print("\nSaved URLs:")
+
+            for code, url in urls.items():
+                print(f"{code} -> {url}")
+
+    elif choice == "3":
+        break
+
+    else:
+        print("Invalid Choice!")
