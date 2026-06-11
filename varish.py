@@ -1,15 +1,17 @@
-import random
-import string
+people = []
 
-length = int(input("Enter Password Length: "))
+n = int(input("How Many People: "))
 
-password = "".join(
-    random.choices(
-        string.ascii_letters +
-        string.digits +
-        string.punctuation,
-        k=length
-    )
-)
+for i in range(n):
 
-print("Password:", password)
+    name = input("Enter Name: ")
+    people.append(name)
+
+bill = float(input("Enter Total Bill: "))
+
+share = bill / n
+
+print("\n===== Split Result =====")
+
+for person in people:
+    print(f"{person} Pays ₹{share:.2f}")

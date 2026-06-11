@@ -7,7 +7,7 @@ data = {
 df = pd.DataFrame(data)
 
 # LINE GRAFH 
-plt.plot(df["Match"],df["Runs"])
+plt.plot(df["Match"],df["Runs"],color="red")
 
 # TITLE
 plt.title("Runs Per Match")

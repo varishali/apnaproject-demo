@@ -7,7 +7,7 @@ data = {
 df = pd.DataFrame(data)
 
 # Grafh
-plt.bar(df["Player"],df["Runs"])
+plt.bar(df["Player"],df["Runs"],color="red")
 
 # Grafh Title
 plt.title("Player Runs")
