@@ -1,55 +1,53 @@
-bookmarks = {}
+notes = []
 
 while True:
 
-    print("\n===== Bookmark Manager =====")
-    print("1. Add Bookmark")
-    print("2. View Bookmarks")
-    print("3. Search Bookmark")
-    print("4. Delete Bookmark")
-    print("5. Exit")
+    print("\n===== Notes Manager =====")
+    print("1. Add Note")
+    print("2. View Notes")
+    print("3. Delete Note")
+    print("4. Exit")
 
     choice = input("Enter Choice: ")
 
     if choice == "1":
 
-        name = input("Website Name: ")
-        url = input("Website URL: ")
+        note = input("Enter Note: ")
+        notes.append(note)
 
-        bookmarks[name] = url
-
-        print("Bookmark Added!")
+        print("Note Added Successfully!")
 
     elif choice == "2":
 
-        if len(bookmarks) == 0:
-            print("No Bookmarks Found!")
+        if len(notes) == 0:
+            print("No Notes Found!")
 
         else:
 
-            for name, url in bookmarks.items():
-                print(f"{name} -> {url}")
+            print("\nYour Notes:")
+
+            for i, note in enumerate(notes, start=1):
+                print(f"{i}. {note}")
 
     elif choice == "3":
 
-        name = input("Search Website: ")
+        if len(notes) == 0:
+            print("No Notes To Delete!")
 
-        if name in bookmarks:
-            print(bookmarks[name])
         else:
-            print("Bookmark Not Found!")
+
+            for i, note in enumerate(notes, start=1):
+                print(f"{i}. {note}")
+
+            num = int(input("Enter Note Number: "))
+
+            if 1 <= num <= len(notes):
+                deleted = notes.pop(num - 1)
+                print(f"{deleted} Deleted!")
+            else:
+                print("Invalid Note Number!")
 
     elif choice == "4":
-
-        name = input("Delete Website: ")
-
-        if name in bookmarks:
-            del bookmarks[name]
-            print("Deleted Successfully!")
-        else:
-            print("Bookmark Not Found!")
-
-    elif choice == "5":
         break
 
     else:
