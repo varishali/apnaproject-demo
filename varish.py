@@ -1,95 +1,101 @@
-class Book:
+class Movie:
 
-    def __init__(self, title):
-        self.title = title
-        self.issued = False
+    def __init__(self, name, rating):
+        self.name = name
+        self.rating = rating
 
 
-class Library:
+class MovieManager:
 
     def __init__(self):
-        self.books = []
+        self.movies = []
 
-    def add_book(self, title):
+    def add_movie(self, name, rating):
 
-        book = Book(title)
-        self.books.append(book)
+        movie = Movie(name, rating)
 
-        print("Book Added Successfully!")
+        self.movies.append(movie)
 
-    def view_books(self):
+        print("Movie Added Successfully!")
 
-        if len(self.books) == 0:
-            print("No Books Available!")
+    def view_movies(self):
+
+        if len(self.movies) == 0:
+            print("No Movies Found!")
 
         else:
 
-            print("\nBooks List:")
+            print("\nMovie Collection:")
 
-            for book in self.books:
+            for movie in self.movies:
 
-                status = "Issued" if book.issued else "Available"
+                print(
+                    f"Movie: {movie.name} | Rating: {movie.rating}/10"
+                )
 
-                print(f"{book.title} - {status}")
+    def search_movie(self, name):
 
-    def issue_book(self, title):
+        for movie in self.movies:
 
-        for book in self.books:
+            if movie.name.lower() == name.lower():
 
-            if book.title == title and not book.issued:
-
-                book.issued = True
-
-                print("Book Issued Successfully!")
+                print(
+                    f"Found: {movie.name} | Rating: {movie.rating}/10"
+                )
                 return
 
-        print("Book Not Available!")
+        print("Movie Not Found!")
 
-    def return_book(self, title):
+    def top_rated(self):
 
-        for book in self.books:
+        if len(self.movies) == 0:
+            print("No Movies Found!")
 
-            if book.title == title and book.issued:
+        else:
 
-                book.issued = False
+            top = max(
+                self.movies,
+                key=lambda movie: movie.rating
+            )
 
-                print("Book Returned Successfully!")
-                return
+            print(
+                f"Top Movie: {top.name} ({top.rating}/10)"
+            )
 
-        print("Book Not Found!")
 
-
-library = Library()
+manager = MovieManager()
 
 while True:
 
-    print("\n===== Library Management System =====")
-    print("1. Add Book")
-    print("2. View Books")
-    print("3. Issue Book")
-    print("4. Return Book")
+    print("\n===== Movie Collection Manager =====")
+    print("1. Add Movie")
+    print("2. View Movies")
+    print("3. Search Movie")
+    print("4. Top Rated Movie")
     print("5. Exit")
 
     choice = input("Enter Choice: ")
 
     if choice == "1":
 
-        title = input("Enter Book Name: ")
-        library.add_book(title)
+        name = input("Movie Name: ")
+        rating = float(input("Rating (1-10): "))
+
+        manager.add_movie(name, rating)
 
     elif choice == "2":
 
-        library.view_books()
+        manager.view_movies()
 
     elif choice == "3":
 
-        title = input("Enter Book Name: ")
-        library.issue_book(title)
+        name = input("Search Movie: ")
+
+        manager.search_movie(name)
 
     elif choice == "4":
 
-        title = input("Enter Book Name: ")
-        library.return_book(title)
+        manager.top_rated()
 
     elif choice == "5":
 
