@@ -1,67 +1,76 @@
-inventory = {}
+class BankAccount:
+
+    def __init__(self, name, password):
+        self.name = name
+        self.password = password
+        self.balance = 0
+        self.transactions = []
+
+    def deposit(self, amount):
+        self.balance += amount
+        self.transactions.append(f"Deposited ₹{amount}")
+        print("Money Deposited Successfully!")
+
+    def withdraw(self, amount):
+
+        if amount <= self.balance:
+            self.balance -= amount
+            self.transactions.append(f"Withdraw ₹{amount}")
+            print("Money Withdrawn Successfully!")
+
+        else:
+            print("Insufficient Balance!")
+
+    def check_balance(self):
+        print(f"Current Balance: ₹{self.balance}")
+
+    def show_transactions(self):
+
+        if len(self.transactions) == 0:
+            print("No Transactions Yet!")
+
+        else:
+
+            print("\nTransaction History:")
+
+            for transaction in self.transactions:
+                print(transaction)
+
+
+user = BankAccount("Varish", "1234")
 
 while True:
 
-    print("\n===== Inventory Management System =====")
-    print("1. Add Product")
-    print("2. View Products")
-    print("3. Update Stock")
-    print("4. Delete Product")
+    print("\n===== BANK MANAGEMENT SYSTEM =====")
+    print("1. Deposit")
+    print("2. Withdraw")
+    print("3. Check Balance")
+    print("4. Transaction History")
     print("5. Exit")
 
     choice = input("Enter Choice: ")
 
     if choice == "1":
 
-        product = input("Enter Product Name: ")
-        stock = int(input("Enter Stock Quantity: "))
-
-        inventory[product] = stock
-
-        print("Product Added Successfully!")
+        amount = float(input("Enter Amount: "))
+        user.deposit(amount)
 
     elif choice == "2":
 
-        if len(inventory) == 0:
-            print("No Products Found!")
-
-        else:
-
-            print("\n===== Product List =====")
-
-            for product, stock in inventory.items():
-                print(f"{product} : {stock}")
+        amount = float(input("Enter Amount: "))
+        user.withdraw(amount)
 
     elif choice == "3":
 
-        product = input("Enter Product Name: ")
-
-        if product in inventory:
-
-            stock = int(input("Enter New Stock: "))
-            inventory[product] = stock
-
-            print("Stock Updated!")
-
-        else:
-            print("Product Not Found!")
+        user.check_balance()
 
     elif choice == "4":
 
-        product = input("Enter Product Name: ")
-
-        if product in inventory:
-
-            del inventory[product]
-
-            print("Product Deleted!")
-
-        else:
-            print("Product Not Found!")
+        user.show_transactions()
 
     elif choice == "5":
 
-        print("Thanks For Using Inventory System!")
+        print("Thank You!")
         break
 
     else:
