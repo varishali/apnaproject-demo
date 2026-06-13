@@ -1,105 +1,93 @@
-class Movie:
+class Room:
 
-    def __init__(self, name, rating):
-        self.name = name
-        self.rating = rating
+    def __init__(self, room_no):
+        self.room_no = room_no
+        self.booked = False
 
 
-class MovieManager:
+class Hotel:
 
     def __init__(self):
-        self.movies = []
+        self.rooms = []
 
-    def add_movie(self, name, rating):
+        for i in range(101, 106):
+            self.rooms.append(Room(i))
 
-        movie = Movie(name, rating)
+    def view_rooms(self):
 
-        self.movies.append(movie)
+        print("\nRoom Status:")
 
-        print("Movie Added Successfully!")
+        for room in self.rooms:
 
-    def view_movies(self):
+            status = "Booked" if room.booked else "Available"
 
-        if len(self.movies) == 0:
-            print("No Movies Found!")
+            print(f"Room {room.room_no} - {status}")
 
-        else:
+    def book_room(self, room_no):
 
-            print("\nMovie Collection:")
+        for room in self.rooms:
 
-            for movie in self.movies:
+            if room.room_no == room_no:
 
-                print(
-                    f"Movie: {movie.name} | Rating: {movie.rating}/10"
-                )
+                if not room.booked:
 
-    def search_movie(self, name):
+                    room.booked = True
+                    print("Room Booked Successfully!")
 
-        for movie in self.movies:
+                else:
+                    print("Room Already Booked!")
 
-            if movie.name.lower() == name.lower():
-
-                print(
-                    f"Found: {movie.name} | Rating: {movie.rating}/10"
-                )
                 return
 
-        print("Movie Not Found!")
+        print("Room Not Found!")
 
-    def top_rated(self):
+    def cancel_booking(self, room_no):
 
-        if len(self.movies) == 0:
-            print("No Movies Found!")
+        for room in self.rooms:
 
-        else:
+            if room.room_no == room_no:
 
-            top = max(
-                self.movies,
-                key=lambda movie: movie.rating
-            )
+                if room.booked:
 
-            print(
-                f"Top Movie: {top.name} ({top.rating}/10)"
-            )
+                    room.booked = False
+                    print("Booking Cancelled!")
+
+                else:
+                    print("Room Already Available!")
+
+                return
+
+        print("Room Not Found!")
 
 
-manager = MovieManager()
+hotel = Hotel()
 
 while True:
 
-    print("\n===== Movie Collection Manager =====")
-    print("1. Add Movie")
-    print("2. View Movies")
-    print("3. Search Movie")
-    print("4. Top Rated Movie")
-    print("5. Exit")
+    print("\n===== HOTEL BOOKING SYSTEM =====")
+    print("1. View Rooms")
+    print("2. Book Room")
+    print("3. Cancel Booking")
+    print("4. Exit")
 
     choice = input("Enter Choice: ")
 
     if choice == "1":
 
-        name = input("Movie Name: ")
-        rating = float(input("Rating (1-10): "))
-
-        manager.add_movie(name, rating)
+        hotel.view_rooms()
 
     elif choice == "2":
 
-        manager.view_movies()
+        room_no = int(input("Enter Room Number: "))
+        hotel.book_room(room_no)
 
     elif choice == "3":
 
-        name = input("Search Movie: ")
-
-        manager.search_movie(name)
+        room_no = int(input("Enter Room Number: "))
+        hotel.cancel_booking(room_no)
 
     elif choice == "4":
 
-        manager.top_rated()
-
-    elif choice == "5":
-
-        print("Thank You!")
         break
 
     else:
