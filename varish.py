@@ -1,72 +1,95 @@
-class BankAccount:
+class Book:
 
-    def __init__(self, name, password):
-        self.name = name
-        self.password = password
-        self.balance = 0
-        self.transactions = []
+    def __init__(self, title):
+        self.title = title
+        self.issued = False
 
-    def deposit(self, amount):
-        self.balance += amount
-        self.transactions.append(f"Deposited ₹{amount}")
-        print("Money Deposited Successfully!")
 
-    def withdraw(self, amount):
+class Library:
 
-        if amount <= self.balance:
-            self.balance -= amount
-            self.transactions.append(f"Withdraw ₹{amount}")
-            print("Money Withdrawn Successfully!")
+    def __init__(self):
+        self.books = []
 
-        else:
-            print("Insufficient Balance!")
+    def add_book(self, title):
 
-    def check_balance(self):
-        print(f"Current Balance: ₹{self.balance}")
+        book = Book(title)
+        self.books.append(book)
 
-    def show_transactions(self):
+        print("Book Added Successfully!")
 
-        if len(self.transactions) == 0:
-            print("No Transactions Yet!")
+    def view_books(self):
+
+        if len(self.books) == 0:
+            print("No Books Available!")
 
         else:
 
-            print("\nTransaction History:")
+            print("\nBooks List:")
 
-            for transaction in self.transactions:
-                print(transaction)
+            for book in self.books:
+
+                status = "Issued" if book.issued else "Available"
+
+                print(f"{book.title} - {status}")
+
+    def issue_book(self, title):
+
+        for book in self.books:
+
+            if book.title == title and not book.issued:
+
+                book.issued = True
+
+                print("Book Issued Successfully!")
+                return
+
+        print("Book Not Available!")
+
+    def return_book(self, title):
+
+        for book in self.books:
+
+            if book.title == title and book.issued:
+
+                book.issued = False
+
+                print("Book Returned Successfully!")
+                return
+
+        print("Book Not Found!")
 
 
-user = BankAccount("Varish", "1234")
+library = Library()
 
 while True:
 
-    print("\n===== BANK MANAGEMENT SYSTEM =====")
-    print("1. Deposit")
-    print("2. Withdraw")
-    print("3. Check Balance")
-    print("4. Transaction History")
+    print("\n===== Library Management System =====")
+    print("1. Add Book")
+    print("2. View Books")
+    print("3. Issue Book")
+    print("4. Return Book")
     print("5. Exit")
 
     choice = input("Enter Choice: ")
 
     if choice == "1":
 
-        amount = float(input("Enter Amount: "))
-        user.deposit(amount)
+        title = input("Enter Book Name: ")
+        library.add_book(title)
 
     elif choice == "2":
 
-        amount = float(input("Enter Amount: "))
-        user.withdraw(amount)
+        library.view_books()
 
     elif choice == "3":
 
-        user.check_balance()
+        title = input("Enter Book Name: ")
+        library.issue_book(title)
 
     elif choice == "4":
 
-        user.show_transactions()
+        title = input("Enter Book Name: ")
+        library.return_book(title)
 
     elif choice == "5":
 
