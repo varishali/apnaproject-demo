@@ -1,11 +1,8 @@
-import random
-import string
+import time
+seconds = int(input("Enter Seconds : "))
 
-coupon = ''.join(
-    random.choices(
-        string.ascii_uppercase + string.digits,
-        k=8
-    )
-)
-
-print("Coupon Code : ",coupon)
+while seconds > 0:
+    print(seconds)
+    time.sleep(1)
+    seconds -= 1
+print("Time Up!")
