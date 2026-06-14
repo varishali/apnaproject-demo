@@ -1,18 +1,15 @@
-username = "varish"
-password = "1234"
+import random
 
-user = input("Enter username : ")
+otp = random.randint(1000,9999)
 
-if user == "varish":
+print("OTP : ",otp)
 
-    pwd = input("Enter Pssword : ")
+user_otp = int(input("Enter OTP : "))
 
-    if password == "1234":
-        print("Login Successful....")
-
-    else:
-        print("Wrong Password...")
+if user_otp == otp:
+    print("Verified..")
 
 else:
-    print("Invalid Username...")            
+    print("Wrong OTP..")    
+
 
