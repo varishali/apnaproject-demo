@@ -1,24 +1,52 @@
-from datetime import datetime
+balance = 10000
 
-birth_date = input("Enter Date of Birth (DD/MM/YYYY): ")
+while True:
 
-dob = datetime.strptime(birth_date, "%d/%m/%Y")
+    print("\n===== ATM =====")
+    print("1. Check Balance")
+    print("2. Deposit")
+    print("3. Withdraw")
+    print("4. Exit")
 
-today = datetime.now()
+    choice = input("Enter Choice: ")
 
-years = today.year - dob.year
-months = today.month - dob.month
-days = today.day - dob.day
+    if choice == "1":
 
-if days < 0:
-    months -= 1
-    days += 30
+        print("Current Balance:", balance)
 
-if months < 0:
-    years -= 1
-    months += 12
+    elif choice == "2":
 
-print("\n===== AGE DETAILS =====")
-print(f"Years  : {years}")
-print(f"Months : {months}")
-print(f"Days   : {days}")
+        amount = float(input("Enter Amount: "))
+
+        if amount > 0:
+
+            balance += amount
+
+            print("Deposit Successful!")
+
+        else:
+
+            print("Invalid Amount!")
+
+    elif choice == "3":
+
+        amount = float(input("Enter Amount: "))
+
+        if amount <= balance:
+
+            balance -= amount
+
+            print("Withdrawal Successful!")
+
+        else:
+
+            print("Insufficient Balance!")
+
+    elif choice == "4":
+
+        print("Thank You!")
+        break
+
+    else:
+
+        print("Invalid Choice!")
