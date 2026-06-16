@@ -1,16 +1,44 @@
-num = int(input("Enter Number (0-9): "))
+def ask_question(question,answer):
+    user_answer = input(question + " ")
 
-words = {
-    0: "Zero",
-    1: "One",
-    2: "Two",
-    3: "Three",
-    4: "Four",
-    5: "Five",
-    6: "Six",
-    7: "Seven",
-    8: "Eight",
-    9: "Nine"
-}
+    if user_answer.lower() == answer.lower():
+        print("Correct Answer!\n")
+        return 1
 
-print(words.get(num, "Invalid Number"))
+    else:
+        print("Wrong Answer!\n")
+        return 0
+    
+score = 0
+
+print("\n==== PYTHON QUIZ GAME ====")
+
+score += ask_question(
+    "1. python kiusne banai?",
+    "guido van rossum"
+)
+score += ask_question(
+    "2. 5+5 = ?",
+    "10"
+)
+score += ask_question(
+    "3. HTML ka full form ?",
+    "hupertext merkup languages"
+)
+score += ask_question(
+    "4. Python file extension ?",
+    ".py"
+)
+score += ask_question(
+    "5. AI ka full form ?",
+    "artificial intelligence"
+)
+
+if score == 5:
+    print("Excellent!")
+
+elif score >=3:
+    print("Good Job!")
+
+else:
+    print("Need Practice!")        
