@@ -1,6 +1,26 @@
-def ask_question(question,answer):
-    user_answer = input(question + " ")
+import time
+import random
 
+questions = [
+    ["Python kisne banayi?", "guido van rossum"],
+    ["5 + 5 ?", "10"],
+    ["India ki capital?", "delhi"],
+    ["HTML ka full form?", "hypertext markup language"],
+    ["AI ka full form?", "artificial intelligence"]
+]
+
+
+def ask_question(question,answer):
+    print("You Have 15 Second !")
+    start_time = time.time()
+    user_answer = input(question + " ")
+    end_time = time.time()
+    total_time = end_time - start_time
+
+    if total_time > 15:
+        print("Time Out ! \n")
+        return 0
+    
     if user_answer.lower() == answer.lower():
         print("Correct Answer!\n")
         return 1
@@ -11,34 +31,12 @@ def ask_question(question,answer):
     
 score = 0
 
-print("\n==== PYTHON QUIZ GAME ====")
+print("\n=== Random Quiz Game ===")
 
-score += ask_question(
-    "1. python kiusne banai?",
-    "guido van rossum"
-)
-score += ask_question(
-    "2. 5+5 = ?",
-    "10"
-)
-score += ask_question(
-    "3. HTML ka full form ?",
-    "hupertext merkup languages"
-)
-score += ask_question(
-    "4. Python file extension ?",
-    ".py"
-)
-score += ask_question(
-    "5. AI ka full form ?",
-    "artificial intelligence"
-)
+random.shuffle(questions)
 
-if score == 5:
-    print("Excellent!")
+for q in questions:
+    score += ask_question(q[0],q[1])
 
-elif score >=3:
-    print("Good Job!")
-
-else:
-    print("Need Practice!")        
+print("==== Final Score ====")
+print("Your Score :",score, "/",len(questions))    
