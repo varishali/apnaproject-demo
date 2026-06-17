@@ -1,42 +1,19 @@
-import time
-import random
+saved_username = "varish"
+saved_password = "admin123"
 
-questions = [
-    ["Python kisne banayi?", "guido van rossum"],
-    ["5 + 5 ?", "10"],
-    ["India ki capital?", "delhi"],
-    ["HTML ka full form?", "hypertext markup language"],
-    ["AI ka full form?", "artificial intelligence"]
-]
+username = input("Enter Username: ")
+password = input("Enter Password: ")
 
+if username == saved_username:
 
-def ask_question(question,answer):
-    print("You Have 15 Second !")
-    start_time = time.time()
-    user_answer = input(question + " ")
-    end_time = time.time()
-    total_time = end_time - start_time
+    if password == saved_password:
 
-    if total_time > 15:
-        print("Time Out ! \n")
-        return 0
-    
-    if user_answer.lower() == answer.lower():
-        print("Correct Answer!\n")
-        return 1
+        print("Login Successful!")
 
     else:
-        print("Wrong Answer!\n")
-        return 0
-    
-score = 0
 
-print("\n=== Random Quiz Game ===")
+        print("Wrong Password!")
 
-random.shuffle(questions)
+else:
 
-for q in questions:
-    score += ask_question(q[0],q[1])
-
-print("==== Final Score ====")
-print("Your Score :",score, "/",len(questions))    
+    print("Username Not Found!")
