@@ -1,19 +1,9 @@
-saved_username = "varish"
-saved_password = "admin123"
+email = input("Enter Email: ")
 
-username = input("Enter Username: ")
-password = input("Enter Password: ")
+if "@" in email and ".com" in email:
 
-if username == saved_username:
-
-    if password == saved_password:
-
-        print("Login Successful!")
-
-    else:
-
-        print("Wrong Password!")
+    print("Valid Email")
 
 else:
 
-    print("Username Not Found!")
+    print("Invalid Email")
