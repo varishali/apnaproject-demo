@@ -1,9 +1,16 @@
-email = input("Enter Email: ")
+taken_usernames = [
+    "admin",
+    "varish",
+    "python",
+    "user123"
+]
 
-if "@" in email and ".com" in email:
+username = input("Enter Username: ")
 
-    print("Valid Email")
+if username.lower() in taken_usernames:
+
+    print("Username Already Taken!")
 
 else:
 
-    print("Invalid Email")
+    print("Username Available!")
