@@ -1,16 +1,9 @@
-taken_usernames = [
-    "admin",
-    "varish",
-    "python",
-    "user123"
-]
+number = input("Enter Mobile Number: ")
 
-username = input("Enter Username: ")
+if len(number) == 10 and number.isdigit():
 
-if username.lower() in taken_usernames:
-
-    print("Username Already Taken!")
+    print("Valid Number")
 
 else:
 
-    print("Username Available!")
+    print("Invalid Number")
