@@ -1,11 +1,14 @@
-password = input("Create Password: ")
+balance = 5000
 
-confirm = input("Confirm Password: ")
+amount = int(input("Enter Purchase Amount: "))
 
-if password == confirm:
+if amount <= balance:
 
-    print("Password Created!")
+    balance -= amount
+
+    print("Payment Successful!")
+    print("Remaining Balance:", balance)
 
 else:
 
-    print("Passwords Do Not Match!")
+    print("Insufficient Balance!")
