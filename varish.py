@@ -1,21 +1,11 @@
-# Typing Speed Checker
+password = input("Create Password: ")
 
-import time
+confirm = input("Confirm Password: ")
 
-sentence = "python is easy"
+if password == confirm:
 
-print(sentence)
-
-start = time.time()
-
-typed = input("Type Here : ")
-
-end = time.time()
-
-if typed == sentence:
-    print("Correct")
-
-    print("Time :", round(end - start, 2), "seconds")
+    print("Password Created!")
 
 else:
-    print("Wrong Typing")
+
+    print("Passwords Do Not Match!")
