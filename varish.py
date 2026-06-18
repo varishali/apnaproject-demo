@@ -1,56 +1,21 @@
-votes = {
-    "Ali": 0,
-    "Ram": 0,
-    "Shyam": 0
-}
+# Typing Speed Checker
 
-voted_users = []
+import time
 
-while True:
+sentence = "python is easy"
 
-    print("\n1. Vote")
-    print("2. Result")
-    print("3. Exit")
+print(sentence)
 
-    choice = input("Enter Choice : ")
+start = time.time()
 
-    if choice == "1":
+typed = input("Type Here : ")
 
-        user = input("Enter Your Name : ")
+end = time.time()
 
-        if user in voted_users:
-            print("You Already Voted")
+if typed == sentence:
+    print("Correct")
 
-        else:
+    print("Time :", round(end - start, 2), "seconds")
 
-            print("\nCandidates")
-            print("Ali")
-            print("Ram")
-            print("Shyam")
-
-            candidate = input("Vote For : ")
-
-            if candidate in votes:
-
-                votes[candidate] += 1
-
-                voted_users.append(user)
-
-                print("Vote Added")
-
-            else:
-                print("Invalid Candidate")
-
-    elif choice == "2":
-
-        print("\nVoting Result")
-
-        for candidate, total_votes in votes.items():
-            print(candidate, ":", total_votes)
-
-    elif choice == "3":
-        print("Voting Closed")
-        break
-
-    else:
-        print("Invalid Choice")
+else:
+    print("Wrong Typing")
