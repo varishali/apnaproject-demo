@@ -1,14 +1,12 @@
-balance = 5000
+import time 
+alarm_time = input("Set Alarm Time (HH:MM:SS):")
+print("Alarm Set For",alarm_time)
 
-amount = int(input("Enter Purchase Amount: "))
+while True:
+    current_time = time.strftime("%H:%M:%S")
+    print(current_time)
 
-if amount <= balance:
-
-    balance -= amount
-
-    print("Payment Successful!")
-    print("Remaining Balance:", balance)
-
-else:
-
-    print("Insufficient Balance!")
+    if current_time == alarm_time:
+        print("Wake Up!")
+        break
+    time.sleep(1)
