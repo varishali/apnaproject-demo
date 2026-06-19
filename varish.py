@@ -1,16 +1,25 @@
-taken_usernames = [
-    "varish",
-    "admin",
-    "python",
-    "gaming"
-]
+balance = 5000
 
-username = input("Create Username: ")
+upi_pin = "1234"
 
-if username.lower() in taken_usernames:
+amount = int(input("Enter Amount: "))
 
-    print("Username Already Taken!")
+pin = input("Enter UPI PIN: ")
+
+if pin == upi_pin:
+
+    if amount <= balance:
+
+        balance -= amount
+
+        print("Payment Successful!")
+
+        print("Remaining Balance:", balance)
+
+    else:
+
+        print("Insufficient Balance!")
 
 else:
 
-    print("Username Available!")
+    print("Wrong UPI PIN!")
