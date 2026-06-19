@@ -1,12 +1,16 @@
-password = input("Creat Password : ")
+taken_usernames = [
+    "varish",
+    "admin",
+    "python",
+    "gaming"
+]
 
-if(
-    len(password) >= 8 and
-    any(char.isdigit() for char in password) and
-    any(char.isupper() for char in password)
-):
-    print("Strong password ! ")
+username = input("Create Username: ")
+
+if username.lower() in taken_usernames:
+
+    print("Username Already Taken!")
 
 else:
-    print("Weak Password ! ")
 
+    print("Username Available!")
