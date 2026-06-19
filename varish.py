@@ -1,12 +1,12 @@
-import time 
-alarm_time = input("Set Alarm Time (HH:MM:SS):")
-print("Alarm Set For",alarm_time)
+password = input("Creat Password : ")
 
-while True:
-    current_time = time.strftime("%H:%M:%S")
-    print(current_time)
+if(
+    len(password) >= 8 and
+    any(char.isdigit() for char in password) and
+    any(char.isupper() for char in password)
+):
+    print("Strong password ! ")
 
-    if current_time == alarm_time:
-        print("Wake Up!")
-        break
-    time.sleep(1)
+else:
+    print("Weak Password ! ")
+
