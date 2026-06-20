@@ -1,49 +1,30 @@
-users = {}
+import random
+import time
 
-while True :
-    print("\n\033[1;92m==== LOGIN SYSTEM ====\033[0m")
-    print("1. Signup")
-    print("2. Login")
-    print("3. Exit")
+username = "varish"
+password = "1234"
 
-    choice = input("Enter your Choice : ")
+print("==== LOGIN SYSTEM ====")
+user = input("Enter Username : ")
+passwd = input("Enter Password : ")
 
-    #signup
-    if choice == "1":
-        username = input("Creat username : ")
-        if username in users:
-            print("Username Already Exists! ")
+if user == username and passwd == password:
+    otp = random.randint(1000,9999)
+
+    print(f"Your OTP Is -- {otp} --")
+    print("OTP Valid for 20 Seconds!")
+    start_time = time.time()
+    user_otp = int(input("Enter OTP : "))
+    end_time = time.time()
+    total_time = end_time - start_time
+
+    if total_time <= 20:
+        if user_otp == otp:
+            print("Login successful!")
 
         else:
-            password = input("Creat password : ")
-            users[username] = password
-            print("Account Created Successfully!")
+            print("Invalid OTP!")    
 
-    elif choice == "2":
-        username = input("Enter Username : ")
-        if username in users:
+else:
+    print("Invalid Username Or Password!")        
 
-            attempts = 3
-
-            while attempts > 0 :
-                password = input("Enter Password : ")
-
-                if users[username] == password:
-                    print("login Successfully!")
-                    break
-                else:
-                    attempts -= 1
-                    print("Wrong Password!")
-                    print("Attempts Left : ",attempts)
-
-            if attempts == 0:
-                print("Account Temporaily Locked!")
-                break
-           
-
-    elif choice == "3":
-        print("Program Closed!")
-        break
-
-    else:
-        print("Invalid Choice!")                        
