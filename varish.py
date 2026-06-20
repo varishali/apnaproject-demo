@@ -1,25 +1,17 @@
-balance = 5000
+users = {
+    "varish" : "1234",
+    "ali" : "pass123"
+}
 
-upi_pin = "1234"
+print("=== LOGIN SYSTEM ===")
 
-amount = int(input("Enter Amount: "))
+username = input("Enter Username : ")
+password = input("Enter Password : ")
 
-pin = input("Enter UPI PIN: ")
-
-if pin == upi_pin:
-
-    if amount <= balance:
-
-        balance -= amount
-
-        print("Payment Successful!")
-
-        print("Remaining Balance:", balance)
-
+if username in users:
+    if users[username] == password:
+        print("Login Successful!")
     else:
-
-        print("Insufficient Balance!")
-
+        print("Wrong Password!")
 else:
-
-    print("Wrong UPI PIN!")
+    print("Username Not Found!")            
