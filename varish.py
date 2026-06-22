@@ -1,8 +1,15 @@
-students = {
-    "ali" : 90,
-    "varish" : 95,
-    "aman" : 80
-}
+num = int(input("Enter Number : "))
 
-topper = max(students,key=students.get)
-print("Topper : ",topper)
+count = 0
+
+for i in range(1, num + 1):
+    if num % i == 0:
+        count += 1
+
+if count == 2:
+    print("Prime Number")
+
+
+else:
+    print("Not Prime")    
+
