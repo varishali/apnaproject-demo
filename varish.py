@@ -1,38 +1,43 @@
-cart = []
-
-total = 0
+balance = 1000
 
 while True:
 
-    print("\n1. Add Item")
-    print("2. View Cart")
-    print("3. Exit")
+    print("\n===== BANK SYSTEM =====")
+
+    print("1. Deposit")
+    print("2. Withdraw")
+    print("3. Check Balance")
+    print("4. Exit")
 
     choice = input("Enter Choice: ")
 
     if choice == "1":
 
-        item = input("Enter Item Name: ")
+        amount = int(input("Enter Amount: "))
 
-        price = int(input("Enter Price: "))
+        balance += amount
 
-        cart.append((item, price))
-
-        total += price
-
-        print("Item Added!")
+        print("Deposit Successful!")
 
     elif choice == "2":
 
-        print("\n===== CART =====")
+        amount = int(input("Enter Amount: "))
 
-        for item, price in cart:
+        if amount <= balance:
 
-            print(item, "-", price)
+            balance -= amount
 
-        print("Total Bill:", total)
+            print("Withdraw Successful!")
+
+        else:
+
+            print("Insufficient Balance!")
 
     elif choice == "3":
+
+        print("Current Balance:", balance)
+
+    elif choice == "4":
 
         print("Thank You!")
 
