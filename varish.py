@@ -1,23 +1,49 @@
-score = 0
+password = "1234"
 
-print("===== QUIZ GAME =====")
+secret_notes = []
 
-answer = input("Python Kisne Banayi? ")
+user = input("Enter Password: ")
 
-if answer.lower() == "guido van rossum":
+if user == password:
 
-    score += 1
+    while True:
 
-answer = input("2 + 2 = ")
+        print("\n1. Add Secret Note")
+        print("2. View Notes")
+        print("3. Exit")
 
-if answer == "4":
+        choice = input("Enter Choice: ")
 
-    score += 1
+        if choice == "1":
 
-answer = input("India Capital? ")
+            note = input("Write Secret Note: ")
 
-if answer.lower() == "delhi":
+            secret_notes.append(note)
 
-    score += 1
+            print("Note Saved!")
 
-print("\nFinal Score:", score)
+        elif choice == "2":
+
+            if len(secret_notes) == 0:
+
+                print("No Notes Found!")
+
+            else:
+
+                for note in secret_notes:
+
+                    print(note)
+
+        elif choice == "3":
+
+            print("Locker Closed!")
+
+            break
+
+        else:
+
+            print("Invalid Choice!")
+
+else:
+
+    print("Wrong Password!")
