@@ -1,80 +1,61 @@
-patients = {}
+class Movie:
+
+    def __init__(self, movie_name, ticket_price):
+
+        self.movie_name = movie_name
+
+        self.ticket_price = ticket_price
 
 
-# ADD PATIENT
-def add_patient():
+class Booking(Movie):
 
-    name = input("Enter Patient Name: ")
+    def __init__(self, movie_name, ticket_price):
 
-    disease = input("Enter Disease: ")
+        super().__init__(movie_name, ticket_price)
 
-    patients[name] = disease
+        self.total_tickets = 0
 
-    print("Patient Added Successfully!")
-
-
-# VIEW PATIENTS
-def view_patients():
-
-    if len(patients) == 0:
-
-        print("No Patients Found!")
-
-    else:
-
-        print("\n===== PATIENT RECORDS =====")
-
-        for name, disease in patients.items():
-
-            print("Patient Name:", name)
-
-            print("Disease:", disease)
-
-            print("----------------------")
+        self.total_amount = 0
 
 
-# SEARCH PATIENT
-def search_patient():
+    def book_ticket(self):
 
-    name = input("Enter Patient Name: ")
+        tickets = int(input("Enter Number Of Tickets: "))
 
-    if name in patients:
+        self.total_tickets += tickets
 
-        print("Patient Found!")
+        amount = tickets * self.ticket_price
 
-        print("Disease:", patients[name])
+        self.total_amount += amount
 
-    else:
-
-        print("Patient Not Found!")
+        print("Ticket Booked Successfully!")
 
 
-# DELETE PATIENT
-def delete_patient():
+    def show_details(self):
 
-    name = input("Enter Patient Name To Delete: ")
+        print("\n===== BOOKING DETAILS =====")
 
-    if name in patients:
+        print("Movie Name:", self.movie_name)
 
-        del patients[name]
+        print("Ticket Price:", self.ticket_price)
 
-        print("Patient Deleted!")
+        print("Total Tickets:", self.total_tickets)
 
-    else:
-
-        print("Patient Not Found!")
+        print("Total Amount:", self.total_amount)
 
 
-# MAIN PROGRAM
+movie1 = Booking("Pushpa 3", 250)
+
+
 while True:
 
-    print("\n===== HOSPITAL MANAGEMENT SYSTEM =====")
+    print("\n===== MOVIE TICKET SYSTEM =====")
 
-    print("1. Add Patient")
-    print("2. View Patients")
-    print("3. Search Patient")
-    print("4. Delete Patient")
-    print("5. Exit")
+    print("1. Book Ticket")
+
+    print("2. Show Details")
+
+    print("3. Exit")
 
 
     choice = input("Enter Choice: ")
@@ -82,27 +63,17 @@ while True:
 
     if choice == "1":
 
-        add_patient()
+        movie1.book_ticket()
 
 
     elif choice == "2":
 
-        view_patients()
+        movie1.show_details()
 
 
     elif choice == "3":
 
-        search_patient()
-
-
-    elif choice == "4":
-
-        delete_patient()
-
-
-    elif choice == "5":
-
-        print("Program Closed!")
+        print("Thank You!")
 
         break
 
