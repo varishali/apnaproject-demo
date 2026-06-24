@@ -1,79 +1,79 @@
-books = {}
+patients = {}
 
 
-# ADD BOOK
-def add_book():
+# ADD PATIENT
+def add_patient():
 
-    name = input("Enter Book Name: ")
+    name = input("Enter Patient Name: ")
 
-    author = input("Enter Author Name: ")
+    disease = input("Enter Disease: ")
 
-    books[name] = author
+    patients[name] = disease
 
-    print("Book Added Successfully!")
-
-
-# VIEW BOOKS
-def view_books():
-
-    if len(books) == 0:
-
-        print("No Books Available!")
-
-    else:
-
-        print("\n===== BOOK LIST =====")
-
-        for book, author in books.items():
-
-            print("Book:", book)
-
-            print("Author:", author)
-
-            print("-------------------")
+    print("Patient Added Successfully!")
 
 
-# SEARCH BOOK
-def search_book():
+# VIEW PATIENTS
+def view_patients():
 
-    name = input("Enter Book Name: ")
+    if len(patients) == 0:
 
-    if name in books:
-
-        print("Book Found!")
-
-        print("Author:", books[name])
+        print("No Patients Found!")
 
     else:
 
-        print("Book Not Found!")
+        print("\n===== PATIENT RECORDS =====")
+
+        for name, disease in patients.items():
+
+            print("Patient Name:", name)
+
+            print("Disease:", disease)
+
+            print("----------------------")
 
 
-# DELETE BOOK
-def delete_book():
+# SEARCH PATIENT
+def search_patient():
 
-    name = input("Enter Book Name To Delete: ")
+    name = input("Enter Patient Name: ")
 
-    if name in books:
+    if name in patients:
 
-        del books[name]
+        print("Patient Found!")
 
-        print("Book Deleted!")
+        print("Disease:", patients[name])
 
     else:
 
-        print("Book Not Found!")
+        print("Patient Not Found!")
+
+
+# DELETE PATIENT
+def delete_patient():
+
+    name = input("Enter Patient Name To Delete: ")
+
+    if name in patients:
+
+        del patients[name]
+
+        print("Patient Deleted!")
+
+    else:
+
+        print("Patient Not Found!")
 
 
 # MAIN PROGRAM
 while True:
 
-    print("\n===== LIBRARY MANAGEMENT SYSTEM =====")
+    print("\n===== HOSPITAL MANAGEMENT SYSTEM =====")
 
-    print("1. Add Book")
-    print("2. View Books")
-    print("3. Search Book")
-    print("4. Delete Book")
+    print("1. Add Patient")
+    print("2. View Patients")
+    print("3. Search Patient")
+    print("4. Delete Patient")
     print("5. Exit")
 
 
@@ -82,22 +82,22 @@ while True:
 
     if choice == "1":
 
-        add_book()
+        add_patient()
 
 
     elif choice == "2":
 
-        view_books()
+        view_patients()
 
 
     elif choice == "3":
 
-        search_book()
+        search_patient()
 
 
     elif choice == "4":
 
-        delete_book()
+        delete_patient()
 
 
     elif choice == "5":
