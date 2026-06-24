@@ -1,49 +1,50 @@
-password = "1234"
+class ATM:
+    def __init__(self,balance):
+        self.balance = balance
 
-secret_notes = []
+    def deposit(self):
 
-user = input("Enter Password: ")
+        amount = int(input("Enter Amount : "))
+        self.balance += amount
+        print("Amount Deposited ..")
+        print(f"Total amount is : {self.balance}")
 
-if user == password:
+    def withdraw(self):
 
-    while True:
+        amount = int(input("Enter Amount To Withdraw : "))
 
-        print("\n1. Add Secret Note")
-        print("2. View Notes")
-        print("3. Exit")
-
-        choice = input("Enter Choice: ")
-
-        if choice == "1":
-
-            note = input("Write Secret Note: ")
-
-            secret_notes.append(note)
-
-            print("Note Saved!")
-
-        elif choice == "2":
-
-            if len(secret_notes) == 0:
-
-                print("No Notes Found!")
-
-            else:
-
-                for note in secret_notes:
-
-                    print(note)
-
-        elif choice == "3":
-
-            print("Locker Closed!")
-
-            break
-
+        if amount <= self.balance:
+            self.balance -= amount
+            print("Amount Withdraw Successfully")
+            print(f"Total Amount Is : {self.balance}")
         else:
+            print("Insufficient Amount")
 
-            print("Invalid Choice!")
+    def cheak_balance(self):
+        print("Current Balance : ",self.balance)                
 
-else:
+atm = ATM(1000)
 
-    print("Wrong Password!")
+while True:
+    print("==  ATM MENU  ==")
+    print("1. Deposit")
+    print("2. Withdraw")
+    print("3. Cheak Balance")
+    print("4. Exit")
+
+    choice = input("Enter Choice : ")
+
+    if choice == "1":
+        atm.deposit()
+
+    elif choice == "2":
+        atm.withdraw()
+
+    elif choice == "3":
+        atm.cheak_balance()
+
+    elif choice == "4":
+        print("Thank You")
+        break             
+    else:
+        print("Invalid Choice")
