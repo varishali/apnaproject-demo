@@ -1,50 +1,112 @@
-class ATM:
-    def __init__(self,balance):
-        self.balance = balance
+books = {}
 
-    def deposit(self):
 
-        amount = int(input("Enter Amount : "))
-        self.balance += amount
-        print("Amount Deposited ..")
-        print(f"Total amount is : {self.balance}")
+# ADD BOOK
+def add_book():
 
-    def withdraw(self):
+    name = input("Enter Book Name: ")
 
-        amount = int(input("Enter Amount To Withdraw : "))
+    author = input("Enter Author Name: ")
 
-        if amount <= self.balance:
-            self.balance -= amount
-            print("Amount Withdraw Successfully")
-            print(f"Total Amount Is : {self.balance}")
-        else:
-            print("Insufficient Amount")
+    books[name] = author
 
-    def cheak_balance(self):
-        print("Current Balance : ",self.balance)                
+    print("Book Added Successfully!")
 
-atm = ATM(1000)
 
+# VIEW BOOKS
+def view_books():
+
+    if len(books) == 0:
+
+        print("No Books Available!")
+
+    else:
+
+        print("\n===== BOOK LIST =====")
+
+        for book, author in books.items():
+
+            print("Book:", book)
+
+            print("Author:", author)
+
+            print("-------------------")
+
+
+# SEARCH BOOK
+def search_book():
+
+    name = input("Enter Book Name: ")
+
+    if name in books:
+
+        print("Book Found!")
+
+        print("Author:", books[name])
+
+    else:
+
+        print("Book Not Found!")
+
+
+# DELETE BOOK
+def delete_book():
+
+    name = input("Enter Book Name To Delete: ")
+
+    if name in books:
+
+        del books[name]
+
+        print("Book Deleted!")
+
+    else:
+
+        print("Book Not Found!")
+
+
+# MAIN PROGRAM
 while True:
-    print("==  ATM MENU  ==")
-    print("1. Deposit")
-    print("2. Withdraw")
-    print("3. Cheak Balance")
-    print("4. Exit")
 
-    choice = input("Enter Choice : ")
+    print("\n===== LIBRARY MANAGEMENT SYSTEM =====")
+
+    print("1. Add Book")
+    print("2. View Books")
+    print("3. Search Book")
+    print("4. Delete Book")
+    print("5. Exit")
+
+
+    choice = input("Enter Choice: ")
+
 
     if choice == "1":
-        atm.deposit()
+
+        add_book()
+
 
     elif choice == "2":
-        atm.withdraw()
+
+        view_books()
+
 
     elif choice == "3":
-        atm.cheak_balance()
+
+        search_book()
+
 
     elif choice == "4":
-        print("Thank You")
-        break             
+
+        delete_book()
+
+
+    elif choice == "5":
+
+        print("Program Closed!")
+
+        break
+
+
     else:
-        print("Invalid Choice")
+
+        print("Invalid Choice!")
