@@ -1,35 +1,18 @@
-password = input("Enter Password : ")
+text = input("Enter Sentence : ")
 
-upper = False
-lower = False
-digit = False
-special = False
+words = len(text.split())
 
-
-for ch in password:
-
-    if ch.isupper():
-
-        upper = True
-
-    elif ch.islower():
-
-        lower = True
-
-    elif ch.isdigit():
-
-        digit = True
-
-    else:
-
-        special = True
+vowels = 0
 
 
-if upper and lower and digit and special:
+for ch in text.lower():
 
-    print("Strong Password")
+    if ch in "aeiou":
 
-else:
+        vowels += 1
 
-    print("Weak Password")
+
+print("Total Words :", words)
+
+print("Total Vowels :", vowels)
 
