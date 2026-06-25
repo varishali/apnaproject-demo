@@ -1,83 +1,72 @@
-class Movie:
+import pandas as pd
+books = {}
 
-    def __init__(self, movie_name, ticket_price):
+# add book
+def add_book():
+    name = input("\nEnter Book Name : ")
+    author = input("Enter Author Name : ")
+    books[name] = author
+    print("Book Added Successfully.")
 
-        self.movie_name = movie_name
+# view book 
+def view_book():
+    if len(books) == 0:
+        print("No Books Found.")
+    else:
+        data = {
+            "Book Name" : list(books.keys()),
+            "Author Name" : list(books.values()) 
+        }
+        df = pd.DataFrame(data)
+        print("\n",df,"\n")
 
-        self.ticket_price = ticket_price
-
-
-class Booking(Movie):
-
-    def __init__(self, movie_name, ticket_price):
-
-        super().__init__(movie_name, ticket_price)
-
-        self.total_tickets = 0
-
-        self.total_amount = 0
-
-
-    def book_ticket(self):
-
-        tickets = int(input("Enter Number Of Tickets: "))
-
-        self.total_tickets += tickets
-
-        amount = tickets * self.ticket_price
-
-        self.total_amount += amount
-
-        print("Ticket Booked Successfully!")
-
-
-    def show_details(self):
-
-        print("\n===== BOOKING DETAILS =====")
-
-        print("Movie Name:", self.movie_name)
-
-        print("Ticket Price:", self.ticket_price)
-
-        print("Total Tickets:", self.total_tickets)
-
-        print("Total Amount:", self.total_amount)
-
-
-movie1 = Booking("Pushpa 3", 250)
-
-
-while True:
-
-    print("\n===== MOVIE TICKET SYSTEM =====")
-
-    print("1. Book Ticket")
-
-    print("2. Show Details")
-
-    print("3. Exit")
-
-
-    choice = input("Enter Choice: ")
-
-
-    if choice == "1":
-
-        movie1.book_ticket()
-
-
-    elif choice == "2":
-
-        movie1.show_details()
-
-
-    elif choice == "3":
-
-        print("Thank You!")
-
-        break
-
+    
+# search book 
+def search_book():
+    name = input("Enter Book Name : ")
+    if name in books :
+        print("Book Found : ",books)
+        print("Author : ",books[name])
 
     else:
+        print("No book Found.")
 
-        print("Invalid Choice!")
+# delete book
+def delete_book():
+    name = input("Enter Book Name TO Delete : ")
+    if name in books:
+        del books[name]
+        print("Book Dlete.")
+    else:
+        print("No Books Found.")
+
+# main program 
+while True:
+    print("\n====  LIBRARY MANAGEMENT SYSTEM  ====\n")
+    print("1. Add Book")
+    print("2. View Book")
+    print("3. Search Book")
+    print("4. Delete Book")
+    print("5. Exit\n")
+
+    choice = input("Enter Choice : ")
+
+    if choice == "1":
+        add_book()
+
+    elif choice == "2":
+        view_book()
+
+    elif choice == "3":
+        search_book()
+
+    elif choice == "4":
+        delete_book() 
+
+    elif choice == "5":
+        print("Program Closed.")
+        break 
+    else:
+        print("Invalid Choice")      
+             
+
