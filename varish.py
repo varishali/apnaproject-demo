@@ -1,18 +1,11 @@
-text = input("Enter Sentence : ")
+import time
 
-words = len(text.split())
+for i in range(10, 0, -1):
 
-vowels = 0
+    print(i)
 
-
-for ch in text.lower():
-
-    if ch in "aeiou":
-
-        vowels += 1
+    time.sleep(1)
 
 
-print("Total Words :", words)
-
-print("Total Vowels :", vowels)
+print("Time Up!")
 
