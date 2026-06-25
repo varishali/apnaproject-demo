@@ -1,72 +1,35 @@
-import pandas as pd
-books = {}
+password = input("Enter Password : ")
 
-# add book
-def add_book():
-    name = input("\nEnter Book Name : ")
-    author = input("Enter Author Name : ")
-    books[name] = author
-    print("Book Added Successfully.")
+upper = False
+lower = False
+digit = False
+special = False
 
-# view book 
-def view_book():
-    if len(books) == 0:
-        print("No Books Found.")
-    else:
-        data = {
-            "Book Name" : list(books.keys()),
-            "Author Name" : list(books.values()) 
-        }
-        df = pd.DataFrame(data)
-        print("\n",df,"\n")
 
-    
-# search book 
-def search_book():
-    name = input("Enter Book Name : ")
-    if name in books :
-        print("Book Found : ",books)
-        print("Author : ",books[name])
+for ch in password:
+
+    if ch.isupper():
+
+        upper = True
+
+    elif ch.islower():
+
+        lower = True
+
+    elif ch.isdigit():
+
+        digit = True
 
     else:
-        print("No book Found.")
 
-# delete book
-def delete_book():
-    name = input("Enter Book Name TO Delete : ")
-    if name in books:
-        del books[name]
-        print("Book Dlete.")
-    else:
-        print("No Books Found.")
+        special = True
 
-# main program 
-while True:
-    print("\n====  LIBRARY MANAGEMENT SYSTEM  ====\n")
-    print("1. Add Book")
-    print("2. View Book")
-    print("3. Search Book")
-    print("4. Delete Book")
-    print("5. Exit\n")
 
-    choice = input("Enter Choice : ")
+if upper and lower and digit and special:
 
-    if choice == "1":
-        add_book()
+    print("Strong Password")
 
-    elif choice == "2":
-        view_book()
+else:
 
-    elif choice == "3":
-        search_book()
-
-    elif choice == "4":
-        delete_book() 
-
-    elif choice == "5":
-        print("Program Closed.")
-        break 
-    else:
-        print("Invalid Choice")      
-             
+    print("Weak Password")
 
