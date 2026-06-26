@@ -1,8 +1,12 @@
-from collections import Counter
+import os
 
-data = ["apple", "Banana", "apple", "orange", "BANANA", "grape"]
-clean_data = [word.lower() for word in data if len(word) > 4]
-counts = Counter(clean_data)
-formatter = lambda k, v: f"{k.title()}: {v} times"
-for fruit, count in zip(counts.keys(), counts.values()):
-    print(formatter(fruit, count))
+class SafeFileUpdater:
+    def __init__(self, filename): self.filename = filename
+    def __enter__(self):
+        self.temp_filename = self.filename + ".tmp"
+        self.file = open(self.temp_filename, "w")
+        return self.file
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.file.close()
+        if exc_type is None: os.replace(self.temp_filename, self.filename)
+        else: os.remove(self.temp_filename)
