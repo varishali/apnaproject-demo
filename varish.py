@@ -1,10 +1,13 @@
-import time
-def timer(func):
-    def wrapper(*args, **kwargs):
-        start = time.perf_counter()
-        result = func(*args, **kwargs)
-        print(f"{func.__name__} took {time.perf_counter() - start:.4f}s")
-        return result
-    return wrapper
-@timer
-def compute(): return sum(i * i for i in range(10**6))
+import asyncio, aiohttp
+
+async def fetch_status(url):
+    try:
+        async with aiohttp.ClientSession() as session:
+            async with session.get(url, timeout=5) as response:
+                return f"{url}: {response.status}"
+    except Exception as e:
+        return f"{url} failed: {type(e).__name__}"
+
+urls = ["https://httpbin.org/status/200", "https://httpbin.org/status/404"]
+results = asyncio.run(asyncio.gather(*(fetch_status(u) for u in urls)))
+print("\n".join(results))
