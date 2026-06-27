@@ -1,23 +1,37 @@
-num = int(input("Enter Number : "))
-
-temp = num
-
-total = 0
+from datetime import datetime
 
 
-while temp > 0:
+class Logger:
 
-    digit = temp % 10
+    def __init__(self, filename):
 
-    total += digit ** 3
-
-    temp //= 10
+        self.filename = filename
 
 
-if total == num:
+    def write_log(self, message):
 
-    print("Armstrong Number")
+        time = datetime.now()
 
-else:
+        with open(self.filename, "a") as file:
 
-    print("Not Armstrong")
+            file.write(f"{time} -> {message}\n")
+
+
+logger = Logger("log.txt")
+
+
+while True:
+
+    text = input("Enter Message : ")
+
+
+    if text == "exit":
+
+        print("Logger Closed")
+
+        break
+
+
+    logger.write_log(text)
+
+    print("Message Saved")
