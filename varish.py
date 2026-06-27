@@ -1,13 +1,23 @@
-text = input("Enter Text : ")
+num = int(input("Enter Number : "))
 
-count = 0
+temp = num
 
-
-for ch in text.lower():
-
-    if ch in "aeiou":
-
-        count += 1
+total = 0
 
 
-print("Vowels :", count)
+while temp > 0:
+
+    digit = temp % 10
+
+    total += digit ** 3
+
+    temp //= 10
+
+
+if total == num:
+
+    print("Armstrong Number")
+
+else:
+
+    print("Not Armstrong")
