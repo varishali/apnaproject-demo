@@ -1,21 +1,41 @@
-class Encryptor:
-    def __init__(self,filename):
+from datetime import datetime
+
+
+class NotesManager:
+
+    def __init__(self, filename):
+
         self.filename = filename
 
-    def encrypt_file(self):
-        with open(self.filename,"r") as file:
-            data = file.read() 
 
-        encrypted = ""
+    def save_note(self, note):
 
-        for ch in data:
-            encrypted += chr(ord(ch) + 3) 
+        time = datetime.now()
 
-        with open ("encrypted.txt","w") as file:
-            file.write(encrypted)
 
-        print("File Encrypted Successfully !")
+        with open(self.filename, "a") as file:
 
-encrypt = Encryptor("log.txt")
+            file.write(f"{time} -> {note}\n")
 
-encrypt.encrypt_file()
+
+        print("Note Saved Successfully!")
+
+
+notes = NotesManager("notes.txt")
+
+
+while True:
+
+    note = input("Write Note : ")
+
+
+    if note == "exit":
+
+        print("Program Closed")
+
+        break
+
+
+    notes.save_note(note)
+
+
