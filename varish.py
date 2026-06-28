@@ -1,16 +1,21 @@
-import shutil 
-from datetime import datetime
+class Encryptor:
+    def __init__(self,filename):
+        self.filename = filename
 
-class BackupSystem:
-    def __init__(self,original_backup):
-        self.original_file = original_backup
+    def encrypt_file(self):
+        with open(self.filename,"r") as file:
+            data = file.read() 
 
-    def create_backup(self):
-        time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-        backup_file = f"backup_{time}.txt"    
+        encrypted = ""
 
-        shutil.copy(self.original_file,backup_file)
-        print("Backup Created : ",backup_file)
+        for ch in data:
+            encrypted += chr(ord(ch) + 3) 
 
-backup = BackupSystem("log.txt")
-backup.create_backup()        
+        with open ("encrypted.txt","w") as file:
+            file.write(encrypted)
+
+        print("File Encrypted Successfully !")
+
+encrypt = Encryptor("log.txt")
+
+encrypt.encrypt_file()
