@@ -1,37 +1,16 @@
+import shutil 
 from datetime import datetime
 
+class BackupSystem:
+    def __init__(self,original_backup):
+        self.original_file = original_backup
 
-class Logger:
+    def create_backup(self):
+        time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+        backup_file = f"backup_{time}.txt"    
 
-    def __init__(self, filename):
+        shutil.copy(self.original_file,backup_file)
+        print("Backup Created : ",backup_file)
 
-        self.filename = filename
-
-
-    def write_log(self, message):
-
-        time = datetime.now()
-
-        with open(self.filename, "a") as file:
-
-            file.write(f"{time} -> {message}\n")
-
-
-logger = Logger("log.txt")
-
-
-while True:
-
-    text = input("Enter Message : ")
-
-
-    if text == "exit":
-
-        print("Logger Closed")
-
-        break
-
-
-    logger.write_log(text)
-
-    print("Message Saved")
+backup = BackupSystem("log.txt")
+backup.create_backup()        
