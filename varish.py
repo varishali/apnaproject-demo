@@ -1,15 +1,10 @@
-import time
+import qrcode
 
-text = "python"
+img = qrcode.make(
 
-start = time.time()
+    "https://google.com"
+)
 
-user = input("Type Word : ")
+img.save("qr.png")
 
-end = time.time()
-
-print("Time :", end - start)
-
-if user == text:
-
-    print("Correct")
+print("QR Generated")
