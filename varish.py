@@ -1,16 +1,15 @@
-import random
-import string
+import time
 
+text = "python"
 
-chars = string.ascii_letters + string.digits
+start = time.time()
 
+user = input("Type Word : ")
 
-password = ""
+end = time.time()
 
+print("Time :", end - start)
 
-for i in range(10):
+if user == text:
 
-    password += random.choice(chars)
-
-
-print(password)
+    print("Correct")

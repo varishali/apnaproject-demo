@@ -1,0 +1,1 @@
+2026-06-29 21:23:26.430168 -> & C:/Users/hp/AppData/Local/Python/pythoncore-3.14-64/python.exe "c:/Users/hp/Desktop/New folder/gitdemo/apnaproject-demo/varish.py"
