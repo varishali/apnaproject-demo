@@ -1,41 +1,16 @@
-from datetime import datetime
+import random
+import string
 
 
-class NotesManager:
-
-    def __init__(self, filename):
-
-        self.filename = filename
+chars = string.ascii_letters + string.digits
 
 
-    def save_note(self, note):
-
-        time = datetime.now()
+password = ""
 
 
-        with open(self.filename, "a") as file:
+for i in range(10):
 
-            file.write(f"{time} -> {note}\n")
-
-
-        print("Note Saved Successfully!")
+    password += random.choice(chars)
 
 
-notes = NotesManager("notes.txt")
-
-
-while True:
-
-    note = input("Write Note : ")
-
-
-    if note == "exit":
-
-        print("Program Closed")
-
-        break
-
-
-    notes.save_note(note)
-
-
+print(password)
