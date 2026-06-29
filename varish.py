@@ -1,10 +1,15 @@
-import qrcode
+password = input("Enter Password : ")
 
-img = qrcode.make(
+if len(password) >= 8:
 
-    "https://google.com"
-)
+    if any(char.isdigit() for char in password):
 
-img.save("qr.png")
+        print("Strong Password")
 
-print("QR Generated")
+    else:
+
+        print("Add Numbers")
+
+else:
+
+    print("Weak Password")
