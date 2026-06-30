@@ -1,15 +1,25 @@
 import schedule
 import time
-import shutil
+from datetime import datetime
 
-def backup():
-    shutil.copy(
-        "backup.txt",
-        "autobackup.txt"
-    )
 
-    print("Backup Created")
-schedule.every(3).seconds.do(backup)    
+def logger():
+
+    with open("logs.txt", "a") as file:
+
+        file.write(
+
+            f"{datetime.now()} -> Running\n"
+        )
+
+    print("Log Saved")
+
+
+schedule.every(5).seconds.do(logger)
+
+
 while True:
+
     schedule.run_pending()
+
     time.sleep(1)
