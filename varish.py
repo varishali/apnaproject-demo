@@ -1,15 +1,13 @@
-password = input("Enter Password : ")
+import shutil
+from datetime import datetime
 
-if len(password) >= 8:
+time = datetime.now().strftime(
+    "%Y-%m-%d__%H-%M-%S"
+)
+backup = f"backup_{time}.txt"
 
-    if any(char.isdigit() for char in password):
-
-        print("Strong Password")
-
-    else:
-
-        print("Add Numbers")
-
-else:
-
-    print("Weak Password")
+shutil.copy(
+    "TextFiles/log.txt",
+    backup
+)
+print("Backup Created")
