@@ -1,13 +1,15 @@
+import schedule
+import time
 import shutil
-from datetime import datetime
 
-time = datetime.now().strftime(
-    "%Y-%m-%d__%H-%M-%S"
-)
-backup = f"backup_{time}.txt"
+def backup():
+    shutil.copy(
+        "backup.txt",
+        "autobackup.txt"
+    )
 
-shutil.copy(
-    "TextFiles/log.txt",
-    backup
-)
-print("Backup Created")
+    print("Backup Created")
+schedule.every(3).seconds.do(backup)    
+while True:
+    schedule.run_pending()
+    time.sleep(1)
