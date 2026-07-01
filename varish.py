@@ -1,74 +1,66 @@
-class Library:
+class Bank:
+    def __init__(self, name ,balance):
+        self.name = name
+        self.balance = balance
 
-    def __init__(self):
-        self.books = {}
+        self.history = []
 
-    def add_book(self):
+    def deposit(self):
 
-        name = input("Enter the name of the book : ")
-        author = input("Enter the name of the author : ")
+        amount = float(input("Enter the amount to deposite : "))
+        self.balance += amount
+        self.history.append(f"Deposited : {amount}")
+        print("Amount deposited successfully.")
 
-        if name in self.books:
-            print("book already axixts in library.")
+    def withdraw(self):
+        amount = float(input("Enter the amount to withdraw : "))
+        if amount > self.balance:
+            print("Insufficient balance.")
         else:
-            self.books[name] = author
-            print("Book added successfully.")    
+            self.balance -= amount
+            self.history.append(f"withdrawn : {amount}")
+            print("Amount withdrawn successfully.")
 
-    def view_books(self):
+    def check_balance(self):
+        print(f"current balance : {self.balance}")
 
-        if not self.books:
-            print("No books available in the library.")
+    def transaction_history(self):
+
+        if len(self.history) == 0 :
+            print("No transaction history available.")
+
         else:
-            print("books available in library : ")
+            print("Transaction History :")        
 
-            for name,author in self.books.items():
-                print(f"Book Name : {name}, author : {author}")
+            for item in self.history:
+                print(item)
 
-    def search_book(self):
-        name = input("Enter the name of the book to search : ")
-        if name in self.books:
-            print(f"Book found ! Book name : {name}, author : {self.books[name]}")
-        else:
-            print("Book not found in the library.")
+user1 = Bank("Varish", 10000)
 
-    def delete_book(self):
-        name = input("Enter tth name of the book to delete : ")
-        if name in self.books:
-            del self.boos[name]
-            print("Book delete Successfully.")
-
-        else :
-            print("Book not found in the library.")
-
-library = Library()
-
-while True :
-    print("\n=====  SMART LIBRARY MANAGRMENT SYSTEM  =====")
-    print("1. Add Book")
-    print("2. View Books")
-    print("3. Search Book ")
-    print("4. Delete Book")
+while True:
+    print("\n=====  WELCOME TO THE VR BANK  =====")
+    print("1. Deposit")
+    print("2. Withdraw")
+    print("3. Check Balance")
+    print("4. Transaction History")
     print("5. Exit")
 
     choice = input("Enter your choice (1 - 5) : ")
-
     if choice == "1":
-        library.add_book()
+        user1.deposit()
 
     elif choice == "2":
-        library.view_books()
+        user1.withdraw()     
 
     elif choice == "3":
-        library.search_book()
+        user1.check_balance()
 
     elif choice == "4":
-        library.delete_book()            
+        user1.transaction_history()
 
     elif choice == "5":
-        print("Exiting th eprogram.")
+        print("Thanks for using VR Bank . ") 
         break
+
     else:
-        print("Invalid choice. Plaese enter a valid option (1 - 5) ")
-
-
-
+        print("Invalid Choice. Please try again.")            
