@@ -1,13 +1,11 @@
-import random
+username = input("Enter Username : ")
 
-secret = random.randint(1, 10)
+password = input("Enter Password : ")
 
-guess = int(input("Guess Number : "))
+if username == "admin" and password == "1234":
 
-if guess == secret:
-
-    print("Correct")
+    print("Login Successful")
 
 else:
 
-    print("Wrong")
+    print("Invalid Username or Password")
