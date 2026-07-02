@@ -1,87 +1,121 @@
-class Employee:
+class Room:
+    def __init__(self,room_no,price):
+        self.room_no = room_no
+        self.price = price
+        self.booked = False
 
-    def __init__(self,name,emp_id,salary):
+    def show_room(self):
+        print(f"Room Number : {self.room_no}, Price : {self.price}, Booking Status : {self.booked}")   
+
+class Customer:
+    def __init__(self,name,age,room):
+
         self.name = name
-        self.emp_id = emp_id 
-        self.salary = salary
+        self.age = age
+        self.room = room
 
-    def show_details(self):
-        print("== EMPLOYEE DETAILS ==")
-        print(f"Employee Name : {self.name}")
-        print(f"Emplyee ID : {self.emp_id}")
-        print(f"Employee Salary : {self.salary}")
+    def show_customer(self):
+        print(f"Costumer Name : {self.name}, Age : {self.age}, Room Number : {self.room.room_no}, Room Price : {self.room.price}, Booking Status : {self.room.booked}")
 
-class Management:
+    
+class Hotel:
     def __init__(self):
-        self.employees = []
 
-    def add_employee(self):
-        name = input("Enter Employee Name : ")
-        emp_id = input("Enter Employee ID : ")
-        salary = float(input("Enter Employee Salary : "))
-        emp = Employee(name, emp_id, salary)
-        self.employees.append(emp)
-        print("Employee Added Successfully!")
+        # room list
+        self.rooms = []
 
-    def show_all_employees(self):
-        if len(self.employees) == 0:
-            print("No Employees Found!")
+        # customer list
+        self.customers = []
 
+    # add rooms
+    def add_room(self):
+        room_no = input("Enter Room Number : ")
+        price = int(input("Enter Room Price : "))
+
+        # room object create
+        room = Room(room_no,price)
+        self.rooms.append(room)
+        print("Room Added")
+
+    # view all rooms
+    def view_room(self):
+        if len(self.rooms) == 0:
+            print("No Rooms Available")
         else:
-            for emp in self.employees:
-                emp.show_details()
+            for room in self.rooms:
+                room.show_room()
 
-    def search_employees(self):
-        search_id = input("Enter Employee ID to search : ")
-        found = False
+    # book rooms
+    def book_room(self):
+        room_no = input("Enter Room Number : ")
+        customer_name = input("Enter Customer Name : ")
+        customer_age = input("Enter Customer Age : ")
 
-        for emp in self.employees:
+        # search room
+        for room in self.rooms:
 
-            if emp.emp_id == search_id:
-                emp.show_details()
+            # roo available
+            if room.room_no == room_no and room.booked == False:
 
-                found = True
-                
-        if found == False:
-            print("Employee Not Found!")
+                room.booked = True
 
-    def delete_employee(self):
+                customer = Customer(customer_name,customer_age,room)
 
-        delete_id = input("Enter Employee ID to delete : ")
-        for emp in self.employees:
-            if emp.emp_id == delete_id:
-                self.employees.remove(emp)
-                print("Employee Delete Successfully!")
+                # save customer
+                self.customers.append(customer)
+                print("Room Booked")
                 return
-            
-        print("Employee Not Found! ")
+        print("Room Not Available")
 
-system = Management()
 
+    def view_customer(self):
+        if len(self.customers) == 0 :
+            print("No Customer Available")
+        else:
+            for customer in self.customers:
+                customer.show_customer()
+
+    def total_revenue(self):
+        total = 0 
+
+        for customer in self.customers:
+            total += customer.room.price
+        print("Total Revenue : ",total)
+
+
+# object create
+hotel = Hotel()                      
+
+# main program
 while True:
-    print("\n=====  EMPLOYEE MANAGEMENT SYSTEM  =====")
-    print("1. Add Employee")
-    print("2. View Employee")
-    print("3. Search Employee")
-    print("4. Delete Employee ")
-    print("5. Exit")
+    print("\n====  DERKVR HOTEL MANAGEMENT  ====")
+    print("1. Add Room")
+    print("2. View Room")
+    print("3. Book Room")
+    print("4. View Customer")
+    print("5. Total Revenue")
+    print("6. Exit")
 
-    choice = input("Enter Your Choice : ")
+    choice = input("Enter Choice : ")
 
     if choice == "1":
-        system.add_employee()
+        hotel.add_room()
 
     elif choice == "2":
-        system.show_all_employees()
+        hotel.view_room()
 
     elif choice == "3":
-        system.search_employees()
+        hotel.book_room()
 
     elif choice == "4":
-        system.delete_employee()
+        hotel.view_customer()
 
     elif choice == "5":
-        print("Exiting the Program...")
-        break 
+        hotel.total_revenue()
+
+    elif choice == "6":
+        print("Program Closed")
+        break
+
     else:
-        print("Invalid choice please try again!")                 
+        print("Invalid Choice")
