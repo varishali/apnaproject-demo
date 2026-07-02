@@ -1,11 +1,13 @@
 import random
 
-chars = "abcd1234XYZ"
+secret = random.randint(1, 10)
 
-password = ""
+guess = int(input("Guess Number : "))
 
-for i in range(6):
+if guess == secret:
 
-    password += random.choice(chars)
+    print("Correct")
 
-print("Password :", password)
+else:
+
+    print("Wrong")
