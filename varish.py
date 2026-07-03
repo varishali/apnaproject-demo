@@ -2,26 +2,30 @@
 import time
 
 
-# Start message
-input("Press Enter To Start Stopwatch")
+# Alarm input
+alarm_time = input("Set Alarm Time (HH:MM:SS) : ")
 
 
-# Start time
-start = time.time()
+while True:
 
 
-# Stop message
-input("Press Enter To Stop Stopwatch")
+    # Current time
+    current_time = time.strftime("%H:%M:%S")
 
 
-# End time
-end = time.time()
+    print("Current Time :", current_time)
 
 
-# Total time
-total = end - start
+    # Alarm match
+    if current_time == alarm_time:
 
 
-# Output
-print(f"Time Taken : {total:.2f} Seconds")
+        print("WAKE UP !!!")
+
+
+        break
+
+
+    # 1 second wait
+    time.sleep(1)
                     
