@@ -1,109 +1,80 @@
-# Total parking slots
-slots = 5
+# Candidates
+votes = {
+
+    "Ali": 0,
+
+    "Varish": 0,
+
+    "Aman": 0
+}
 
 
-# Parked vehicles
-parked = []
+# Voted users
+voted_users = []
 
 
 while True:
 
 
-    print("\n===== PARKING SYSTEM =====")
+    print("\n===== ONLINE VOTING SYSTEM =====")
 
 
-    print("Available Slots :", slots)
+    # User ID
+    user = input("Enter User ID : ")
 
 
-    print("1. Park Vehicle")
-
-    print("2. Remove Vehicle")
-
-    print("3. View Parked Vehicles")
-
-    print("4. Exit")
+    # Already voted
+    if user in voted_users:
 
 
-    choice = input("Enter Choice : ")
+        print("You Already Voted ")
 
-
-    if choice == "1":
-
-
-        if slots > 0:
-
-
-            vehicle = input("Enter Vehicle Number : ")
-
-
-            parked.append(vehicle)
-
-
-            slots -= 1
-
-
-            print("Vehicle Parked ")
-
-
-        else:
-
-
-            print("Parking Full ")
-
-
-    elif choice == "2":
-
-
-        vehicle = input("Enter Vehicle Number : ")
-
-
-        if vehicle in parked:
-
-
-            parked.remove(vehicle)
-
-
-            slots += 1
-
-
-            print("Vehicle Removed")
-
-
-        else:
-
-
-            print("Vehicle Not Found")
-
-
-    elif choice == "3":
-
-
-        print("\nParked Vehicles :")
-
-
-        if len(parked) == 0:
-
-
-            print("No Vehicles")
-
-
-        else:
-
-
-            for vehicle in parked:
-
-
-                print(vehicle)
-
-    elif choice == "4":
-
-
-        print("Program Closed")
-
-
-        break
 
     else:
 
 
-        print("Invalid Choice")
+        print("\nCandidates :")
+
+
+        for candidate in votes:
+
+            print(candidate)
+
+
+        # Vote input
+        vote = input("Enter Candidate Name : ")
+
+
+        # Candidate exists
+        if vote in votes:
+
+
+            votes[vote] += 1
+
+
+            voted_users.append(user)
+
+
+            print("Vote Submitted ")
+
+
+        else:
+
+
+            print("Invalid Candidate")
+
+
+    # Exit
+    stop = input("\nStop Voting ? (yes/no) : ")
+
+
+    if stop == "yes":
+
+        break
+
+print("\n===== FINAL RESULT =====")
+
+
+for candidate, total in votes.items():
+
+    print(candidate, ":", total)
