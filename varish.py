@@ -1,47 +1,63 @@
-# Correct PIN
-correct_pin = "1234"
+# Product stock
+stock = {
+
+    "Laptop": 5,
+
+    "Mouse": 10,
+
+    "Keyboard": 7
+}
 
 
-# Total attempts
-attempt = 0
+while True:
 
 
-# Maximum attempts
-max_attempt = 3
+    print("\n===== INVENTORY =====")
 
 
-while attempt < max_attempt:
+    # Show stock
+    for item, qty in stock.items():
+
+        print(item, ":", qty)
 
 
     # User input
-    pin = input("Enter ATM PIN : ")
+    product = input("\nEnter Product Name : ")
 
 
-    # Correct PIN
-    if pin == correct_pin:
+    # Product exists
+    if product in stock:
 
 
-        print("Login Successful")
+        quantity = int(input("Enter Quantity : "))
 
 
-        break
+        # Stock available
+        if quantity <= stock[product]:
 
 
-    # Wrong PIN
+            stock[product] -= quantity
+
+
+            print("Order Successful ")
+
+
+        else:
+
+
+            print("Not Enough Stock ")
+
+
     else:
 
 
-        attempt += 1
+        print("Product Not Found")
 
 
-        left = max_attempt - attempt
+    # Stop program
+    stop = input("Exit ? (yes/no) : ")
 
 
-        print(f"Wrong PIN | Attempts Left : {left}")
+    if stop == "yes":
 
-
-# Account lock
-if attempt == max_attempt:
-
-
-    print("ATM Card Blocked")
+        break
