@@ -1,25 +1,47 @@
-# Shutil module
-import shutil
+# Correct PIN
+correct_pin = "1234"
 
 
-# Time module
-import time
+# Total attempts
+attempt = 0
 
 
-while True:
+# Maximum attempts
+max_attempt = 3
 
 
-    # Copy file
-    shutil.copy(
-
-        "data.txt",
-
-        "backup_data.txt"
-    )
+while attempt < max_attempt:
 
 
-    print("Backup Created")
+    # User input
+    pin = input("Enter ATM PIN : ")
 
 
-    # Wait 10 seconds
-    time.sleep(10)
+    # Correct PIN
+    if pin == correct_pin:
+
+
+        print("Login Successful")
+
+
+        break
+
+
+    # Wrong PIN
+    else:
+
+
+        attempt += 1
+
+
+        left = max_attempt - attempt
+
+
+        print(f"Wrong PIN | Attempts Left : {left}")
+
+
+# Account lock
+if attempt == max_attempt:
+
+
+    print("ATM Card Blocked")
