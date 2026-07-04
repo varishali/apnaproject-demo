@@ -1,63 +1,109 @@
-# Product stock
-stock = {
+# Total parking slots
+slots = 5
 
-    "Laptop": 5,
 
-    "Mouse": 10,
-
-    "Keyboard": 7
-}
+# Parked vehicles
+parked = []
 
 
 while True:
 
 
-    print("\n===== INVENTORY =====")
+    print("\n===== PARKING SYSTEM =====")
 
 
-    # Show stock
-    for item, qty in stock.items():
-
-        print(item, ":", qty)
+    print("Available Slots :", slots)
 
 
-    # User input
-    product = input("\nEnter Product Name : ")
+    print("1. Park Vehicle")
+
+    print("2. Remove Vehicle")
+
+    print("3. View Parked Vehicles")
+
+    print("4. Exit")
 
 
-    # Product exists
-    if product in stock:
+    choice = input("Enter Choice : ")
 
 
-        quantity = int(input("Enter Quantity : "))
+    if choice == "1":
 
 
-        # Stock available
-        if quantity <= stock[product]:
+        if slots > 0:
 
 
-            stock[product] -= quantity
+            vehicle = input("Enter Vehicle Number : ")
 
 
-            print("Order Successful ")
+            parked.append(vehicle)
+
+
+            slots -= 1
+
+
+            print("Vehicle Parked ")
 
 
         else:
 
 
-            print("Not Enough Stock ")
+            print("Parking Full ")
 
+
+    elif choice == "2":
+
+
+        vehicle = input("Enter Vehicle Number : ")
+
+
+        if vehicle in parked:
+
+
+            parked.remove(vehicle)
+
+
+            slots += 1
+
+
+            print("Vehicle Removed")
+
+
+        else:
+
+
+            print("Vehicle Not Found")
+
+
+    elif choice == "3":
+
+
+        print("\nParked Vehicles :")
+
+
+        if len(parked) == 0:
+
+
+            print("No Vehicles")
+
+
+        else:
+
+
+            for vehicle in parked:
+
+
+                print(vehicle)
+
+    elif choice == "4":
+
+
+        print("Program Closed")
+
+
+        break
 
     else:
 
 
-        print("Product Not Found")
-
-
-    # Stop program
-    stop = input("Exit ? (yes/no) : ")
-
-
-    if stop == "yes":
-
-        break
+        print("Invalid Choice")
