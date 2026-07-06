@@ -1,13 +1,12 @@
 import matplotlib.pyplot as plt
+days = ["mon","Tues","Wed","Thur","Fri","Sat","Sun"]
+direct = [50,60,70,80,90,100,110]
+organic = [30,40,50,55,60,70,80]
+social = [20,25,30,35,40,50,60]
 
-expenses = ["er","wt","as","ui","op"]
-amounts = [500,150,120,100,50]
-
-plt.style.use("default")
-explode = [0,0,0,0.2,0]
-plt.pie(amounts,
-        labels=expenses,
-        autopct="%1.1f%%",
-        explode=explode,
-        shadow=True)
+plt.stackplot(days,direct,organic,social, labels=["Direect","Organic","Social"])
+plt.title("Marketing data for the week")
+plt.xlabel("Days")
+plt.ylabel("# of customers")
+plt.legend()
 plt.show()
