@@ -1,99 +1,87 @@
 import matplotlib.pyplot as plt
 
 
-# Months
-months = [
+# Students
+students = [
 
-    "Jan",
+    "Ali",
 
-    "Feb",
+    "Varish",
 
-    "Mar",
+    "Aman",
 
-    "Apr",
+    "Rohan",
 
-    "May"
+    "Zaid"
 ]
 
 
-# Product sales
-products = [
+# Subject marks
+python_marks = [80, 92, 75, 88, 95]
 
-    "Laptop",
+sql_marks = [70, 85, 78, 82, 90]
 
-    "Mobile",
-
-    "Tablet",
-
-    "Camera"
-]
+ml_marks = [90, 89, 80, 91, 93]
 
 
-sales = [
-
-    [50, 60, 55, 70, 80],   # Laptop
-
-    [40, 45, 50, 55, 60],   # Mobile
-
-    [20, 25, 22, 30, 35],   # Tablet
-
-    [15, 18, 20, 25, 28]    # Camera
-]
+# Create figure
+fig, axes = plt.subplots(1, 3)
 
 
-# Create 2x2 graphs
-fig, axes = plt.subplots(2, 2)
+# ==================================
+# PYTHON GRAPH
+# ==================================
+axes[0].plot(
+
+    students,
+
+    python_marks,
+
+    marker="o"
+)
+
+axes[0].set_title("Python")
+
+axes[0].grid(True)
 
 
-product_no = 0
+# ==================================
+# SQL GRAPH
+# ==================================
+axes[1].bar(
+
+    students,
+
+    sql_marks
+)
+
+axes[1].set_title("SQL")
+
+axes[1].grid(True)
 
 
-# Nested loop
-for i in range(2):
+# ==================================
+# MACHINE LEARNING GRAPH
+# ==================================
+axes[2].scatter(
 
+    students,
 
-    for j in range(2):
+    ml_marks
+)
 
+axes[2].set_title("Machine Learning")
 
-        # Plot graph
-        axes[i][j].bar(
-
-            months,
-
-            sales[product_no]
-        )
-
-
-        # Graph title
-        axes[i][j].set_title(
-
-            products[product_no]
-        )
-
-
-        # X label
-        axes[i][j].set_xlabel("Months")
-
-
-        # Y label
-        axes[i][j].set_ylabel("Sales")
-
-
-        # Grid
-        axes[i][j].grid(True)
-
-
-        # Next product
-        product_no += 1
+axes[2].grid(True)
 
 
 # Main title
-fig.suptitle("Product Sales Dashboard")
+fig.suptitle("Student Performance Analytics")
 
 
 # Auto spacing
 fig.tight_layout()
 
 
-# Show graph
+# Show graphs
 plt.show()
