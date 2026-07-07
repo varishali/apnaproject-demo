@@ -1,65 +1,56 @@
 import matplotlib.pyplot as plt
 
-# Employee Names
-employees = ["Ali", "Varish", "Aman", "Rohan", "Zaid"]
+# Months
+months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
 
-# Data
-salary = [30000, 45000, 50000, 42000, 55000]
-experience = [1, 3, 5, 2, 6]
-age = [22, 25, 28, 24, 30]
-projects = [2, 5, 6, 3, 7]
-rating = [3.5, 4.8, 4.2, 4.0, 4.9]
+# Department Profit
+departments = {
+    "IT": [45, 50, 55, 60, 58, 65],
+    "HR": [15, 18, 20, 22, 21, 23],
+    "Sales": [35, 40, 38, 45, 50, 55]
+}
+
+# Total Profit Calculate
+total_profit = []
+
+for i in range(len(months)):
+
+    total = 0
+
+    for dept in departments:
+
+        total += departments[dept][i]
+
+    total_profit.append(total)
 
 # Create Dashboard
-fig, axes = plt.subplots(2, 3, figsize=(14, 8))
+fig, axes = plt.subplots(2, 2, figsize=(12, 8))
 
-# Salary
-
-axes[0][0].bar(employees, salary)
-axes[0][0].set_title("Employee Salary")
-axes[0][0].set_ylabel("Salary")
+# ---------------- IT ----------------
+axes[0][0].plot(months, departments["IT"], marker="o")
+axes[0][0].set_title("IT Department")
 axes[0][0].grid(True)
 
-
-# Experience
-
-axes[0][1].plot(employees, experience, marker="o")
-axes[0][1].set_title("Experience")
+# ---------------- HR ----------------
+axes[0][1].bar(months, departments["HR"])
+axes[0][1].set_title("HR Department")
 axes[0][1].grid(True)
 
-# Age
-
-axes[0][2].scatter(employees, age)
-axes[0][2].set_title("Age")
-axes[0][2].grid(True)
-
-
-# Projects
-
-axes[1][0].bar(employees, projects)
-axes[1][0].set_title("Completed Projects")
+# -------------- Sales ---------------
+axes[1][0].plot(months, departments["Sales"], marker="s")
+axes[1][0].set_title("Sales Department")
 axes[1][0].grid(True)
 
-# Rating
+# -------- Total Profit --------------
+axes[1][1].pie(
+    total_profit,
+    labels=months,
+    autopct="%1.1f%%"
+)
+axes[1][1].set_title("Monthly Profit Share")
 
-axes[1][1].plot(employees, rating, marker="*", linewidth=2)
-axes[1][1].set_title("Performance Rating")
-axes[1][1].grid(True)
+fig.suptitle("Company Profit Dashboard")
 
-
-# Salary vs Experience
-
-axes[1][2].scatter(experience, salary)
-axes[1][2].set_title("Salary vs Experience")
-axes[1][2].set_xlabel("Experience")
-axes[1][2].set_ylabel("Salary")
-axes[1][2].grid(True)
-
-# Dashboard Title
-fig.suptitle("Employee Analytics Dashboard", fontsize=16)
-
-# Adjust Layout
 plt.tight_layout()
 
-# Show Dashboard
 plt.show()
