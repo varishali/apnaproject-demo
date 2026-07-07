@@ -1,87 +1,65 @@
 import matplotlib.pyplot as plt
 
+# Employee Names
+employees = ["Ali", "Varish", "Aman", "Rohan", "Zaid"]
 
-# Students
-students = [
+# Data
+salary = [30000, 45000, 50000, 42000, 55000]
+experience = [1, 3, 5, 2, 6]
+age = [22, 25, 28, 24, 30]
+projects = [2, 5, 6, 3, 7]
+rating = [3.5, 4.8, 4.2, 4.0, 4.9]
 
-    "Ali",
+# Create Dashboard
+fig, axes = plt.subplots(2, 3, figsize=(14, 8))
 
-    "Varish",
+# Salary
 
-    "Aman",
-
-    "Rohan",
-
-    "Zaid"
-]
-
-
-# Subject marks
-python_marks = [80, 92, 75, 88, 95]
-
-sql_marks = [70, 85, 78, 82, 90]
-
-ml_marks = [90, 89, 80, 91, 93]
+axes[0][0].bar(employees, salary)
+axes[0][0].set_title("Employee Salary")
+axes[0][0].set_ylabel("Salary")
+axes[0][0].grid(True)
 
 
-# Create figure
-fig, axes = plt.subplots(1, 3)
+# Experience
+
+axes[0][1].plot(employees, experience, marker="o")
+axes[0][1].set_title("Experience")
+axes[0][1].grid(True)
+
+# Age
+
+axes[0][2].scatter(employees, age)
+axes[0][2].set_title("Age")
+axes[0][2].grid(True)
 
 
-# ==================================
-# PYTHON GRAPH
-# ==================================
-axes[0].plot(
+# Projects
 
-    students,
+axes[1][0].bar(employees, projects)
+axes[1][0].set_title("Completed Projects")
+axes[1][0].grid(True)
 
-    python_marks,
+# Rating
 
-    marker="o"
-)
-
-axes[0].set_title("Python")
-
-axes[0].grid(True)
+axes[1][1].plot(employees, rating, marker="*", linewidth=2)
+axes[1][1].set_title("Performance Rating")
+axes[1][1].grid(True)
 
 
-# ==================================
-# SQL GRAPH
-# ==================================
-axes[1].bar(
+# Salary vs Experience
 
-    students,
+axes[1][2].scatter(experience, salary)
+axes[1][2].set_title("Salary vs Experience")
+axes[1][2].set_xlabel("Experience")
+axes[1][2].set_ylabel("Salary")
+axes[1][2].grid(True)
 
-    sql_marks
-)
+# Dashboard Title
+fig.suptitle("Employee Analytics Dashboard", fontsize=16)
 
-axes[1].set_title("SQL")
+# Adjust Layout
+plt.tight_layout()
 
-axes[1].grid(True)
-
-
-# ==================================
-# MACHINE LEARNING GRAPH
-# ==================================
-axes[2].scatter(
-
-    students,
-
-    ml_marks
-)
-
-axes[2].set_title("Machine Learning")
-
-axes[2].grid(True)
-
-
-# Main title
-fig.suptitle("Student Performance Analytics")
-
-
-# Auto spacing
-fig.tight_layout()
-
-
-# Show graphs
+# Show Dashboard
 plt.show()
