@@ -1,48 +1,42 @@
 import matplotlib.pyplot as plt
 
-# Days
-days = ["Mon", "Tue", "Wed", "Thu", "Fri"]
+# Time Slots
+time = ["Mon", "Tue", "Wed", "Thu", "Fri"]
 
-# Room Names
-rooms = ["Hall", "Kitchen", "Bedroom", "Bathroom"]
+# Vehicle Types
+vehicles = ["Cars", "Bikes", "Buses", "Trucks"]
 
-# Electricity Units (kWh)
-units = [
-    [12, 14, 13, 15, 16],   # Hall
-    [8, 9, 10, 9, 11],       # Kitchen
-    [6, 7, 8, 7, 9],         # Bedroom
-    [3, 4, 3, 5, 4]          # Bathroom
+# Traffic Data
+traffic = [
+    [250, 270, 300, 280, 310],   # Cars
+    [400, 420, 390, 450, 470],   # Bikes
+    [80, 85, 82, 90, 95],        # Buses
+    [60, 70, 65, 75, 80]         # Trucks
 ]
 
-# Create Dashboard
 fig, axes = plt.subplots(2, 2, figsize=(12, 8))
 
-room = 0
+vehicle = 0
 
 for i in range(2):
-
     for j in range(2):
 
-        axes[i][j].bar(
-            days,
-            units[room]
+        axes[i][j].plot(
+            time,
+            traffic[vehicle],
+            marker="o",
+            linewidth=2
         )
 
-        axes[i][j].set_title(rooms[room])
-
+        axes[i][j].set_title(vehicles[vehicle])
         axes[i][j].set_xlabel("Days")
-
-        axes[i][j].set_ylabel("Electricity (kWh)")
-
+        axes[i][j].set_ylabel("Vehicle Count")
         axes[i][j].grid(True)
 
-        room += 1
+        vehicle += 1
 
-# Main Title
-fig.suptitle("Electricity Consumption Dashboard")
+fig.suptitle("Traffic Analysis Dashboard")
 
-# Auto Spacing
 plt.tight_layout()
 
-# Show Graph
 plt.show()
