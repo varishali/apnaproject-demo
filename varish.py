@@ -1,41 +1,37 @@
 import matplotlib.pyplot as plt
 
-# Time Slots
-time = ["Mon", "Tue", "Wed", "Thu", "Fri"]
+# Products
+products = ["Laptop", "Mouse", "Keyboard", "Monitor"]
 
-# Vehicle Types
-vehicles = ["Cars", "Bikes", "Buses", "Trucks"]
-
-# Traffic Data
-traffic = [
-    [250, 270, 300, 280, 310],   # Cars
-    [400, 420, 390, 450, 470],   # Bikes
-    [80, 85, 82, 90, 95],        # Buses
-    [60, 70, 65, 75, 80]         # Trucks
-]
+# Stock Data
+current_stock = [120, 250, 180, 90]
+sold = [80, 170, 120, 60]
+remaining = [40, 80, 60, 30]
+returned = [5, 8, 4, 2]
 
 fig, axes = plt.subplots(2, 2, figsize=(12, 8))
 
-vehicle = 0
+# Current Stock
+axes[0][0].bar(products, current_stock)
+axes[0][0].set_title("Current Stock")
+axes[0][0].grid(True)
 
-for i in range(2):
-    for j in range(2):
+# Sold Products
+axes[0][1].bar(products, sold)
+axes[0][1].set_title("Sold Products")
+axes[0][1].grid(True)
 
-        axes[i][j].plot(
-            time,
-            traffic[vehicle],
-            marker="o",
-            linewidth=2
-        )
+# Remaining Stock
+axes[1][0].bar(products, remaining)
+axes[1][0].set_title("Remaining Stock")
+axes[1][0].grid(True)
 
-        axes[i][j].set_title(vehicles[vehicle])
-        axes[i][j].set_xlabel("Days")
-        axes[i][j].set_ylabel("Vehicle Count")
-        axes[i][j].grid(True)
+# Returned Products
+axes[1][1].bar(products, returned)
+axes[1][1].set_title("Returned Products")
+axes[1][1].grid(True)
 
-        vehicle += 1
-
-fig.suptitle("Traffic Analysis Dashboard")
+fig.suptitle("Warehouse Stock Dashboard")
 
 plt.tight_layout()
 
