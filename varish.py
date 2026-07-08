@@ -1,48 +1,42 @@
 import matplotlib.pyplot as plt
 
-# Departments
-departments = ["ICU", "Emergency", "General", "Pediatrics", "Surgery"]
+# Weeks
+weeks = ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5"]
 
-# Data
-patients = [35, 60, 45, 30, 40]
-doctors = [10, 15, 12, 8, 11]
-beds = [40, 70, 50, 35, 45]
+# Plant Names
+plants = ["Rose", "Sunflower", "Tulip", "Lily"]
 
-# Create Dashboard
+# Growth Data (cm)
+growth = [
+    [5, 8, 11, 15, 19],      # Rose
+    [6, 10, 15, 21, 27],     # Sunflower
+    [4, 6, 9, 12, 16],       # Tulip
+    [5, 7, 10, 13, 17]       # Lily
+]
+
+# Create 2x2 Dashboard
 fig, axes = plt.subplots(2, 2, figsize=(12, 8))
 
-# Patients
+plant = 0
 
-axes[0][0].bar(departments, patients)
-axes[0][0].set_title("Patients")
-axes[0][0].grid(True)
+for i in range(2):
+    for j in range(2):
 
-# Doctors
+        axes[i][j].plot(
+            weeks,
+            growth[plant],
+            marker="o",
+            linewidth=2
+        )
 
-axes[0][1].plot(departments, doctors, marker="o")
-axes[0][1].set_title("Doctors")
-axes[0][1].grid(True)
+        axes[i][j].set_title(plants[plant])
+        axes[i][j].set_xlabel("Weeks")
+        axes[i][j].set_ylabel("Height (cm)")
+        axes[i][j].grid(True)
 
-# Beds
+        plant += 1
 
-axes[1][0].scatter(departments, beds)
-axes[1][0].set_title("Available Beds")
-axes[1][0].grid(True)
-
-# Occupancy Percentage
-
-occupancy = []
-
-for i in range(len(departments)):
-    percentage = (patients[i] / beds[i]) * 100
-    occupancy.append(percentage)
-
-axes[1][1].plot(departments, occupancy, marker="*", linewidth=2)
-axes[1][1].set_title("Bed Occupancy %")
-axes[1][1].grid(True)
-
-# Main Title
-fig.suptitle("Hospital Management Dashboard")
+fig.suptitle("Plant Growth Analysis")
 
 plt.tight_layout()
 
