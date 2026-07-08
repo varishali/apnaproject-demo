@@ -1,43 +1,48 @@
 import matplotlib.pyplot as plt
 
-# Weeks
-weeks = ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5"]
+# Days
+days = ["Mon", "Tue", "Wed", "Thu", "Fri"]
 
-# Plant Names
-plants = ["Rose", "Sunflower", "Tulip", "Lily"]
+# Room Names
+rooms = ["Hall", "Kitchen", "Bedroom", "Bathroom"]
 
-# Growth Data (cm)
-growth = [
-    [5, 8, 11, 15, 19],      # Rose
-    [6, 10, 15, 21, 27],     # Sunflower
-    [4, 6, 9, 12, 16],       # Tulip
-    [5, 7, 10, 13, 17]       # Lily
+# Electricity Units (kWh)
+units = [
+    [12, 14, 13, 15, 16],   # Hall
+    [8, 9, 10, 9, 11],       # Kitchen
+    [6, 7, 8, 7, 9],         # Bedroom
+    [3, 4, 3, 5, 4]          # Bathroom
 ]
 
-# Create 2x2 Dashboard
+# Create Dashboard
 fig, axes = plt.subplots(2, 2, figsize=(12, 8))
 
-plant = 0
+room = 0
 
 for i in range(2):
+
     for j in range(2):
 
-        axes[i][j].plot(
-            weeks,
-            growth[plant],
-            marker="o",
-            linewidth=2
+        axes[i][j].bar(
+            days,
+            units[room]
         )
 
-        axes[i][j].set_title(plants[plant])
-        axes[i][j].set_xlabel("Weeks")
-        axes[i][j].set_ylabel("Height (cm)")
+        axes[i][j].set_title(rooms[room])
+
+        axes[i][j].set_xlabel("Days")
+
+        axes[i][j].set_ylabel("Electricity (kWh)")
+
         axes[i][j].grid(True)
 
-        plant += 1
+        room += 1
 
-fig.suptitle("Plant Growth Analysis")
+# Main Title
+fig.suptitle("Electricity Consumption Dashboard")
 
+# Auto Spacing
 plt.tight_layout()
 
+# Show Graph
 plt.show()
