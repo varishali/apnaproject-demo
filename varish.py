@@ -1,89 +1,119 @@
-class Product:
-    def __init__(self, name, price, qty):
-        self.name = name
-        self.price = price
-        self.qty = qty
+# ==========================
+# Pet Care Management System
+# ==========================
 
-    def total(self):
-        return self.price * self.qty    
+class Pet:
+
+    def __init__(self, name, animal, age):
+        self.name = name
+        self.animal = animal
+        self.age = age
+        self.vaccinated = False
 
     def show(self):
-        print(f"{self.name} | ${self.price} * {self.qty} = ${self.total()}")
+
+        print(f"""
+Name : {self.name}
+Animal : {self.animal}
+Age : {self.age}
+Vaccinated : {self.vaccinated}
+""")
 
 
-class Cart:
+class PetCare:
+
     def __init__(self):
-        self.items = []
 
-    # add product
-    def add_product(self):
+        self.pets = []
 
-        name = input("Enter Product Name : ")
-        price = int(input("Enter Product Price : "))
-        qty = int(input("Enter Product Quantity : "))
+    # Add Pet
+    def add_pet(self):
 
-        product = Product(name,price,qty)
+        name = input("Pet Name : ")
+        animal = input("Animal Type : ")
+        age = int(input("Age : "))
 
-        self.items.append(product)
+        pet = Pet(name, animal, age)
 
-        print("Product Added ..")
+        self.pets.append(pet)
 
-    # view cart
-    def view_cart(self):
-        if len(self.items) == 0:
-            print("Cart is Empty")
+        print("Pet Added Successfully")
+
+    # View Pets
+    def view_pets(self):
+
+        if len(self.pets) == 0:
+            print("No Pets Available")
             return
-        print("===  CART  ===")
 
-        bill = 0
+        for pet in self.pets:
+            pet.show()
 
-        for item in self.items:
-            item.show()
-            bill += item.total()
+    # Vaccinate Pet
+    def vaccinate_pet(self):
 
-        print("Total Bill $:",bill)
+        name = input("Pet Name : ")
 
-    # remove product
-    def remove_product(self):
-        name = input("Product Name : ")
-        for item in self.items:
-            if item.name.lower() == name.lower():
-                self.items.remove(item)
+        for pet in self.pets:
 
-                print("Product Removed")
+            if pet.name.lower() == name.lower():
+
+                pet.vaccinated = True
+
+                print("Vaccination Updated")
 
                 return
 
-        print("Product Not Found")
+        print("Pet Not Found")
+
+    # Remove Pet
+    def remove_pet(self):
+
+        name = input("Pet Name : ")
+
+        for pet in self.pets:
+
+            if pet.name.lower() == name.lower():
+
+                self.pets.remove(pet)
+
+                print("Pet Removed")
+
+                return
+
+        print("Pet Not Found")
 
 
-# main program
-cart = Cart()
+
+
+care = PetCare()
 
 while True:
-    
-    print("\n===== SHOPPING CART =====")
-    print("1. Add Product")
-    print("2. View Cart")
-    print("3. Remove Product")
-    print("4. Exit")
+
+    print("\n===== PET CARE MANAGEMENT =====")
+    print("1. Add Pet")
+    print("2. View Pets")
+    print("3. Vaccinate Pet")
+    print("4. Remove Pet")
+    print("5. Exit")
 
     choice = input("Enter Choice : ")
 
     if choice == "1":
-        cart.add_product()
+        care.add_pet()
 
     elif choice == "2":
-        cart.view_cart()
+        care.view_pets()
 
     elif choice == "3":
-        cart.remove_product()
+        care.vaccinate_pet()
 
     elif choice == "4":
-        print("Thank You")
+        care.remove_pet()
+
+    elif choice == "5":
+        print("Program Closed")
         break
 
     else:
         print("Invalid Choice")
-
-                     
