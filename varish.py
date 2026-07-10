@@ -1,115 +1,109 @@
 # ==========================
-# Pet Care Management System
+# Contact Book Management
 # ==========================
 
-class Pet:
+class Contact:
 
-    def __init__(self, name, animal, age):
+    def __init__(self, name, phone):
         self.name = name
-        self.animal = animal
-        self.age = age
-        self.vaccinated = False
+        self.phone = phone
 
     def show(self):
-
-        print(f"""
-Name : {self.name}
-Animal : {self.animal}
-Age : {self.age}
-Vaccinated : {self.vaccinated}
-""")
+        print(f"Name : {self.name}")
+        print(f"Phone : {self.phone}")
+        print("-" * 25)
 
 
-class PetCare:
+class ContactBook:
 
     def __init__(self):
+        self.contacts = []
 
-        self.pets = []
+    # Add Contact
+    def add_contact(self):
 
-    # Add Pet
-    def add_pet(self):
+        name = input("Enter Name : ")
+        phone = input("Enter Phone Number : ")
 
-        name = input("Pet Name : ")
-        animal = input("Animal Type : ")
-        age = int(input("Age : "))
+        contact = Contact(name, phone)
 
-        pet = Pet(name, animal, age)
+        self.contacts.append(contact)
 
-        self.pets.append(pet)
+        print("Contact Added Successfully")
 
-        print("Pet Added Successfully")
+    # View Contacts
+    def view_contacts(self):
 
-    # View Pets
-    def view_pets(self):
-
-        if len(self.pets) == 0:
-            print("No Pets Available")
+        if len(self.contacts) == 0:
+            print("No Contacts Found")
             return
 
-        for pet in self.pets:
-            pet.show()
+        print("\n===== CONTACT LIST =====")
 
-    # Vaccinate Pet
-    def vaccinate_pet(self):
+        for contact in self.contacts:
+            contact.show()
 
-        name = input("Pet Name : ")
+    # Search Contact
+    def search_contact(self):
 
-        for pet in self.pets:
+        name = input("Enter Name : ")
 
-            if pet.name.lower() == name.lower():
+        for contact in self.contacts:
 
-                pet.vaccinated = True
+            if contact.name.lower() == name.lower():
 
-                print("Vaccination Updated")
+                print("\nContact Found")
+                contact.show()
+                return
+
+        print("Contact Not Found")
+
+    # Delete Contact
+    def delete_contact(self):
+
+        name = input("Enter Name : ")
+
+        for contact in self.contacts:
+
+            if contact.name.lower() == name.lower():
+
+                self.contacts.remove(contact)
+
+                print("Contact Deleted")
 
                 return
 
-        print("Pet Not Found")
-
-    # Remove Pet
-    def remove_pet(self):
-
-        name = input("Pet Name : ")
-
-        for pet in self.pets:
-
-            if pet.name.lower() == name.lower():
-
-                self.pets.remove(pet)
-
-                print("Pet Removed")
-
-                return
-
-        print("Pet Not Found")
+        print("Contact Not Found")
 
 
+# ==========================
+# Main Program
+# ==========================
 
-
-care = PetCare()
+book = ContactBook()
 
 while True:
 
-    print("\n===== PET CARE MANAGEMENT =====")
-    print("1. Add Pet")
-    print("2. View Pets")
-    print("3. Vaccinate Pet")
-    print("4. Remove Pet")
+    print("\n===== CONTACT BOOK =====")
+    print("1. Add Contact")
+    print("2. View Contacts")
+    print("3. Search Contact")
+    print("4. Delete Contact")
     print("5. Exit")
 
     choice = input("Enter Choice : ")
 
     if choice == "1":
-        care.add_pet()
+        book.add_contact()
 
     elif choice == "2":
-        care.view_pets()
+        book.view_contacts()
 
     elif choice == "3":
-        care.vaccinate_pet()
+        book.search_contact()
 
     elif choice == "4":
-        care.remove_pet()
+        book.delete_contact()
 
     elif choice == "5":
         print("Program Closed")
