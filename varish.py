@@ -1,16 +1,16 @@
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-tips = sns.load_dataset("tips")
-print(type(tips))
-
-
-print(tips.head())
-
-sns.barplot(
-    data=tips,
-    x="day",
-    y="tip",
-    hue="sex"
+flights = sns.load_dataset("flights")
+flights_pivot = flights.pivot(index="month",columns="year",values="passengers")
+sns.heatmap(
+    flights_pivot,
+    cmap="coolwarm",
+    annot=True,
+    fmt="d"
 )
+
+plt.title("Passengers Heatmap")
+plt.tight_layout()
 plt.show()
+
