@@ -1,110 +1,124 @@
 # ==========================
-# Music Playlist Manager
+# Bicycle Rental System
 # ==========================
 
-class Song:
+class Bicycle:
 
-    def __init__(self, title, singer):
-        self.title = title
-        self.singer = singer
-
-    def show(self):
-        print(f"Song : {self.title}")
-        print(f"Singer : {self.singer}")
-        print("-" * 25)
+    def __init__(self, bike_no):
+        self.bike_no = bike_no
+        self.available = True
 
 
-class Playlist:
+class Rental:
 
     def __init__(self):
-        self.songs = []
+        self.bikes = []
 
-    # Add Song
-    def add_song(self):
+    # Add Bicycle
+    def add_bike(self):
 
-        title = input("Song Name : ")
-        singer = input("Singer Name : ")
+        bike_no = input("Bike Number : ")
 
-        song = Song(title, singer)
+        bike = Bicycle(bike_no)
 
-        self.songs.append(song)
+        self.bikes.append(bike)
 
-        print("Song Added")
+        print("Bike Added")
 
-    # View Playlist
-    def view_playlist(self):
+    # View Bikes
+    def view_bikes(self):
 
-        if len(self.songs) == 0:
-            print("Playlist Empty")
+        if len(self.bikes) == 0:
+            print("No Bikes Available")
             return
 
-        print("\n===== PLAYLIST =====")
+        print("\n===== Bicycle List =====")
 
-        for song in self.songs:
-            song.show()
+        for bike in self.bikes:
 
-    # Play Song
-    def play_song(self):
+            print(
+                f"Bike : {bike.bike_no} | Available : {bike.available}"
+            )
 
-        title = input("Song Name : ")
+    # Rent Bicycle
+    def rent_bike(self):
 
-        for song in self.songs:
+        bike_no = input("Bike Number : ")
 
-            if song.title.lower() == title.lower():
+        for bike in self.bikes:
 
-                print(f"Now Playing : {song.title}")
+            if bike.bike_no == bike_no:
+
+                if bike.available:
+
+                    bike.available = False
+
+                    print("Bike Rented Successfully")
+
+                else:
+
+                    print("Bike Already Rented")
+
                 return
 
-        print("Song Not Found")
+        print("Bike Not Found")
 
-    # Delete Song
-    def delete_song(self):
+    # Return Bicycle
+    def return_bike(self):
 
-        title = input("Song Name : ")
+        bike_no = input("Bike Number : ")
 
-        for song in self.songs:
+        for bike in self.bikes:
 
-            if song.title.lower() == title.lower():
+            if bike.bike_no == bike_no:
 
-                self.songs.remove(song)
+                if not bike.available:
 
-                print("Song Deleted")
+                    bike.available = True
+
+                    print("Bike Returned")
+
+                else:
+
+                    print("Bike Already Available")
+
                 return
 
-        print("Song Not Found")
+        print("Bike Not Found")
 
 
 # ==========================
 # Main Program
 # ==========================
 
-playlist = Playlist()
+rental = Rental()
 
 while True:
 
-    print("\n===== MUSIC PLAYLIST =====")
-    print("1. Add Song")
-    print("2. View Playlist")
-    print("3. Play Song")
-    print("4. Delete Song")
+    print("\n===== Bicycle Rental =====")
+
+    print("1. Add Bicycle")
+    print("2. View Bicycles")
+    print("3. Rent Bicycle")
+    print("4. Return Bicycle")
     print("5. Exit")
 
     choice = input("Enter Choice : ")
 
     if choice == "1":
-        playlist.add_song()
+        rental.add_bike()
 
     elif choice == "2":
-        playlist.view_playlist()
+        rental.view_bikes()
 
     elif choice == "3":
-        playlist.play_song()
+        rental.rent_bike()
 
     elif choice == "4":
-        playlist.delete_song()
+        rental.return_bike()
 
     elif choice == "5":
-        print("Good Bye")
+        print("Program Closed")
         break
 
     else:
