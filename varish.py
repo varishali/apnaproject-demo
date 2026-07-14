@@ -1,84 +1,71 @@
-class Contact:
-    def __init__(self, name, phone):
-        self.name = name
-        self.phone = phone
+class Alarm:
+    def __init__(self, time, label):
+        self.time = time
+        self.label = label
 
     def display(self):
-        print(f"Name : {self.name}")
-        print(f"Phone: {self.phone}")
+        print(f"Time : {self.time}")
+        print(f"Label: {self.label}")
         print("-" * 20)
 
 
-class ContactBook:
+class AlarmManager:
     def __init__(self):
-        self.contacts = []
+        self.alarms = []
 
-    def add_contact(self):
-        name = input("Enter Name: ")
-        phone = input("Enter Phone: ")
+    def add_alarm(self):
+        time = input("Enter Alarm Time (HH:MM): ")
+        label = input("Enter Alarm Label: ")
 
-        contact = Contact(name, phone)
-        self.contacts.append(contact)
+        alarm = Alarm(time, label)
+        self.alarms.append(alarm)
 
-        print("Contact Added Successfully")
+        print("Alarm Added Successfully!")
 
-    def view_contacts(self):
-        if not self.contacts:
-            print("No Contacts Found")
+    def view_alarms(self):
+        if not self.alarms:
+            print("No Alarms Found!")
             return
 
-        for contact in self.contacts:
-            contact.display()
+        print("\n----- Alarm List -----")
+        for alarm in self.alarms:
+            alarm.display()
 
-    def search_contact(self):
-        name = input("Search Name: ")
+    def delete_alarm(self):
+        time = input("Enter Alarm Time to Delete: ")
 
-        for contact in self.contacts:
-            if contact.name.lower() == name.lower():
-                contact.display()
+        for alarm in self.alarms:
+            if alarm.time == time:
+                self.alarms.remove(alarm)
+                print("Alarm Deleted Successfully!")
                 return
 
-        print("Contact Not Found")
-
-    def delete_contact(self):
-        name = input("Enter Name to Delete: ")
-
-        for contact in self.contacts:
-            if contact.name.lower() == name.lower():
-                self.contacts.remove(contact)
-                print("✅ Contact Deleted")
-                return
-
-        print("Contact Not Found")
+        print("Alarm Not Found")
 
 
-book = ContactBook()
+manager = AlarmManager()
 
 while True:
-    print("\n===== CONTACT BOOK =====")
-    print("1. Add Contact")
-    print("2. View Contacts")
-    print("3. Search Contact")
-    print("4. Delete Contact")
-    print("5. Exit")
+    print("\n===== ALARM MANAGER =====")
+    print("1. Add Alarm")
+    print("2. View Alarms")
+    print("3. Delete Alarm")
+    print("4. Exit")
 
-    choice = input("Enter Choice: ")
+    choice = input("Enter Your Choice: ")
 
     if choice == "1":
-        book.add_contact()
+        manager.add_alarm()
 
     elif choice == "2":
-        book.view_contacts()
+        manager.view_alarms()
 
     elif choice == "3":
-        book.search_contact()
+        manager.delete_alarm()
 
     elif choice == "4":
-        book.delete_contact()
-
-    elif choice == "5":
         print("Thank You!")
         break
 
     else:
-        print("Invalid Choice")
+        print("Invalid Choice!")
