@@ -1,71 +1,37 @@
-class Alarm:
-    def __init__(self, time, label):
-        self.time = time
-        self.label = label
+import pandas as pd
 
-    def display(self):
-        print(f"Time : {self.time}")
-        print(f"Label: {self.label}")
-        print("-" * 20)
+students = {
+    "Roll Number" : [101,102,103,104,105],
+    "Name" : ["Varish","Ali","Aman","Sohil","Sana"],
+    "Python" : [90,85,89,78,75],
+    "SQL" : [89,79,50,89,90],
+    "Attendemce" : [95,90,85,98,92]
 
+}
 
-class AlarmManager:
-    def __init__(self):
-        self.alarms = []
+df = pd.DataFrame(students)
 
-    def add_alarm(self):
-        time = input("Enter Alarm Time (HH:MM): ")
-        label = input("Enter Alarm Label: ")
+# totla makrs
+df["Total"] = df["Python"] + df["SQL"]
 
-        alarm = Alarm(time, label)
-        self.alarms.append(alarm)
+# average
+df["Average"] = df["Total"]/2
 
-        print("Alarm Added Successfully!")
+# grade
+df["Grade"] = df["Average"].apply(
+    lambda x: "A" if x>= 90 else
+              "B" if x>= 80 else
+              "C" if x>= 70 else
+              "Fail"
+)
+print("\n\033[1;92m                   ------- STUDENT REPORT  --------\033[0m\n")
+print(df)
 
-    def view_alarms(self):
-        if not self.alarms:
-            print("No Alarms Found!")
-            return
+print("\n\033[1;92m----- Top Student -----\033[0m\n")
+print(df.loc[df["Total"].idxmax()])
 
-        print("\n----- Alarm List -----")
-        for alarm in self.alarms:
-            alarm.display()
+print("\n\033[1;92m----- Average Python Marks -----\033[0m\n")
+print(df["Python"].mean())
 
-    def delete_alarm(self):
-        time = input("Enter Alarm Time to Delete: ")
-
-        for alarm in self.alarms:
-            if alarm.time == time:
-                self.alarms.remove(alarm)
-                print("Alarm Deleted Successfully!")
-                return
-
-        print("Alarm Not Found")
-
-
-manager = AlarmManager()
-
-while True:
-    print("\n===== ALARM MANAGER =====")
-    print("1. Add Alarm")
-    print("2. View Alarms")
-    print("3. Delete Alarm")
-    print("4. Exit")
-
-    choice = input("Enter Your Choice: ")
-
-    if choice == "1":
-        manager.add_alarm()
-
-    elif choice == "2":
-        manager.view_alarms()
-
-    elif choice == "3":
-        manager.delete_alarm()
-
-    elif choice == "4":
-        print("Thank You!")
-        break
-
-    else:
-        print("Invalid Choice!")
+print("\n\033[1;92m---- Sorted by Total Marks ----\033[0m\n")
+print(df.sort_values(by="Total",ascending=False))
