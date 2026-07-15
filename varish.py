@@ -1,37 +1,40 @@
 import pandas as pd
 
-students = {
-    "Roll Number" : [101,102,103,104,105],
-    "Name" : ["Varish","Ali","Aman","Sohil","Sana"],
-    "Python" : [90,85,89,78,75],
-    "SQL" : [89,79,50,89,90],
-    "Attendemce" : [95,90,85,98,92]
-
+employee = {
+    "ID" : [1,2,3,4,5],
+    "Name" : ["Aman","Varish","Ali","Rahul","Sara"],
+    "Department" : ["IT","HR","IT","Sales","HR",],
+    "Salary" : [50000,70000,65000,45000,55000],
+    "Experience" : [2,5,4,1,3]
 }
 
-df = pd.DataFrame(students)
+df = pd.DataFrame(employee)
 
-# totla makrs
-df["Total"] = df["Python"] + df["SQL"]
+print("\n\033[1;101m||------------ EMPLOYEE DATA -------------||\033[0m\n")
+print("\033[0;92m",df,"\033[0m")
 
-# average
-df["Average"] = df["Total"]/2
+print("\n\033[1;104m|-- Highest Salary --|\033[0m\n")
+top = df.loc[df["Salary"].idxmax()]
+print(f"""
+Name       :{top['Name']}
+Department :{top['Department']}
+Salary     :{top['Salary']}
+""")
 
-# grade
-df["Grade"] = df["Average"].apply(
-    lambda x: "A" if x>= 90 else
-              "B" if x>= 80 else
-              "C" if x>= 70 else
-              "Fail"
-)
-print("\n\033[1;92m                   ------- STUDENT REPORT  --------\033[0m\n")
-print(df)
+print("\n\033[0;104m|-- Lowest Salary --|\033[0m\n")
+print(df.loc[df["Salary"].idxmin()])
 
-print("\n\033[1;92m----- Top Student -----\033[0m\n")
-print(df.loc[df["Total"].idxmax()])
+print("\n\033[0;104m|-- Average Salary --|\033[0m\n")
+print(df["Salary"].mean())
 
-print("\n\033[1;92m----- Average Python Marks -----\033[0m\n")
-print(df["Python"].mean())
+print("\n\033[0;104m|-- Department Wise Average Salary --|\033[0m\n")
+print(df.groupby("Department")["Salary"].mean())
 
-print("\n\033[1;92m---- Sorted by Total Marks ----\033[0m\n")
-print(df.sort_values(by="Total",ascending=False))
+df["Bonus"] = df["Salary"] * 0.10
+df["Final Salary"] = df["Salary"] + df["Bonus"]
+
+print("\n\033[0;104m|-- Salary After Bonus --|\033[0m\n")
+print("\033[0;92m",df,"\033[0m")
+
+df.to_csv("employee_salary.csv",index=False)
+print("\n\033[0;104m|-- File Saved --|\033[0m\n")
