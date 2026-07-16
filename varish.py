@@ -1,108 +1,93 @@
 import pandas as pd
 
-# -----------------------------
-# Employee Data
-# -----------------------------
-employees = pd.DataFrame({
-    "EmpID": [101,102,103,104,105],
-    "Name": ["Aman","Riya","Karan","Neha","Vikas"],
-    "Dept": ["IT","HR","IT","Finance","HR"],
-    "Salary": [50000,45000,60000,70000,48000],
-    "Age": [25,30,28,35,27]
-})
 
-# Department Data
-departments = pd.DataFrame({
-    "Dept": ["IT","HR","Finance"],
-    "Manager": ["Raj","Priya","Ankit"]
-})
+class StudentManager:
 
-# -----------------------------
-# Merge
-# -----------------------------
-df = pd.merge(employees, departments, on="Dept")
+    def __init__(self):
+        try:
+            self.df = pd.read_csv("students.csv")
+            print("Data Loaded Successfully!\n")
+        except FileNotFoundError:
+            self.df = pd.DataFrame(columns=["ID", "Name", "Marks"])
+            print("New Student Database Created!\n")
 
-# -----------------------------
-# New Column
-# -----------------------------
-df["Bonus"] = df["Salary"] * 0.10
-df["TotalSalary"] = df["Salary"] + df["Bonus"]
+    def add_student(self):
+        student_id = int(input("Enter ID : "))
+        name = input("Enter Name : ")
+        marks = float(input("Enter Marks : "))
 
-# -----------------------------
-# Filter
-# -----------------------------
-high_salary = df[df["Salary"] > 50000]
+        new_student = pd.DataFrame({
+            "ID": [student_id],
+            "Name": [name],
+            "Marks": [marks]
+        })
 
-# -----------------------------
-# Sort
-# -----------------------------
-sorted_df = df.sort_values("Salary", ascending=False)
+        self.df = pd.concat([self.df, new_student], ignore_index=True)
+        print("Student Added Successfully!\n")
 
-# -----------------------------
-# GroupBy
-# -----------------------------
-group = df.groupby("Dept").agg({
-    "Salary": ["mean","max","min","sum"],
-    "Age": "mean"
-})
+    def view_students(self):
+        if self.df.empty:
+            print("No Students Found.\n")
+        else:
+            print(self.df)
 
-# -----------------------------
-# Pivot Table
-# -----------------------------
-pivot = pd.pivot_table(
-    df,
-    values="Salary",
-    index="Dept",
-    columns="Manager",
-    aggfunc="mean"
-)
+    def search_student(self):
+        student_id = int(input("Enter Student ID : "))
+        student = self.df[self.df["ID"] == student_id]
 
-# -----------------------------
-# Ranking
-# -----------------------------
-df["Rank"] = df["Salary"].rank(ascending=False)
+        if student.empty:
+            print("Student Not Found.\n")
+        else:
+            print(student)
 
-# -----------------------------
-# Apply + Lambda
-# -----------------------------
-df["Tax"] = df["Salary"].apply(lambda x: x*0.05)
+    def result_analysis(self):
+        if self.df.empty:
+            print("No Data Available.\n")
+            return
 
-# -----------------------------
-# Query
-# -----------------------------
-query_result = df.query("Age > 27")
+        print("\n----- Result Analysis -----")
+        print("Highest Marks :", self.df["Marks"].max())
+        print("Lowest Marks  :", self.df["Marks"].min())
+        print("Average Marks :", round(self.df["Marks"].mean(), 2))
 
-# -----------------------------
-# MultiIndex
-# -----------------------------
-multi = df.set_index(["Dept","Name"])
+    def save_data(self):
+        self.df.to_csv("students.csv", index=False)
+        print("Data Saved Successfully!\n")
 
-# -----------------------------
-# Missing Values
-# -----------------------------
-df.fillna(0, inplace=True)
 
-# -----------------------------
-# Output
-# -----------------------------
-print("Original Data")
-print(df)
+manager = StudentManager()
 
-print("\nHigh Salary")
-print(high_salary)
+while True:
+    print("\n===== Student Result Manager =====")
+    print("1. Add Student")
+    print("2. View Students")
+    print("3. Search Student")
+    print("4. Result Analysis")
+    print("5. Save Data")
+    print("6. Exit")
 
-print("\nSorted")
-print(sorted_df)
+    choice = input("Enter Choice : ")
 
-print("\nGroupBy")
-print(group)
+    if choice == "1":
+        manager.add_student()
 
-print("\nPivot Table")
-print(pivot)
+    elif choice == "2":
+        manager.view_students()
 
-print("\nQuery Result")
-print(query_result)
+    elif choice == "3":
+        manager.search_student()
 
-print("\nMultiIndex")
-print(multi)
+    elif choice == "4":
+        manager.result_analysis()
+
+    elif choice == "5":
+        manager.save_data()
+
+    elif choice == "6":
+        manager.save_data()
+        print("Thank You!")
+        break
+
+    else:
+        print("Invalid Choice!")
 
