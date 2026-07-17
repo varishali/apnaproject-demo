@@ -1,93 +1,42 @@
 import pandas as pd
 
+# read CSV file
+df = pd.read_csv("file.csv")
 
-class StudentManager:
+print("\n\033[1;103m==========================  STUDENTS RESULT ANALYZER  ==========================\033[0m\n")
 
-    def __init__(self):
-        try:
-            self.df = pd.read_csv("students.csv")
-            print("Data Loaded Successfully!\n")
-        except FileNotFoundError:
-            self.df = pd.DataFrame(columns=["ID", "Name", "Marks"])
-            print("New Student Database Created!\n")
-
-    def add_student(self):
-        student_id = int(input("Enter ID : "))
-        name = input("Enter Name : ")
-        marks = float(input("Enter Marks : "))
-
-        new_student = pd.DataFrame({
-            "ID": [student_id],
-            "Name": [name],
-            "Marks": [marks]
-        })
-
-        self.df = pd.concat([self.df, new_student], ignore_index=True)
-        print("Student Added Successfully!\n")
-
-    def view_students(self):
-        if self.df.empty:
-            print("No Students Found.\n")
-        else:
-            print(self.df)
-
-    def search_student(self):
-        student_id = int(input("Enter Student ID : "))
-        student = self.df[self.df["ID"] == student_id]
-
-        if student.empty:
-            print("Student Not Found.\n")
-        else:
-            print(student)
-
-    def result_analysis(self):
-        if self.df.empty:
-            print("No Data Available.\n")
-            return
-
-        print("\n----- Result Analysis -----")
-        print("Highest Marks :", self.df["Marks"].max())
-        print("Lowest Marks  :", self.df["Marks"].min())
-        print("Average Marks :", round(self.df["Marks"].mean(), 2))
-
-    def save_data(self):
-        self.df.to_csv("students.csv", index=False)
-        print("Data Saved Successfully!\n")
+print("\n\033[1;102m--------------   STUDENT DATA  ------------------\033[0m\n")
+print("\033[0;91m",df,"\033[0m")
 
 
-manager = StudentManager()
+# total marks
+df["Total"] = df["Math"] + df["Science"] + df["English"]
 
-while True:
-    print("\n===== Student Result Manager =====")
-    print("1. Add Student")
-    print("2. View Students")
-    print("3. Search Student")
-    print("4. Result Analysis")
-    print("5. Save Data")
-    print("6. Exit")
+# average marks
+df["Average"] = df["Total"] / 3
 
-    choice = input("Enter Choice : ")
 
-    if choice == "1":
-        manager.add_student()
+# result
+df["Result"] = df["Average"].apply(lambda x: "Pass" if x>=40 else "Fail")
 
-    elif choice == "2":
-        manager.view_students()
 
-    elif choice == "3":
-        manager.search_student()
+# grade
 
-    elif choice == "4":
-        manager.result_analysis()
-
-    elif choice == "5":
-        manager.save_data()
-
-    elif choice == "6":
-        manager.save_data()
-        print("Thank You!")
-        break
-
+def grade(avg):
+    if avg >= 90:
+        return "A+"
+    elif avg >= 80:
+        return "A"
+    elif avg >= 70:
+        return "B"
+    elif avg >= 60:
+        return "C"
     else:
-        print("Invalid Choice!")
+        return "D"
 
+df["Grade"] = df["Average"].apply(grade)
+
+
+# show update data 
+print("\n\033[1;102m----------------------------------- RESULT ------------------------------------\033[0m\n")
+print("\033[0;91m",df,"\033[0m")    
