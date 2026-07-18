@@ -1,81 +1,44 @@
 import pandas as pd
 
 # CSV file read
-df = pd.read_csv("data.csv")
+df = pd.read_csv("employee.csv")
 
-print("\n========== STUDENT RESULT ANALYZER ==========\n")
-
-# Complete data
-print("Student Data:\n")
+print("========== EMPLOYEE DATA ==========\n")
 print(df)
 
-# Total Marks
-df["Total"] = df["Math"] + df["Science"] + df["English"]
+# Bonus (10%)
+df["Bonus"] = df["Salary"] * 0.10
 
-# Percentage
-df["Percentage"] = (df["Total"] / 300) * 100
+# Total Salary
+df["Total Salary"] = df["Salary"] + df["Bonus"]
 
-# Result
-df["Result"] = df["Percentage"].apply(lambda x: "Pass" if x >= 40 else "Fail")
-
-# Grade
-def grade(per):
-    if per >= 90:
-        return "A+"
-    elif per >= 80:
-        return "A"
-    elif per >= 70:
-        return "B"
-    elif per >= 60:
-        return "C"
-    elif per >= 40:
-        return "D"
-    else:
-        return "F"
-
-df["Grade"] = df["Percentage"].apply(grade)
-
-print("\n========== UPDATED RESULT ==========\n")
+print("\n========== UPDATED DATA ==========\n")
 print(df)
 
-# Topper
-topper = df.loc[df["Percentage"].idxmax()]
+# Highest Salary
+print("\nHighest Salary Employee:")
+print(df.loc[df["Salary"].idxmax()])
 
-print("\n========== TOPPER ==========")
-print(topper)
+# Lowest Salary
+print("\nLowest Salary Employee:")
+print(df.loc[df["Salary"].idxmin()])
 
-# Average Marks
-print("\nAverage Marks")
-print(df[["Math", "Science", "English"]].mean())
+# Average Salary
+print("\nAverage Salary:", df["Salary"].mean())
 
-# Highest Marks
-print("\nHighest Marks")
-print(df[["Math", "Science", "English"]].max())
+# Department Wise Average Salary
+print("\nDepartment Wise Average Salary")
+print(df.groupby("Department")["Salary"].mean())
 
-# Lowest Marks
-print("\nLowest Marks")
-print(df[["Math", "Science", "English"]].min())
+# Employees with Salary Above 50000
+print("\nEmployees earning above 50000")
+print(df[df["Salary"] > 50000])
 
-# Course Wise Average
-print("\n========== COURSE WISE AVERAGE ==========")
-print(df.groupby("Course")[["Math","Science","English","Percentage"]].mean())
+# Sort by Salary
+print("\nSalary Ranking")
+print(df.sort_values(by="Salary", ascending=False))
 
-# Attendance > 90
-print("\n========== ATTENDANCE ABOVE 90 ==========")
-print(df[df["Attendance"] > 90][["Name","Attendance"]])
+# Save new file
+df.to_csv("employee_report.csv", index=False)
 
-# Students Scoring Above 80%
-print("\n========== STUDENTS ABOVE 80% ==========")
-print(df[df["Percentage"] >= 80][["Name","Course","Percentage","Grade"]])
-
-# Sort by Percentage
-print("\n========== RANK LIST ==========")
-print(df.sort_values(by="Percentage", ascending=False)[["Name","Percentage","Grade"]])
-
-# Save Result
-df.to_csv("student_result.csv", index=False)
-
-print("\nResult saved successfully as student_result.csv")
-
-df = pd.read_csv("student_result.csv")
-print(df)
+print("\nReport saved as employee_report.csv")
