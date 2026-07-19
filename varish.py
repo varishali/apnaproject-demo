@@ -1,48 +1,40 @@
-import numpy as np
+import matplotlib.pyplot as plt
 
-# 1. Array banana
-arr = np.array([10, 20, 30, 40, 50])
+# Data
+months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
+sales = [50000, 65000, 70000, 85000, 90000, 100000]
+expenses = [30000, 35000, 40000, 45000, 50000, 55000]
 
-print("Original Array:")
-print(arr)
+# Profit
+profit = []
+for s, e in zip(sales, expenses):
+    profit.append(s - e)
 
-# 2. Array Information
-print("\nShape:", arr.shape)
-print("Size:", arr.size)
-print("Data Type:", arr.dtype)
+# -------- Line Chart --------
+plt.figure(figsize=(8,5))
+plt.plot(months, sales, marker='o', linewidth=2, label="Sales")
+plt.plot(months, expenses, marker='s', linewidth=2, label="Expenses")
+plt.title("Monthly Sales vs Expenses")
+plt.xlabel("Months")
+plt.ylabel("Amount (₹)")
+plt.legend()
+plt.grid(True)
+plt.show()
 
-# 3. Mathematical Operations
-print("\nAddition (+5):", arr + 5)
-print("Multiplication (*2):", arr * 2)
+# -------- Bar Chart --------
+plt.figure(figsize=(8,5))
+plt.bar(months, profit)
+plt.title("Monthly Profit")
+plt.xlabel("Months")
+plt.ylabel("Profit (₹)")
+plt.grid(axis="y")
+plt.show()
 
-# 4. Statistics
-print("\nSum:", np.sum(arr))
-print("Mean:", np.mean(arr))
-print("Maximum:", np.max(arr))
-print("Minimum:", np.min(arr))
+# -------- Pie Chart --------
+labels = ["Sales", "Expenses"]
+values = [sum(sales), sum(expenses)]
 
-# 5. 2D Array
-matrix = np.array([
-    [1, 2, 3],
-    [4, 5, 6],
-    [7, 8, 9]
-])
-
-print("\n2D Array:")
-print(matrix)
-
-# 6. Row aur Column
-print("\nFirst Row:", matrix[0])
-print("Second Column:", matrix[:, 1])
-
-# 7. Reshape
-new_arr = np.arange(1, 13).reshape(3, 4)
-
-print("\nReshaped Array:")
-print(new_arr)
-
-# 8. Random Numbers
-random_array = np.random.randint(1, 101, size=(3, 3))
-
-print("\nRandom Array:")
-print(random_array)
+plt.figure(figsize=(6,6))
+plt.pie(values, labels=labels, autopct="%1.1f%%", startangle=90)
+plt.title("Sales vs Expenses Distribution")
+plt.show()
