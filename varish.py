@@ -1,44 +1,48 @@
-import pandas as pd
+import numpy as np
 
-# CSV file read
-df = pd.read_csv("employee.csv")
+# 1. Array banana
+arr = np.array([10, 20, 30, 40, 50])
 
-print("========== EMPLOYEE DATA ==========\n")
-print(df)
+print("Original Array:")
+print(arr)
 
-# Bonus (10%)
-df["Bonus"] = df["Salary"] * 0.10
+# 2. Array Information
+print("\nShape:", arr.shape)
+print("Size:", arr.size)
+print("Data Type:", arr.dtype)
 
-# Total Salary
-df["Total Salary"] = df["Salary"] + df["Bonus"]
+# 3. Mathematical Operations
+print("\nAddition (+5):", arr + 5)
+print("Multiplication (*2):", arr * 2)
 
-print("\n========== UPDATED DATA ==========\n")
-print(df)
+# 4. Statistics
+print("\nSum:", np.sum(arr))
+print("Mean:", np.mean(arr))
+print("Maximum:", np.max(arr))
+print("Minimum:", np.min(arr))
 
-# Highest Salary
-print("\nHighest Salary Employee:")
-print(df.loc[df["Salary"].idxmax()])
+# 5. 2D Array
+matrix = np.array([
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+])
 
-# Lowest Salary
-print("\nLowest Salary Employee:")
-print(df.loc[df["Salary"].idxmin()])
+print("\n2D Array:")
+print(matrix)
 
-# Average Salary
-print("\nAverage Salary:", df["Salary"].mean())
+# 6. Row aur Column
+print("\nFirst Row:", matrix[0])
+print("Second Column:", matrix[:, 1])
 
-# Department Wise Average Salary
-print("\nDepartment Wise Average Salary")
-print(df.groupby("Department")["Salary"].mean())
+# 7. Reshape
+new_arr = np.arange(1, 13).reshape(3, 4)
 
-# Employees with Salary Above 50000
-print("\nEmployees earning above 50000")
-print(df[df["Salary"] > 50000])
+print("\nReshaped Array:")
+print(new_arr)
 
-# Sort by Salary
-print("\nSalary Ranking")
-print(df.sort_values(by="Salary", ascending=False))
+# 8. Random Numbers
+random_array = np.random.randint(1, 101, size=(3, 3))
 
-# Save new file
-df.to_csv("employee_report.csv", index=False)
-
-print("\nReport saved as employee_report.csv")
+print("\nRandom Array:")
+print(random_array)
