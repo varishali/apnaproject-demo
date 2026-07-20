@@ -1,0 +1,11 @@
+EmpID,Name,Department,Salary,Experience,Rating,Bonus,Total Salary,Grade,Rank
+101,Aman,IT,55000,2,4.2,8000,63000,Good,6.0
+102,Rahul,HR,42000,5,3.8,5000,47000,Average,10.0
+103,Priya,IT,65000,4,4.7,8000,73000,Excellent,2.0
+104,Neha,Sales,45000,3,4.1,6000,51000,Good,9.0
+105,Arjun,HR,50000,6,4.5,5000,55000,Excellent,7.0
+106,Riya,IT,70000,5,4.9,8000,78000,Excellent,1.0
+107,Karan,Sales,48000,4,3.9,6000,54000,Average,8.0
+108,Simran,Finance,60000,7,4.8,7000,67000,Excellent,4.0
+109,Ankit,Finance,58000,3,4.0,7000,65000,Good,5.0
+110,Pooja,IT,62000,6,4.6,8000,70000,Excellent,3.0
