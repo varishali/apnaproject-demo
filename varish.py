@@ -1,77 +1,18 @@
 import pandas as pd
 
-# Read CSV files
-emp = pd.read_csv("employee.csv")
-bonus = pd.read_csv("bonus.csv")
+employee_data = {
+    "EmpID": [101,102,103,104,105,106,107,108,109,110],
+    "Name": ["Aman","Rahul","Priya","Neha","Arjun","Riya","Karan","Simran","Ankit","Pooja"],
+    "Department": ["IT","HR","IT","Sales","HR","IT","Sales","Finance","Finance","IT"],
+    "Salary": [55000,42000,65000,45000,50000,70000,48000,60000,58000,62000],
+    "Experience": [2,5,4,3,6,5,4,7,3,6],
+    "Rating": [4.2,3.8,4.7,4.1,4.5,4.9,3.9,4.8,4.0,4.6]
+}
 
-print("\n========= EMPLOYEE DATA =========\n")
-print(emp)
+employee_df = pd.DataFrame(employee_data)
 
-# Merge DataFrames
-df = pd.merge(emp, bonus, on="Department")
+# CSV File Create
+employee_df.to_csv("employee.csv", index=False)
 
-# Total Salary
-df["Total Salary"] = df["Salary"] + df["Bonus"]
-
-# Performance Grade
-df["Grade"] = df["Rating"].apply(
-    lambda x: "Excellent" if x >= 4.5
-    else "Good" if x >= 4
-    else "Average"
-)
-
-print("\n========= MERGED DATA =========\n")
-print(df)
-
-# Average salary department wise
-print("\nAverage Salary Department Wise\n")
-print(df.groupby("Department")["Salary"].mean())
-
-# Highest salary employee
-print("\nHighest Salary Employee\n")
-print(df.loc[df["Salary"].idxmax()])
-
-# Top Rated Employees
-print("\nTop Rated Employees\n")
-print(df[df["Rating"] > 4.5])
-
-# Pivot Table
-print("\nPivot Table\n")
-pivot = pd.pivot_table(
-    df,
-    values="Salary",
-    index="Department",
-    columns="Grade",
-    aggfunc="mean",
-    fill_value=0
-)
-print(pivot)
-
-# Sort
-print("\nSorted by Total Salary\n")
-print(df.sort_values(by="Total Salary", ascending=False))
-
-# Query
-print("\nEmployees with Salary > 55000\n")
-print(df.query("Salary > 55000"))
-
-# Rank
-df["Rank"] = df["Salary"].rank(ascending=False)
-
-print("\nSalary Ranking\n")
-print(df[["Name", "Salary", "Rank"]])
-
-# Department Summary
-summary = df.groupby("Department").agg({
-    "Salary": ["mean", "max", "min"],
-    "Rating": "mean",
-    "Experience": "sum"
-})
-
-print("\nDepartment Summary\n")
-print(summary)
-
-# Save Result
-df.to_csv("employee_analysis.csv", index=False)
-
-print("\nAnalysis Completed Successfully")
+print("employee.csv file successfully created!")
+print(employee_df)
