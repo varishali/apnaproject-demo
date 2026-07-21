@@ -1,33 +1,46 @@
-def calculate_grade(percentage):
-    if percentage >= 90:
-        return "A+"
-    elif percentage >= 80:
-        return "A"
-    elif percentage >= 70:
-        return "B"
-    elif percentage >= 60:
-        return "C"
-    elif percentage >= 40:
-        return "D"
+books = []
+
+while True:
+    print("\n===== LIBRARY BOOK MANAGER =====")
+    print("1. Add Book")
+    print("2. View Books")
+    print("3. Search Book")
+    print("4. Remove Book")
+    print("5. Exit")
+
+    choice = input("Enter Choice: ")
+
+    if choice == "1":
+        book = input("Enter Book Name: ")
+        books.append(book)
+        print("Book Added Successfully!")
+
+    elif choice == "2":
+        if books:
+            print("\nAvailable Books:")
+            for i, book in enumerate(books, start=1):
+                print(f"{i}. {book}")
+        else:
+            print("No Books Available.")
+
+    elif choice == "3":
+        search = input("Enter Book Name: ")
+        if search in books:
+            print("Book Found!")
+        else:
+            print("Book Not Found.")
+
+    elif choice == "4":
+        remove = input("Enter Book Name: ")
+        if remove in books:
+            books.remove(remove)
+            print("Book Removed Successfully!")
+        else:
+            print("Book Not Found.")
+
+    elif choice == "5":
+        print("Thank You!")
+        break
+
     else:
-        return "Fail"
-
-
-print("===== STUDENT GRADE CALCULATOR =====")
-
-name = input("Enter Student Name: ")
-
-marks = []
-for i in range(1, 6):
-    mark = float(input(f"Enter Marks of Subject {i}: "))
-    marks.append(mark)
-
-total = sum(marks)
-percentage = total / 5
-grade = calculate_grade(percentage)
-
-print("\n------ RESULT ------")
-print("Name:", name)
-print("Total Marks:", total)
-print("Percentage:", percentage)
-print("Grade:", grade)
+        print("Invalid Choice!")
