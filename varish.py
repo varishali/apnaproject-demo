@@ -1,18 +1,33 @@
-import pandas as pd
+def calculate_grade(percentage):
+    if percentage >= 90:
+        return "A+"
+    elif percentage >= 80:
+        return "A"
+    elif percentage >= 70:
+        return "B"
+    elif percentage >= 60:
+        return "C"
+    elif percentage >= 40:
+        return "D"
+    else:
+        return "Fail"
 
-employee_data = {
-    "EmpID": [101,102,103,104,105,106,107,108,109,110],
-    "Name": ["Aman","Rahul","Priya","Neha","Arjun","Riya","Karan","Simran","Ankit","Pooja"],
-    "Department": ["IT","HR","IT","Sales","HR","IT","Sales","Finance","Finance","IT"],
-    "Salary": [55000,42000,65000,45000,50000,70000,48000,60000,58000,62000],
-    "Experience": [2,5,4,3,6,5,4,7,3,6],
-    "Rating": [4.2,3.8,4.7,4.1,4.5,4.9,3.9,4.8,4.0,4.6]
-}
 
-employee_df = pd.DataFrame(employee_data)
+print("===== STUDENT GRADE CALCULATOR =====")
 
-# CSV File Create
-employee_df.to_csv("employee.csv", index=False)
+name = input("Enter Student Name: ")
 
-print("employee.csv file successfully created!")
-print(employee_df)
+marks = []
+for i in range(1, 6):
+    mark = float(input(f"Enter Marks of Subject {i}: "))
+    marks.append(mark)
+
+total = sum(marks)
+percentage = total / 5
+grade = calculate_grade(percentage)
+
+print("\n------ RESULT ------")
+print("Name:", name)
+print("Total Marks:", total)
+print("Percentage:", percentage)
+print("Grade:", grade)
