@@ -1,46 +1,57 @@
-books = []
+from colorama import Fore, Style, init
+import time
+import os
 
-while True:
-    print("\n===== LIBRARY BOOK MANAGER =====")
-    print("1. Add Book")
-    print("2. View Books")
-    print("3. Search Book")
-    print("4. Remove Book")
-    print("5. Exit")
+init(autoreset=True)
 
-    choice = input("Enter Choice: ")
+os.system("cls" if os.name == "nt" else "clear")
 
-    if choice == "1":
-        book = input("Enter Book Name: ")
-        books.append(book)
-        print("Book Added Successfully!")
+name = input(Fore.CYAN + " Enter Her Name: ")
 
-    elif choice == "2":
-        if books:
-            print("\nAvailable Books:")
-            for i, book in enumerate(books, start=1):
-                print(f"{i}. {book}")
-        else:
-            print("No Books Available.")
+print(Fore.YELLOW + "\nLoading Your Surprise", end="")
 
-    elif choice == "3":
-        search = input("Enter Book Name: ")
-        if search in books:
-            print("Book Found!")
-        else:
-            print("Book Not Found.")
+for i in range(8):
+    print(Fore.MAGENTA + " ", end="", flush=True)
+    time.sleep(0.3)
 
-    elif choice == "4":
-        remove = input("Enter Book Name: ")
-        if remove in books:
-            books.remove(remove)
-            print("Book Removed Successfully!")
-        else:
-            print("Book Not Found.")
+print("\n")
 
-    elif choice == "5":
-        print("Thank You!")
-        break
+messages = [
+    (Fore.RED, f" Dear {name},"),
+    (Fore.GREEN, " Tum meri life ka sabse beautiful part ho."),
+    (Fore.YELLOW, " Tumhari smile meri favourite cheez hai."),
+    (Fore.BLUE, " Har din tumhare saath aur bhi special lagta hai."),
+    (Fore.MAGENTA, " Thank You meri life me aane ke liye."),
+    (Fore.CYAN, " I Love You So Much "),
+]
 
-    else:
-        print("Invalid Choice!")
+for color, msg in messages:
+    print(color + Style.BRIGHT + msg)
+    time.sleep(2)
+
+heart = [
+"      ❤❤❤     ❤❤❤",
+"    ❤     ❤ ❤     ❤",
+"   ❤       ❤       ❤",
+"   ❤               ❤",
+"    ❤             ❤",
+"      ❤         ❤",
+"        ❤     ❤",
+"          ❤ ❤",
+"           ❤"
+]
+
+colors = [
+    Fore.RED, Fore.YELLOW, Fore.GREEN,
+    Fore.CYAN, Fore.BLUE, Fore.MAGENTA
+]
+
+print()
+
+for i, line in enumerate(heart):
+    print(colors[i % len(colors)] + Style.BRIGHT + line)
+    time.sleep(0.3)
+
+print(Fore.RED + Style.BRIGHT + f"\n {name}, You Are My Happiness ")
+print(Fore.YELLOW + " Forever Together ")
+print(Fore.MAGENTA + " Made With Love By Varish Ali ")
