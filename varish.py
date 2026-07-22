@@ -1,44 +1,46 @@
-import re
-from colorama import Fore, Style, init
+import os
+import shutil
 
-init(autoreset=True)
+# Folder path
+path = input("Enter Folder Path: ")
 
-print(Fore.CYAN + "=" * 45)
-print(Fore.YELLOW + Style.BRIGHT + "   PASSWORD STRENGTH CHECKER")
-print(Fore.CYAN + "=" * 45)
+if not os.path.exists(path):
+    print("Folder not found!")
+    exit()
 
-password = input(Fore.GREEN + "\nEnter Password: ")
+# Categories
+folders = {
+    "Images": [".jpg", ".jpeg", ".png", ".gif", ".webp"],
+    "Videos": [".mp4", ".mkv", ".avi", ".mov"],
+    "Documents": [".pdf", ".docx", ".doc", ".txt", ".pptx", ".xlsx"],
+    "Music": [".mp3", ".wav"],
+    "Programs": [".py", ".java", ".cpp", ".c", ".html", ".css", ".js"],
+    "Archives": [".zip", ".rar", ".7z"],
+    "Others": []
+}
 
-score = 0
+for file in os.listdir(path):
+    file_path = os.path.join(path, file)
 
-if len(password) >= 8:
-    score += 1
-if re.search(r"[A-Z]", password):
-    score += 1
-if re.search(r"[a-z]", password):
-    score += 1
-if re.search(r"\d", password):
-    score += 1
-if re.search(r"[!@#$%^&*(),.?\":{}|<>]", password):
-    score += 1
+    if os.path.isdir(file_path):
+        continue
 
-print()
+    ext = os.path.splitext(file)[1].lower()
+    moved = False
 
-if score == 5:
-    print(Fore.GREEN + "🟢 Password Strength: VERY STRONG")
-elif score == 4:
-    print(Fore.CYAN + "🔵 Password Strength: STRONG")
-elif score == 3:
-    print(Fore.YELLOW + "🟡 Password Strength: MEDIUM")
-elif score == 2:
-    print(Fore.MAGENTA + "🟠 Password Strength: WEAK")
-else:
-    print(Fore.RED + "🔴 Password Strength: VERY WEAK")
+    for folder, extensions in folders.items():
+        if ext in extensions:
+            folder_path = os.path.join(path, folder)
+            os.makedirs(folder_path, exist_ok=True)
+            shutil.move(file_path, os.path.join(folder_path, file))
+            print(f" {file} -> {folder}")
+            moved = True
+            break
 
-print(Fore.CYAN + "\nPassword Analysis")
-print("-" * 30)
-print("✔ Length >= 8 :", len(password) >= 8)
-print("✔ Uppercase   :", bool(re.search(r"[A-Z]", password)))
-print("✔ Lowercase   :", bool(re.search(r"[a-z]", password)))
-print("✔ Number      :", bool(re.search(r"\d", password)))
-print("✔ Special Char:", bool(re.search(r"[!@#$%^&*(),.?\":{}|<>]", password)))
+    if not moved:
+        folder_path = os.path.join(path, "Others")
+        os.makedirs(folder_path, exist_ok=True)
+        shutil.move(file_path, os.path.join(folder_path, file))
+        print(f" {file} -> Others")
+
+print("\nFile organization completed successfully!")
