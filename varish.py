@@ -1,57 +1,44 @@
+import re
 from colorama import Fore, Style, init
-import time
-import os
 
 init(autoreset=True)
 
-os.system("cls" if os.name == "nt" else "clear")
+print(Fore.CYAN + "=" * 45)
+print(Fore.YELLOW + Style.BRIGHT + "   PASSWORD STRENGTH CHECKER")
+print(Fore.CYAN + "=" * 45)
 
-name = input(Fore.CYAN + " Enter Her Name: ")
+password = input(Fore.GREEN + "\nEnter Password: ")
 
-print(Fore.YELLOW + "\nLoading Your Surprise", end="")
+score = 0
 
-for i in range(8):
-    print(Fore.MAGENTA + " ", end="", flush=True)
-    time.sleep(0.3)
-
-print("\n")
-
-messages = [
-    (Fore.RED, f" Dear {name},"),
-    (Fore.GREEN, " Tum meri life ka sabse beautiful part ho."),
-    (Fore.YELLOW, " Tumhari smile meri favourite cheez hai."),
-    (Fore.BLUE, " Har din tumhare saath aur bhi special lagta hai."),
-    (Fore.MAGENTA, " Thank You meri life me aane ke liye."),
-    (Fore.CYAN, " I Love You So Much "),
-]
-
-for color, msg in messages:
-    print(color + Style.BRIGHT + msg)
-    time.sleep(2)
-
-heart = [
-"      ❤❤❤     ❤❤❤",
-"    ❤     ❤ ❤     ❤",
-"   ❤       ❤       ❤",
-"   ❤               ❤",
-"    ❤             ❤",
-"      ❤         ❤",
-"        ❤     ❤",
-"          ❤ ❤",
-"           ❤"
-]
-
-colors = [
-    Fore.RED, Fore.YELLOW, Fore.GREEN,
-    Fore.CYAN, Fore.BLUE, Fore.MAGENTA
-]
+if len(password) >= 8:
+    score += 1
+if re.search(r"[A-Z]", password):
+    score += 1
+if re.search(r"[a-z]", password):
+    score += 1
+if re.search(r"\d", password):
+    score += 1
+if re.search(r"[!@#$%^&*(),.?\":{}|<>]", password):
+    score += 1
 
 print()
 
-for i, line in enumerate(heart):
-    print(colors[i % len(colors)] + Style.BRIGHT + line)
-    time.sleep(0.3)
+if score == 5:
+    print(Fore.GREEN + "🟢 Password Strength: VERY STRONG")
+elif score == 4:
+    print(Fore.CYAN + "🔵 Password Strength: STRONG")
+elif score == 3:
+    print(Fore.YELLOW + "🟡 Password Strength: MEDIUM")
+elif score == 2:
+    print(Fore.MAGENTA + "🟠 Password Strength: WEAK")
+else:
+    print(Fore.RED + "🔴 Password Strength: VERY WEAK")
 
-print(Fore.RED + Style.BRIGHT + f"\n {name}, You Are My Happiness ")
-print(Fore.YELLOW + " Forever Together ")
-print(Fore.MAGENTA + " Made With Love By Varish Ali ")
+print(Fore.CYAN + "\nPassword Analysis")
+print("-" * 30)
+print("✔ Length >= 8 :", len(password) >= 8)
+print("✔ Uppercase   :", bool(re.search(r"[A-Z]", password)))
+print("✔ Lowercase   :", bool(re.search(r"[a-z]", password)))
+print("✔ Number      :", bool(re.search(r"\d", password)))
+print("✔ Special Char:", bool(re.search(r"[!@#$%^&*(),.?\":{}|<>]", password)))
