@@ -1,59 +1,39 @@
 import pandas as pd
 import os
 
-FILE = "expenses.csv"
+FILE = "employees.csv"
 
-# Create file if not exists
+# Create CSV if it doesn't exist
 if not os.path.exists(FILE):
-    df = pd.DataFrame(columns=["Date", "Category", "Amount"])
-    df.to_csv(FILE, index=False)
+    data = {
+        "ID": [101, 102, 103, 104, 105],
+        "Name": ["Aman", "Rahul", "Neha", "Priya", "Rohan"],
+        "Department": ["IT", "HR", "IT", "Sales", "HR"],
+        "Salary": [45000, 38000, 52000, 41000, 36000]
+    }
+    pd.DataFrame(data).to_csv(FILE, index=False)
 
-while True:
-    print("\n====== Expense Tracker ======")
-    print("1. Add Expense")
-    print("2. View Expenses")
-    print("3. Total Expense")
-    print("4. Exit")
+# Read data
+df = pd.read_csv(FILE)
 
-    choice = input("Enter Choice: ")
+print("\n===== EMPLOYEE DATA =====")
+print(df)
 
-    if choice == "1":
-        date = input("Date (DD-MM-YYYY): ")
-        category = input("Category: ")
-        amount = float(input("Amount: "))
+print("\nHighest Salary:")
+print(df.loc[df["Salary"].idxmax()])
 
-        df = pd.read_csv(FILE)
+print("\nLowest Salary:")
+print(df.loc[df["Salary"].idxmin()])
 
-        new = pd.DataFrame({
-            "Date": [date],
-            "Category": [category],
-            "Amount": [amount]
-        })
+print("\nAverage Salary:", df["Salary"].mean())
 
-        df = pd.concat([df, new], ignore_index=True)
-        df.to_csv(FILE, index=False)
+print("\nDepartment Wise Salary")
+print(df.groupby("Department")["Salary"].mean())
 
-        print("Expense Added Successfully!")
+# Bonus (10%)
+df["Bonus"] = df["Salary"] * 0.10
+df["Total Salary"] = df["Salary"] + df["Bonus"]
 
-    elif choice == "2":
-        df = pd.read_csv(FILE)
+df.to_csv("employee_salary_report.csv", index=False)
 
-        if df.empty:
-            print("No Expenses Found!")
-        else:
-            print(df)
-
-    elif choice == "3":
-        df = pd.read_csv(FILE)
-
-        print("\nTotal Expense:", df["Amount"].sum())
-
-        print("\nCategory Wise Expense")
-        print(df.groupby("Category")["Amount"].sum())
-
-    elif choice == "4":
-        print("Thank You!")
-        break
-
-    else:
-        print("Invalid Choice!")
+print("\nReport saved as employee_salary_report.csv")
