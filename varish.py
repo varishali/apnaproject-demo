@@ -1,46 +1,53 @@
+import pandas as pd
 import os
-import shutil
 
-# Folder path
-path = input("Enter Folder Path: ")
+FILE = "students.csv"
 
-if not os.path.exists(path):
-    print("Folder not found!")
-    exit()
+# Create CSV if not exists
+if not os.path.exists(FILE):
+    df = pd.DataFrame({
+        "ID": [1, 2, 3, 4, 5],
+        "Name": ["Aman", "Rahul", "Priya", "Neha", "Rohan"],
+        "Math": [85, 72, 91, 68, 77],
+        "Science": [80, 75, 95, 70, 82],
+        "English": [78, 88, 90, 72, 79]
+    })
+    df.to_csv(FILE, index=False)
 
-# Categories
-folders = {
-    "Images": [".jpg", ".jpeg", ".png", ".gif", ".webp"],
-    "Videos": [".mp4", ".mkv", ".avi", ".mov"],
-    "Documents": [".pdf", ".docx", ".doc", ".txt", ".pptx", ".xlsx"],
-    "Music": [".mp3", ".wav"],
-    "Programs": [".py", ".java", ".cpp", ".c", ".html", ".css", ".js"],
-    "Archives": [".zip", ".rar", ".7z"],
-    "Others": []
-}
+# Read CSV
+df = pd.read_csv(FILE)
 
-for file in os.listdir(path):
-    file_path = os.path.join(path, file)
+# Total & Average
+df["Total"] = df["Math"] + df["Science"] + df["English"]
+df["Average"] = (df["Total"] / 3).round(2)
 
-    if os.path.isdir(file_path):
-        continue
+# Grade
+def grade(avg):
+    if avg >= 90:
+        return "A+"
+    elif avg >= 80:
+        return "A"
+    elif avg >= 70:
+        return "B"
+    elif avg >= 60:
+        return "C"
+    else:
+        return "Fail"
 
-    ext = os.path.splitext(file)[1].lower()
-    moved = False
+df["Grade"] = df["Average"].apply(grade)
 
-    for folder, extensions in folders.items():
-        if ext in extensions:
-            folder_path = os.path.join(path, folder)
-            os.makedirs(folder_path, exist_ok=True)
-            shutil.move(file_path, os.path.join(folder_path, file))
-            print(f" {file} -> {folder}")
-            moved = True
-            break
+print("\n===== STUDENT REPORT =====")
+print(df)
 
-    if not moved:
-        folder_path = os.path.join(path, "Others")
-        os.makedirs(folder_path, exist_ok=True)
-        shutil.move(file_path, os.path.join(folder_path, file))
-        print(f" {file} -> Others")
+print("\nTop Student:")
+print(df.loc[df["Total"].idxmax()])
 
-print("\nFile organization completed successfully!")
+print("\nClass Statistics")
+print("Highest Total :", df["Total"].max())
+print("Lowest Total  :", df["Total"].min())
+print("Average Marks :", round(df["Average"].mean(), 2))
+
+# Save result
+df.to_csv("student_result.csv", index=False)
+
+print("\nResult saved as 'student_result.csv'")
