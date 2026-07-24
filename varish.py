@@ -1,72 +1,49 @@
-import os
+import random
+import string
 
-KEY = 25
+def generate_password(length):
+    lower = string.ascii_lowercase
+    upper = string.ascii_uppercase
+    digits = string.digits
+    symbols = "!@#$%^&*"
 
-def encrypt(text):
-    result = ""
-    for char in text:
-        result += chr(ord(char) + KEY)
-    return result
+    all_chars = lower + upper + digits + symbols
 
-def decrypt(text):
-    result = ""
-    for char in text:
-        result += chr(ord(char) - KEY)
-    return result
+    password = ""
 
-def create_file():
-    name = input("Enter file name: ") + ".txt"
-    text = input("Enter secret message: ")
+    password += random.choice(lower)
+    password += random.choice(upper)
+    password += random.choice(digits)
+    password += random.choice(symbols)
 
-    with open(name, "w") as file:
-        file.write(encrypt(text))
+    for _ in range(length - 4):
+        password += random.choice(all_chars)
 
-    print("File created and encrypted successfully.")
+    password = list(password)
+    random.shuffle(password)
 
-def read_file():
-    name = input("Enter file name: ") + ".txt"
+    return "".join(password)
 
-    if not os.path.exists(name):
-        print("File not found.")
-        return
-
-    with open(name, "r") as file:
-        data = file.read()
-
-    print("\nDecrypted Message:")
-    print(decrypt(data))
-
-def list_files():
-    files = [f for f in os.listdir() if f.endswith(".txt")]
-
-    if not files:
-        print("No text files found.")
-    else:
-        print("\nAvailable Files:")
-        for i, file in enumerate(files, start=1):
-            print(f"{i}. {file}")
+print("=" * 35)
+print(" RANDOM PASSWORD GENERATOR ")
+print("=" * 35)
 
 while True:
-    print("\n===== Secure File Locker =====")
-    print("1. Create Secure File")
-    print("2. Read Secure File")
-    print("3. Show Files")
-    print("4. Exit")
+    try:
+        length = int(input("Enter password length (8-30): "))
 
-    choice = input("Enter choice: ")
+        if length < 8:
+            print("Password must be at least 8 characters.\n")
+            continue
 
-    if choice == "1":
-        create_file()
+        print("\nGenerated Password:")
+        print(generate_password(length))
 
-    elif choice == "2":
-        read_file()
+        again = input("\nGenerate another? (y/n): ").lower()
 
-    elif choice == "3":
-        list_files()
+        if again != "y":
+            print("Thank You!")
+            break
 
-    elif choice == "4":
-        print("Goodbye!")
-        break
-
-    else:
-        print("Invalid choice.")
+    except ValueError:
+        print("Please enter a valid number.\n")
