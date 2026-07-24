@@ -1,39 +1,72 @@
-import pandas as pd
 import os
 
-FILE = "employees.csv"
+KEY = 25
 
-# Create CSV if it doesn't exist
-if not os.path.exists(FILE):
-    data = {
-        "ID": [101, 102, 103, 104, 105],
-        "Name": ["Aman", "Rahul", "Neha", "Priya", "Rohan"],
-        "Department": ["IT", "HR", "IT", "Sales", "HR"],
-        "Salary": [45000, 38000, 52000, 41000, 36000]
-    }
-    pd.DataFrame(data).to_csv(FILE, index=False)
+def encrypt(text):
+    result = ""
+    for char in text:
+        result += chr(ord(char) + KEY)
+    return result
 
-# Read data
-df = pd.read_csv(FILE)
+def decrypt(text):
+    result = ""
+    for char in text:
+        result += chr(ord(char) - KEY)
+    return result
 
-print("\n===== EMPLOYEE DATA =====")
-print(df)
+def create_file():
+    name = input("Enter file name: ") + ".txt"
+    text = input("Enter secret message: ")
 
-print("\nHighest Salary:")
-print(df.loc[df["Salary"].idxmax()])
+    with open(name, "w") as file:
+        file.write(encrypt(text))
 
-print("\nLowest Salary:")
-print(df.loc[df["Salary"].idxmin()])
+    print("File created and encrypted successfully.")
 
-print("\nAverage Salary:", df["Salary"].mean())
+def read_file():
+    name = input("Enter file name: ") + ".txt"
 
-print("\nDepartment Wise Salary")
-print(df.groupby("Department")["Salary"].mean())
+    if not os.path.exists(name):
+        print("File not found.")
+        return
 
-# Bonus (10%)
-df["Bonus"] = df["Salary"] * 0.10
-df["Total Salary"] = df["Salary"] + df["Bonus"]
+    with open(name, "r") as file:
+        data = file.read()
 
-df.to_csv("employee_salary_report.csv", index=False)
+    print("\nDecrypted Message:")
+    print(decrypt(data))
 
-print("\nReport saved as employee_salary_report.csv")
+def list_files():
+    files = [f for f in os.listdir() if f.endswith(".txt")]
+
+    if not files:
+        print("No text files found.")
+    else:
+        print("\nAvailable Files:")
+        for i, file in enumerate(files, start=1):
+            print(f"{i}. {file}")
+
+while True:
+    print("\n===== Secure File Locker =====")
+    print("1. Create Secure File")
+    print("2. Read Secure File")
+    print("3. Show Files")
+    print("4. Exit")
+
+    choice = input("Enter choice: ")
+
+    if choice == "1":
+        create_file()
+
+    elif choice == "2":
+        read_file()
+
+    elif choice == "3":
+        list_files()
+
+    elif choice == "4":
+        print("Goodbye!")
+        break
+
+    else:
+        print("Invalid choice.")
