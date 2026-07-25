@@ -1,126 +1,121 @@
 import pandas as pd
 import numpy as np
 
-# -------------------------------
-# Sample Patient Data
-# -------------------------------
+# -----------------------------
+# Create Sales Data
+# -----------------------------
 data = {
-    "Patient_ID":[101,102,103,104,105,106,107,108,109,110],
-    "Name":["Aman","Riya","Ali","Sneha","Rohit",
-            "Priya","Karan","Neha","Arjun","Sara"],
-    "Age":[25,42,35,60,55,30,70,48,52,66],
-    "Gender":["Male","Female","Male","Female","Male",
-              "Female","Male","Female","Male","Female"],
-    "Disease":["Diabetes","BP","Diabetes","Heart","BP",
-               "Asthma","Heart","Diabetes","BP","Heart"],
-    "Weight":[70,62,82,68,90,55,78,64,85,72],
-    "Height":[1.72,1.60,1.78,1.58,1.80,1.55,1.70,1.62,1.75,1.60],
-    "Bill":[12000,8500,15000,25000,9000,
-            6000,28000,13000,9500,30000]
+    "Order_ID": range(1001, 1016),
+    "Product": [
+        "Laptop", "Mouse", "Keyboard", "Monitor", "Headphone",
+        "Laptop", "Mouse", "Keyboard", "Monitor", "Headphone",
+        "Laptop", "Mouse", "Keyboard", "Monitor", "Headphone"
+    ],
+    "Category": [
+        "Electronics","Accessories","Accessories","Electronics","Accessories",
+        "Electronics","Accessories","Accessories","Electronics","Accessories",
+        "Electronics","Accessories","Accessories","Electronics","Accessories"
+    ],
+    "Month": [
+        "Jan","Jan","Feb","Feb","Mar",
+        "Mar","Apr","Apr","May","May",
+        "Jun","Jun","Jul","Jul","Aug"
+    ],
+    "Quantity": [3,10,5,2,6,4,8,7,3,9,5,12,6,4,8],
+    "Price": [65000,500,1500,18000,2500,66000,550,1600,18500,2600,67000,600,1700,19000,2700],
+    "Cost": [58000,350,1100,15000,1800,59000,380,1200,15500,1900,60000,400,1250,16000,2000],
+    "Rating": [4.8,4.2,4.5,4.6,4.1,4.9,4.3,4.4,4.7,4.0,5.0,4.2,4.5,4.8,4.3]
 }
 
 df = pd.DataFrame(data)
 
-# -------------------------------
-# Basic Information
-# -------------------------------
-print("\nPATIENT DATA\n")
-print(df)
+# -----------------------------
+# Calculations
+# -----------------------------
+df["Revenue"] = df["Quantity"] * df["Price"]
+df["Total_Cost"] = df["Quantity"] * df["Cost"]
+df["Profit"] = df["Revenue"] - df["Total_Cost"]
 
-print("\nShape :", df.shape)
-print("\nColumns :", list(df.columns))
-
-# -------------------------------
-# Missing Values
-# -------------------------------
-print("\nMissing Values\n")
-print(df.isnull().sum())
-
-# -------------------------------
-# BMI Calculation
-# -------------------------------
-df["BMI"] = round(df["Weight"] / (df["Height"] ** 2),2)
-
-# -------------------------------
-# Risk Category
-# -------------------------------
-conditions = [
-    df["Age"] >= 60,
-    df["Age"] >= 45,
-    df["Age"] >= 30
-]
-
-choices = ["High","Medium","Low"]
-
-df["Risk"] = np.select(conditions, choices, default="Very Low")
-
-# -------------------------------
-# Age Group
-# -------------------------------
-df["Age_Group"] = pd.cut(
-    df["Age"],
-    bins=[0,18,35,50,100],
-    labels=["Child","Young","Adult","Senior"]
+df["Discount"] = np.where(
+    df["Revenue"] > 100000,
+    df["Revenue"] * 0.10,
+    df["Revenue"] * 0.05
 )
 
-# -------------------------------
-# Disease Wise Count
-# -------------------------------
-print("\nDisease Count\n")
-print(df["Disease"].value_counts())
+df["Final_Revenue"] = df["Revenue"] - df["Discount"]
 
-# -------------------------------
-# Gender Wise Average Bill
-# -------------------------------
-print("\nAverage Bill by Gender\n")
-print(df.groupby("Gender")["Bill"].mean())
+# -----------------------------
+# Summary
+# -----------------------------
+print("\n===== SALES DATA =====")
+print(df)
 
-# -------------------------------
-# Disease Summary
-# -------------------------------
-summary = df.groupby("Disease").agg({
-    "Bill":"mean",
-    "Age":"mean",
-    "BMI":"mean"
+print("\nTotal Revenue")
+print(df["Final_Revenue"].sum())
+
+print("\nTotal Profit")
+print(df["Profit"].sum())
+
+print("\nAverage Rating")
+print(round(df["Rating"].mean(),2))
+
+# -----------------------------
+# Category Analysis
+# -----------------------------
+category = df.groupby("Category").agg({
+    "Final_Revenue":"sum",
+    "Profit":"sum",
+    "Quantity":"sum"
 })
 
-print("\nDisease Summary\n")
-print(summary)
+print("\nCategory Summary")
+print(category)
 
-# -------------------------------
-# Top 5 Highest Bills
-# -------------------------------
-top = df.sort_values("Bill",ascending=False).head(5)
+# -----------------------------
+# Monthly Sales
+# -----------------------------
+monthly = df.groupby("Month")["Final_Revenue"].sum()
 
-print("\nTop Billing Patients\n")
-print(top[["Name","Disease","Bill"]])
+print("\nMonthly Revenue")
+print(monthly)
 
-# -------------------------------
+# -----------------------------
+# Top 5 Products
+# -----------------------------
+top = df.groupby("Product")["Final_Revenue"].sum().sort_values(ascending=False)
+
+print("\nTop Products")
+print(top.head())
+
+# -----------------------------
 # Pivot Table
-# -------------------------------
+# -----------------------------
 pivot = pd.pivot_table(
     df,
-    values="Bill",
-    index="Disease",
-    columns="Gender",
-    aggfunc="mean",
+    values="Profit",
+    index="Month",
+    columns="Category",
+    aggfunc="sum",
     fill_value=0
 )
 
-print("\nPivot Table\n")
+print("\nProfit Pivot")
 print(pivot)
 
-# -------------------------------
-# Statistics
-# -------------------------------
-print("\nStatistics\n")
-print(df.describe())
+# -----------------------------
+# Best Rated Products
+# -----------------------------
+best = df.sort_values("Rating", ascending=False)
 
-# -------------------------------
+print("\nBest Rated Products")
+print(best[["Product","Rating"]].head())
+
+# -----------------------------
 # Export Reports
-# -------------------------------
-df.to_csv("patients_report.csv",index=False)
-summary.to_csv("disease_summary.csv")
-pivot.to_csv("bill_pivot.csv")
+# -----------------------------
+df.to_csv("sales_report.csv", index=False)
+category.to_csv("category_summary.csv")
+monthly.to_csv("monthly_revenue.csv")
+pivot.to_csv("profit_pivot.csv")
 
-print("\nAll Reports Saved Successfully!")
+print("\nReports Generated Successfully!")
