@@ -1,0 +1,11 @@
+Patient_ID,Name,Age,Gender,Disease,Weight,Height,Bill,BMI,Risk,Age_Group
+101,Aman,25,Male,Diabetes,70,1.72,12000,23.66,Very Low,Young
+102,Riya,42,Female,BP,62,1.6,8500,24.22,Low,Adult
+103,Ali,35,Male,Diabetes,82,1.78,15000,25.88,Low,Young
+104,Sneha,60,Female,Heart,68,1.58,25000,27.24,High,Senior
+105,Rohit,55,Male,BP,90,1.8,9000,27.78,Medium,Senior
+106,Priya,30,Female,Asthma,55,1.55,6000,22.89,Low,Young
+107,Karan,70,Male,Heart,78,1.7,28000,26.99,High,Senior
+108,Neha,48,Female,Diabetes,64,1.62,13000,24.39,Medium,Adult
+109,Arjun,52,Male,BP,85,1.75,9500,27.76,Medium,Senior
+110,Sara,66,Female,Heart,72,1.6,30000,28.12,High,Senior
