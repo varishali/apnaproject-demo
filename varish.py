@@ -1,121 +1,73 @@
 import pandas as pd
-import numpy as np
 
-# -----------------------------
-# Create Sales Data
-# -----------------------------
+# ------------------------------
+# Create Sample CSV
+# ------------------------------
+
 data = {
-    "Order_ID": range(1001, 1016),
-    "Product": [
-        "Laptop", "Mouse", "Keyboard", "Monitor", "Headphone",
-        "Laptop", "Mouse", "Keyboard", "Monitor", "Headphone",
-        "Laptop", "Mouse", "Keyboard", "Monitor", "Headphone"
+    "Movie": [
+        "KGF 2", "Jawan", "Pathaan", "Animal",
+        "Pushpa", "Leo", "RRR", "Dunki",
+        "Kalki", "Salaar"
     ],
-    "Category": [
-        "Electronics","Accessories","Accessories","Electronics","Accessories",
-        "Electronics","Accessories","Accessories","Electronics","Accessories",
-        "Electronics","Accessories","Accessories","Electronics","Accessories"
+    "Genre": [
+        "Action", "Action", "Action", "Action",
+        "Action", "Action", "Drama", "Comedy",
+        "Sci-Fi", "Action"
     ],
-    "Month": [
-        "Jan","Jan","Feb","Feb","Mar",
-        "Mar","Apr","Apr","May","May",
-        "Jun","Jun","Jul","Jul","Aug"
+    "Rating": [
+        8.7, 8.1, 7.4, 8.4,
+        7.9, 8.3, 8.8, 7.2,
+        9.0, 8.6
     ],
-    "Quantity": [3,10,5,2,6,4,8,7,3,9,5,12,6,4,8],
-    "Price": [65000,500,1500,18000,2500,66000,550,1600,18500,2600,67000,600,1700,19000,2700],
-    "Cost": [58000,350,1100,15000,1800,59000,380,1200,15500,1900,60000,400,1250,16000,2000],
-    "Rating": [4.8,4.2,4.5,4.6,4.1,4.9,4.3,4.4,4.7,4.0,5.0,4.2,4.5,4.8,4.3]
+    "Votes": [
+        120000, 95000, 85000, 110000,
+        90000, 98000, 130000, 65000,
+        150000, 140000
+    ]
 }
 
 df = pd.DataFrame(data)
+df.to_csv("movies.csv", index=False)
 
-# -----------------------------
-# Calculations
-# -----------------------------
-df["Revenue"] = df["Quantity"] * df["Price"]
-df["Total_Cost"] = df["Quantity"] * df["Cost"]
-df["Profit"] = df["Revenue"] - df["Total_Cost"]
+# ------------------------------
+# Read CSV
+# ------------------------------
 
-df["Discount"] = np.where(
-    df["Revenue"] > 100000,
-    df["Revenue"] * 0.10,
-    df["Revenue"] * 0.05
-)
+df = pd.read_csv("movies.csv")
 
-df["Final_Revenue"] = df["Revenue"] - df["Discount"]
-
-# -----------------------------
-# Summary
-# -----------------------------
-print("\n===== SALES DATA =====")
+print("\n===== MOVIE DATA =====")
 print(df)
 
-print("\nTotal Revenue")
-print(df["Final_Revenue"].sum())
+# ------------------------------
+# Basic Analysis
+# ------------------------------
 
-print("\nTotal Profit")
-print(df["Profit"].sum())
+print("\nAverage Rating:")
+print(df["Rating"].mean())
 
-print("\nAverage Rating")
-print(round(df["Rating"].mean(),2))
+print("\nHighest Rated Movie:")
+print(df.loc[df["Rating"].idxmax()])
 
-# -----------------------------
-# Category Analysis
-# -----------------------------
-category = df.groupby("Category").agg({
-    "Final_Revenue":"sum",
-    "Profit":"sum",
-    "Quantity":"sum"
-})
+print("\nLowest Rated Movie:")
+print(df.loc[df["Rating"].idxmin()])
 
-print("\nCategory Summary")
-print(category)
+print("\nTop 5 Movies:")
+print(df.sort_values(by="Rating", ascending=False).head())
 
-# -----------------------------
-# Monthly Sales
-# -----------------------------
-monthly = df.groupby("Month")["Final_Revenue"].sum()
+print("\nGenre Count:")
+print(df["Genre"].value_counts())
 
-print("\nMonthly Revenue")
-print(monthly)
+print("\nMovies with Rating Above 8:")
+print(df[df["Rating"] > 8])
 
-# -----------------------------
-# Top 5 Products
-# -----------------------------
-top = df.groupby("Product")["Final_Revenue"].sum().sort_values(ascending=False)
+print("\nAverage Rating By Genre:")
+print(df.groupby("Genre")["Rating"].mean())
 
-print("\nTop Products")
-print(top.head())
+print("\nTotal Votes:")
+print(df["Votes"].sum())
 
-# -----------------------------
-# Pivot Table
-# -----------------------------
-pivot = pd.pivot_table(
-    df,
-    values="Profit",
-    index="Month",
-    columns="Category",
-    aggfunc="sum",
-    fill_value=0
-)
+print("\nTop Voted Movie:")
+print(df.sort_values(by="Votes", ascending=False).head(1))
 
-print("\nProfit Pivot")
-print(pivot)
-
-# -----------------------------
-# Best Rated Products
-# -----------------------------
-best = df.sort_values("Rating", ascending=False)
-
-print("\nBest Rated Products")
-print(best[["Product","Rating"]].head())
-
-# -----------------------------
-# Export Reports
-# -----------------------------
-df.to_csv("sales_report.csv", index=False)
-category.to_csv("category_summary.csv")
-monthly.to_csv("monthly_revenue.csv")
-pivot.to_csv("profit_pivot.csv")
-
-print("\nReports Generated Successfully!")
+print("\nAnalysis Completed Successfully!")
