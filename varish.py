@@ -1,32 +1,49 @@
 import csv
 import os
 
-FILE = "passwords.csv"
+FILE = "students.csv"
 
 if not os.path.exists(FILE):
     with open(FILE, "w", newline="") as f:
         writer = csv.writer(f)
-        writer.writerow(["Website", "Username", "Password"])
+        writer.writerow(["Name", "Math", "Science", "English", "Total", "Percent", "Grade"])
 
-def add_password():
-    website = input("Website: ")
-    username = input("Username: ")
-    password = input("Password: ")
+def grade(percent):
+    if percent >= 90:
+        return "A+"
+    elif percent >= 75:
+        return "A"
+    elif percent >= 60:
+        return "B"
+    elif percent >= 45:
+        return "C"
+    else:
+        return "Fail"
+
+def add_student():
+    name = input("Student Name: ")
+    math = int(input("Math Marks: "))
+    science = int(input("Science Marks: "))
+    english = int(input("English Marks: "))
+
+    total = math + science + english
+    percent = round(total / 3, 2)
+    g = grade(percent)
 
     with open(FILE, "a", newline="") as f:
         writer = csv.writer(f)
-        writer.writerow([website, username, password])
+        writer.writerow([name, math, science, english, total, percent, g])
 
-    print("Password Saved Successfully!")
+    print("Student Record Saved!")
 
-def view_passwords():
+def show_records():
     with open(FILE, "r") as f:
         reader = csv.reader(f)
         for row in reader:
             print(row)
 
-def search_password():
-    website = input("Enter Website: ")
+def search_student():
+    name = input("Enter Student Name: ")
     found = False
 
     with open(FILE, "r") as f:
@@ -34,56 +51,38 @@ def search_password():
         next(reader)
 
         for row in reader:
-            if row[0].lower() == website.lower():
-                print("\nWebsite :", row[0])
-                print("Username:", row[1])
-                print("Password:", row[2])
+            if row[0].lower() == name.lower():
+                print("\nName      :", row[0])
+                print("Math      :", row[1])
+                print("Science   :", row[2])
+                print("English   :", row[3])
+                print("Total     :", row[4])
+                print("Percent   :", row[5])
+                print("Grade     :", row[6])
                 found = True
 
     if not found:
-        print("No Record Found!")
-
-def delete_password():
-    website = input("Website to Delete: ")
-
-    rows = []
-
-    with open(FILE, "r") as f:
-        reader = csv.reader(f)
-        rows = list(reader)
-
-    with open(FILE, "w", newline="") as f:
-        writer = csv.writer(f)
-
-        for row in rows:
-            if row and row[0].lower() != website.lower():
-                writer.writerow(row)
-
-    print("Deleted Successfully!")
+        print("Student Not Found!")
 
 while True:
-    print("\n===== Smart Password Vault =====")
-    print("1. Add Password")
-    print("2. View Passwords")
-    print("3. Search Password")
-    print("4. Delete Password")
-    print("5. Exit")
+    print("\n===== Student Report Card Manager =====")
+    print("1. Add Student")
+    print("2. Show All Records")
+    print("3. Search Student")
+    print("4. Exit")
 
     choice = input("Enter Choice: ")
 
     if choice == "1":
-        add_password()
+        add_student()
 
     elif choice == "2":
-        view_passwords()
+        show_records()
 
     elif choice == "3":
-        search_password()
+        search_student()
 
     elif choice == "4":
-        delete_password()
-
-    elif choice == "5":
         print("Thank You!")
         break
 
