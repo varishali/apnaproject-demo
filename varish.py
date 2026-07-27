@@ -1,73 +1,91 @@
-import pandas as pd
+import csv
+import os
 
-# ------------------------------
-# Create Sample CSV
-# ------------------------------
+FILE = "passwords.csv"
 
-data = {
-    "Movie": [
-        "KGF 2", "Jawan", "Pathaan", "Animal",
-        "Pushpa", "Leo", "RRR", "Dunki",
-        "Kalki", "Salaar"
-    ],
-    "Genre": [
-        "Action", "Action", "Action", "Action",
-        "Action", "Action", "Drama", "Comedy",
-        "Sci-Fi", "Action"
-    ],
-    "Rating": [
-        8.7, 8.1, 7.4, 8.4,
-        7.9, 8.3, 8.8, 7.2,
-        9.0, 8.6
-    ],
-    "Votes": [
-        120000, 95000, 85000, 110000,
-        90000, 98000, 130000, 65000,
-        150000, 140000
-    ]
-}
+if not os.path.exists(FILE):
+    with open(FILE, "w", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow(["Website", "Username", "Password"])
 
-df = pd.DataFrame(data)
-df.to_csv("movies.csv", index=False)
+def add_password():
+    website = input("Website: ")
+    username = input("Username: ")
+    password = input("Password: ")
 
-# ------------------------------
-# Read CSV
-# ------------------------------
+    with open(FILE, "a", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow([website, username, password])
 
-df = pd.read_csv("movies.csv")
+    print("Password Saved Successfully!")
 
-print("\n===== MOVIE DATA =====")
-print(df)
+def view_passwords():
+    with open(FILE, "r") as f:
+        reader = csv.reader(f)
+        for row in reader:
+            print(row)
 
-# ------------------------------
-# Basic Analysis
-# ------------------------------
+def search_password():
+    website = input("Enter Website: ")
+    found = False
 
-print("\nAverage Rating:")
-print(df["Rating"].mean())
+    with open(FILE, "r") as f:
+        reader = csv.reader(f)
+        next(reader)
 
-print("\nHighest Rated Movie:")
-print(df.loc[df["Rating"].idxmax()])
+        for row in reader:
+            if row[0].lower() == website.lower():
+                print("\nWebsite :", row[0])
+                print("Username:", row[1])
+                print("Password:", row[2])
+                found = True
 
-print("\nLowest Rated Movie:")
-print(df.loc[df["Rating"].idxmin()])
+    if not found:
+        print("No Record Found!")
 
-print("\nTop 5 Movies:")
-print(df.sort_values(by="Rating", ascending=False).head())
+def delete_password():
+    website = input("Website to Delete: ")
 
-print("\nGenre Count:")
-print(df["Genre"].value_counts())
+    rows = []
 
-print("\nMovies with Rating Above 8:")
-print(df[df["Rating"] > 8])
+    with open(FILE, "r") as f:
+        reader = csv.reader(f)
+        rows = list(reader)
 
-print("\nAverage Rating By Genre:")
-print(df.groupby("Genre")["Rating"].mean())
+    with open(FILE, "w", newline="") as f:
+        writer = csv.writer(f)
 
-print("\nTotal Votes:")
-print(df["Votes"].sum())
+        for row in rows:
+            if row and row[0].lower() != website.lower():
+                writer.writerow(row)
 
-print("\nTop Voted Movie:")
-print(df.sort_values(by="Votes", ascending=False).head(1))
+    print("Deleted Successfully!")
 
-print("\nAnalysis Completed Successfully!")
+while True:
+    print("\n===== Smart Password Vault =====")
+    print("1. Add Password")
+    print("2. View Passwords")
+    print("3. Search Password")
+    print("4. Delete Password")
+    print("5. Exit")
+
+    choice = input("Enter Choice: ")
+
+    if choice == "1":
+        add_password()
+
+    elif choice == "2":
+        view_passwords()
+
+    elif choice == "3":
+        search_password()
+
+    elif choice == "4":
+        delete_password()
+
+    elif choice == "5":
+        print("Thank You!")
+        break
+
+    else:
+        print("Invalid Choice!")
