@@ -2,87 +2,92 @@ import pandas as pd
 import os
 from datetime import datetime
 
-FILE = "history.csv"
+FILE = "parking.csv"
 
-# Create CSV if not exists
 if not os.path.exists(FILE):
-    df = pd.DataFrame(columns=["Date", "News", "Score", "Result"])
+    df = pd.DataFrame(columns=["Vehicle No", "Owner", "Type", "Entry Time"])
     df.to_csv(FILE, index=False)
 
-fake_keywords = [
-    "free", "click", "win", "urgent", "money",
-    "offer", "lottery", "guaranteed", "virus",
-    "hack", "breaking", "limited", "prize"
-]
 
-def analyze_news(news):
-    score = 0
-    matched = []
+def load():
+    return pd.read_csv(FILE)
 
-    text = news.lower()
 
-    for word in fake_keywords:
-        if word in text:
-            score += 8
-            matched.append(word)
-
-    score = min(score, 100)
-
-    if score >= 60:
-        result = "Highly Fake"
-    elif score >= 30:
-        result = "Suspicious"
-    else:
-        result = "Likely Real"
-
-    return score, result, matched
+def save(df):
+    df.to_csv(FILE, index=False)
 
 
 while True:
-    print("\n====== FAKE NEWS DETECTOR ======")
-    print("1. Analyze News")
-    print("2. View History")
-    print("3. Exit")
+    print("\n===== VEHICLE PARKING SYSTEM =====")
+    print("1. Add Vehicle")
+    print("2. View Vehicles")
+    print("3. Search Vehicle")
+    print("4. Delete Vehicle")
+    print("5. Count Vehicles")
+    print("6. Exit")
 
-    choice = input("Enter Choice: ")
+    ch = input("Enter Choice: ")
 
-    if choice == "1":
-        news = input("\nPaste News:\n")
+    if ch == "1":
+        no = input("Vehicle Number: ")
+        owner = input("Owner Name: ")
+        vtype = input("Vehicle Type: ")
 
-        score, result, matched = analyze_news(news)
+        entry = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-        print("\nScore :", score, "%")
-        print("Result :", result)
-
-        if matched:
-            print("Matched Keywords:", ", ".join(matched))
-        else:
-            print("No Suspicious Keywords Found.")
-
-        df = pd.read_csv(FILE)
+        df = load()
 
         new = pd.DataFrame({
-            "Date": [datetime.now().strftime("%Y-%m-%d %H:%M:%S")],
-            "News": [news],
-            "Score": [score],
-            "Result": [result]
+            "Vehicle No": [no],
+            "Owner": [owner],
+            "Type": [vtype],
+            "Entry Time": [entry]
         })
 
         df = pd.concat([df, new], ignore_index=True)
-        df.to_csv(FILE, index=False)
+        save(df)
 
-    elif choice == "2":
-        df = pd.read_csv(FILE)
+        print("Vehicle Added Successfully!")
+
+    elif ch == "2":
+        df = load()
 
         if df.empty:
-            print("\nNo History Found.")
+            print("No Vehicle Found")
         else:
-            print("\n===== HISTORY =====")
             print(df.to_string(index=False))
 
-    elif choice == "3":
-        print("Goodbye!")
+    elif ch == "3":
+        df = load()
+
+        no = input("Enter Vehicle Number: ")
+
+        result = df[df["Vehicle No"].str.upper() == no.upper()]
+
+        if result.empty:
+            print("Vehicle Not Found")
+        else:
+            print(result.to_string(index=False))
+
+    elif ch == "4":
+        df = load()
+
+        no = input("Vehicle Number To Delete: ")
+
+        df = df[df["Vehicle No"].str.upper() != no.upper()]
+
+        save(df)
+
+        print("Record Deleted Successfully!")
+
+    elif ch == "5":
+        df = load()
+
+        print("Total Vehicles:", len(df))
+
+    elif ch == "6":
+        print("Thank You!")
         break
 
     else:
-        print("Invalid Choice!")
+        print("Invalid Choice")
