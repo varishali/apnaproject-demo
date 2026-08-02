@@ -1,93 +1,69 @@
-import pandas as pd
-import os
-from datetime import datetime
+import random
+import string
 
-FILE = "parking.csv"
+def generate_password(length):
+    characters = (
+        string.ascii_letters +
+        string.digits +
+        string.punctuation
+        )
 
-if not os.path.exists(FILE):
-    df = pd.DataFrame(columns=["Vehicle No", "Owner", "Type", "Entry Time"])
-    df.to_csv(FILE, index=False)
+    password = ''.join(random.choice(characters) for _ in range(length))
+    return password
+def password_strength(password):
+    score = 0
+    if any(c.islower() for c in password):
+        score += 1
 
+    if any(c.isupper() for c in password):
+        score += 1
 
-def load():
-    return pd.read_csv(FILE)
+    if any(c.isdigit() for c in password):
+        score += 1
 
+    if any(c in string.punctuation for c in password):
+        score += 1
 
-def save(df):
-    df.to_csv(FILE, index=False)
+    if len(password) >= 12:
+        score += 1
+
+    if score <= 2:
+        return 'Weak'
+
+    elif score == 3 or score == 4:
+        return 'Medium'
+
+    else:
+        return 'Strong'
+def main():
+    print('=== Password Generator CLI ===')
 
 
 while True:
-    print("\n===== VEHICLE PARKING SYSTEM =====")
-    print("1. Add Vehicle")
-    print("2. View Vehicles")
-    print("3. Search Vehicle")
-    print("4. Delete Vehicle")
-    print("5. Count Vehicles")
-    print("6. Exit")
+    try:
+        length = int(input('Enter password length (6-32): '))
 
-    ch = input("Enter Choice: ")
+        if 6 <= length <= 32:
+            password = generate_password(length)
 
-    if ch == "1":
-        no = input("Vehicle Number: ")
-        owner = input("Owner Name: ")
-        vtype = input("Vehicle Type: ")
+            print('\\nGenerated Password:')
+            print(password)
 
-        entry = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            print('\\nStrength:')
+            print(password_strength(password))
 
-        df = load()
+            again = input('\\nGenerate another password? (y/n): ').lower()
 
-        new = pd.DataFrame({
-            "Vehicle No": [no],
-            "Owner": [owner],
-            "Type": [vtype],
-            "Entry Time": [entry]
-        })
+            if again != 'y':
+                print('Goodbye!')
+                break
 
-        df = pd.concat([df, new], ignore_index=True)
-        save(df)
-
-        print("Vehicle Added Successfully!")
-
-    elif ch == "2":
-        df = load()
-
-        if df.empty:
-            print("No Vehicle Found")
         else:
-            print(df.to_string(index=False))
+            print('Please enter a number between 6 and 32.')
 
-    elif ch == "3":
-        df = load()
+    except ValueError:
+        print('Please enter a valid number.')
 
-        no = input("Enter Vehicle Number: ")
 
-        result = df[df["Vehicle No"].str.upper() == no.upper()]
-
-        if result.empty:
-            print("Vehicle Not Found")
-        else:
-            print(result.to_string(index=False))
-
-    elif ch == "4":
-        df = load()
-
-        no = input("Vehicle Number To Delete: ")
-
-        df = df[df["Vehicle No"].str.upper() != no.upper()]
-
-        save(df)
-
-        print("Record Deleted Successfully!")
-
-    elif ch == "5":
-        df = load()
-
-        print("Total Vehicles:", len(df))
-
-    elif ch == "6":
-        print("Thank You!")
-        break
-
-    else:
-        print("Invalid Choice")
+if __name__ == '__main__':
+    main()
