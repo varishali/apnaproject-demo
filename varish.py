@@ -1,11 +1,12 @@
-import random
+num = int(input("Enter a number: "))
+is_prime = True
 
-while True:
-    input("Press Enter To Roll Dice...")
-    roll = random.randint(1, 6)
-    print(f"You Rolled : {roll}")
-    
-    again = input("Roll Again? (y/n) : ")
-    if again.lower() != 'y':
-        print("Game Over!")
-        break
+if num < 2:
+    is_prime = False
+else:
+    for i in range(2, int(num**0.5) + 1):
+        if num % i == 0:
+            is_prime = False
+            break
+
+print(f"{num} is Prime" if is_prime else f"{num} is Not Prime")
