@@ -3,7 +3,7 @@ import random
 secret = random.randint(1, 100)
 attempts = 0
 
-print("Number Guessing Game")
+print("===Number Guessing Game===")
 print("Guess a number between 1 and 100")
 
 while True:
@@ -15,6 +15,6 @@ while True:
     elif guess > secret:
         print("Too High!")
     else:
-        print("Congratulations!")
+        print("=====Congratulations!=====")
         print(f"You guessed in {attempts} attempts")
         break
