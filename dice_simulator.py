@@ -4,7 +4,7 @@ while True:
     dice = np.random.randint(1,7)
     print("Dice Number : ",dice)
 
-    again = input("Roll Again? yes/no : ")
+    again = input("Do you want to Roll Again? yes/no : ")
 
     if again == "no":
         break
