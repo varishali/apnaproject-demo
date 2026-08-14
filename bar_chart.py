@@ -1,15 +1,36 @@
-import pandas as pd
-import matplotlib.pyplot as plt
-data = {
-    "Player" : ["Virat","Gill","Rohil","KL rahul"],
-    "Runs" : [120,89,78,101]
-}
-df = pd.DataFrame(data)
+def add(a, b):
+    return a + b
 
-# Grafh
-plt.bar(df["Player"],df["Runs"],color="red")
+def subtract(a, b):
+    return a - b
 
-# Grafh Title
-plt.title("Player Runs")
+def multiply(a, b):
+    return a * b
 
-plt.show()
+def divide(a, b):
+    if b == 0:
+        return "Error: Divide by zero nahi ho sakta"
+    return a / b
+
+def calculator():
+    print("Calculator Shuru")
+    print("Operations: +, -, *, /")
+    
+    num1 = float(input("Pehla number: "))
+    op = input("Operation choose karein (+, -, *, /): ")
+    num2 = float(input("Dusra number: "))
+
+    if op == "+":
+        result = add(num1, num2)
+    elif op == "-":
+        result = subtract(num1, num2)
+    elif op == "*":
+        result = multiply(num1, num2)
+    elif op == "/":
+        result = divide(num1, num2)
+    else:
+        result = "Invalid operation!"
+
+    print(f"Result: {result}")
+
+calculator()
