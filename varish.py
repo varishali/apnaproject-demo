@@ -1,12 +1,34 @@
-num = int(input("Enter a number: "))
-is_prime = True
+def add(a, b):
+    return a + b
 
-if num < 2:
-    is_prime = False
-else:
-    for i in range(2, int(num**0.5) + 1):
-        if num % i == 0:
-            is_prime = False
-            break
+def subtract(a, b):
+    return a - b
 
-print(f"{num} is Prime" if is_prime else f"{num} is Not Prime")
+def multiply(a, b):
+    return a * b
+
+def divide(a, b):
+    if b == 0:
+        return "Error: Not divide by zero"
+    return a / b
+
+def calculator():
+    print("Calculator Start")
+    print("Operations: +, -, *, /")
+    
+    num1 = float(input("Pehla number: "))
+    op = input("Operation --> (+, -, *, /): ")
+    num2 = float(input("Dusra number: "))
+
+    if op == "+":
+        result = add(num1, num2)
+    elif op == "-":
+        result = subtract(num1, num2)
+    elif op == "*":
+        result = multiply(num1, num2)
+    elif op == "/":
+        result = divide(num1, num2)
+    else:
+        result = "Invalid operation! please try another operator!"
+
+    print(f"Result: {result}")

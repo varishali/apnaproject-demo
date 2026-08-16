@@ -9,15 +9,15 @@ def multiply(a, b):
 
 def divide(a, b):
     if b == 0:
-        return "Error: Divide by zero nahi ho sakta"
+        return "Error: Not divide by zero"
     return a / b
 
 def calculator():
-    print("Calculator Shuru")
+    print("Calculator Start")
     print("Operations: +, -, *, /")
     
     num1 = float(input("Pehla number: "))
-    op = input("Operation choose karein (+, -, *, /): ")
+    op = input("Operation --> (+, -, *, /): ")
     num2 = float(input("Dusra number: "))
 
     if op == "+":
@@ -29,7 +29,7 @@ def calculator():
     elif op == "/":
         result = divide(num1, num2)
     else:
-        result = "Invalid operation!"
+        result = "Invalid operation! please try another operator!"
 
     print(f"Result: {result}")
 
