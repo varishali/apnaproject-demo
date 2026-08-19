@@ -1,21 +1,51 @@
 import random
 
-number = random.randint(1, 100)
-attempts = 0
+def get_computer_choice():
+    return random.choice(["rock", "paper", "scissors"])
 
-print("Number Guessing Game")
-print("1 se 100 ke beech number guess karo!")
-
-while True:
-    guess = int(input("Apna guess: "))
-    attempts += 1
-
-    if guess < number:
-        print("Thoda bada number try karo")
-    elif guess > number:
-        print("Thoda chhota number try karo")
+def decide_winner(user, computer):
+    if user == computer:
+        return "Draw"
+    
+    rules = {
+        "rock": "scissors",
+        "paper": "rock",
+        "scissors": "paper"
+    }
+    
+    if rules[user] == computer:
+        return "Aap Jeete!"
     else:
-        print(f"Sahi jawab! Number: {number}")
-        print(f"Attempts: {attempts}")
-        break
+        return "Computer Jeeta!"
 
+def play():
+    score = {"user": 0, "computer": 0}
+    
+    print("Rock, Paper, Scissors Game!")
+    print("Exit karne ke liye 'quit' likhiye")
+
+    while True:
+        user_choice = input("\nApna choice daaliye (rock/paper/scissors): ").lower()
+        
+        if user_choice == "quit":
+            break
+        
+        if user_choice not in ["rock", "paper", "scissors"]:
+            print("Galat input! Sirf rock, paper ya scissors likhiye")
+            continue
+        
+        computer_choice = get_computer_choice()
+        result = decide_winner(user_choice, computer_choice)
+        
+        print(f"Computer ne choose kiya: {computer_choice}")
+        print(f"Result: {result}")
+        
+        if result == "Aap Jeete!":
+            score["user"] += 1
+        elif result == "Computer Jeeta!":
+            score["computer"] += 1
+    
+    print(f"\nFinal Score - Aap: {score['user']} | Computer: {score['computer']}")
+    print("Game khatam!")
+
+play()
