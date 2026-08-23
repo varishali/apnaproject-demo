@@ -1,7 +1,7 @@
 import pandas as pd
 data = {
-    "Name" : ["Varish","Ali","Aman","Sohil","Zainul"],
-    "Marks" : [89,90,45,67,78]
+    "Name" : ["Aman","Rohit","Aman","Sohil","Zainul"],
+    "Marks" : [79,98,45,67,78]
 }
 
 # DATA FRAME
@@ -22,7 +22,7 @@ df["Result"] = result
 
 # FULL DATA
 print("=" *40)
-print("         Student Pass Fail Analyzer")
+print("=======Student Pass Fail Analyzer========")
 print("=" *40)
 
 print("\nStudnet Data :\n")
