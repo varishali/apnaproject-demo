@@ -1,13 +1,11 @@
-import matplotlib.pyplot as plt
+import turtle
 
-x = [1, 2, 3, 4, 5]
-y = [10, 20, 25, 30, 40]
+t = turtle.Turtle()
 
-plt.plot(x, y, marker='o', color='blue', label='Sample Data')
-plt.title('Matplotlib Example')
-plt.xlabel('X Axis')
-plt.ylabel('Y Axis')
-plt.legend()
-plt.grid(True)
-plt.savefig('plot.png')
-plt.show()
+t.speed(0)
+colors = ['green','red','blue','yellow','pink','orange','black','white']
+for i in range(100):
+    t.pencolor(colors[i % 6])
+    t.forward(i * 2)
+    t.right(59)
+turtle.done()
