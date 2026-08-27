@@ -1,10 +1,14 @@
 import turtle
 
 t = turtle.Turtle()
+screen = turtle.Screen()
+t.speed(5)
 
-t.penup()
-t.goto(-100, 0)
-t.pendown()
-t.color('red')
-t.write('VARISH ALI', font=('Arial', 50, 'bold'))
-turtle.done()
+colors = ['lightblue','lightgreen','lightpink','lightyellow']
+
+for i in range(20):
+    screen.bgcolor(colors[i % 4])
+    t.circle(50)
+    t.left(20)
+
+turtle.done()    
