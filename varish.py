@@ -1,40 +1,34 @@
-import json
+import random
+import string
 
 
-class TaskManager:
+def generate_password(length=12, include_symbols=True):
+    # Characters defined
+    letters = string.ascii_letters
+    digits = string.digits
+    symbols = string.punctuation if include_symbols else ""
 
-    def __init__(self, filename="tasks.json"):
-        self.filename = filename
-        self.tasks = self.load_tasks()
+    # Ensure password has at least one of each character set
+    password = [
+        random.choice(string.ascii_lowercase),
+        random.choice(string.ascii_uppercase),
+        random.choice(digits),
+    ]
 
-    def load_tasks(self):
-        try:
-            with open(self.filename, "r") as file:
-                return json.load(file)
-        except (FileNotFoundError, json.JSONDecodeError):
-            return []
+    if include_symbols:
+        password.append(random.choice(symbols))
 
-    def save_tasks(self):
-        with open(self.filename, "w") as file:
-            json.dump(self.tasks, file, indent=4)
+    # Fill remaining length with random choices from all pool
+    all_chars = letters + digits + symbols
+    for _ in range(length - len(password)):
+        password.append(random.choice(all_chars))
 
-    def add_task(self, title):
-        task = {"id": len(self.tasks) + 1, "title": title, "done": False}
-        self.tasks.append(task)
-        self.save_tasks()
-        print(f"Added task: '{title}'")
-
-    def show_tasks(self):
-        if not self.tasks:
-            print("No tasks found.")
-            return
-        for task in self.tasks:
-            status = "✓" if task["done"] else "✗"
-            print(f"[{status}] {task['id']}. {task['title']}")
+    # Shuffle to remove any set patterns
+    random.shuffle(password)
+    return "".join(password)
 
 
 # Example Usage
-manager = TaskManager()
-manager.add_task("Learn Python Code")
-manager.add_task("Build a mini project")
-manager.show_tasks()
+if __name__ == "__main__":
+    new_password = generate_password(length=16, include_symbols=True)
+    print(f"Generated Password: {new_password}")
